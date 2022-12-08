@@ -22,7 +22,7 @@ import es.unican.is.appgasolineras.repository.db.GasolineraDatabase;
 
 public class HistorialRepostajesView extends AppCompatActivity implements IHistorialRepostajesContract.View {
 
-
+    // Comentario
     private BarraHerramientasView barraHerramientasView;
     private IHistorialRepostajesContract.Presenter presenter;
 
