@@ -25,8 +25,9 @@ jobs:
             
             # Ejecutar analisis de AppSweep
             - name: Upload app to AppSweep with Gradle
+              working-directory: ./AndroidProject
               env:
-                APPSWEEP_API_KEY: $
+                APPSWEEP_API_KEY: ${{ secrets.APPSWEEP_API_KEY }}
               run: ./gradlew uploadToAppSweepRelease
               
             # Show a report of the unit tests results
