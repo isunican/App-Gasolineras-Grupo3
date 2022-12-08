@@ -59,13 +59,25 @@ public class GasolinerasArrayAdapter extends ArrayAdapter<Gasolinera> {
         // 95 octanes price
         String label95 = getContext().getResources().getString(R.string.gasolina95label);
         showInfo(convertView, R.id.tv95Label, label95 + ":");
-        showInfo(convertView, R.id.tv95, gasolinera.getNormal95().substring(0, 4)+DIVISA);
+        String gasInfo;
+        try {
+            gasInfo  = gasolinera.getNormal95().substring(0, 4);
+        } catch(StringIndexOutOfBoundsException e) {
+            gasInfo = "-";
+        }
+        showInfo(convertView, R.id.tv95, gasInfo+DIVISA);
 
         //Se muestran 2 decimales y la divisa de euros
         // diesel A price
         String labelDieselALabel = getContext().getResources().getString(R.string.dieselAlabel);
         showInfo(convertView, R.id.tvDieselALabel, labelDieselALabel + ":");
-        showInfo(convertView, R.id.tvDieselA, gasolinera.getDieselA().substring(0, 4)+DIVISA);
+        try {
+            gasInfo  = gasolinera.getDieselA().substring(0, 4);
+        } catch(StringIndexOutOfBoundsException e) {
+            gasInfo = "-";
+
+        }
+        showInfo(convertView, R.id.tvDieselA, gasInfo+DIVISA);
         
         // distance
         showInfo(convertView, R.id.tvDistance, DistanceUtilities.

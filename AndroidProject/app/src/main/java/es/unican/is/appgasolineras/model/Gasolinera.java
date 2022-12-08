@@ -160,7 +160,11 @@ public class Gasolinera implements Parcelable {
         // mostrar precio con coma
         String precio = Double.toString(precioSumario);
         precio = precio.replace('.', ',');
-        precio = precio.substring(0, 4);
+        try {
+            precio = precio.substring(0, 4);
+        } catch(StringIndexOutOfBoundsException e) {
+
+        }
         return precio;
     }
 
