@@ -1,7 +1,6 @@
 plugins {
     id 'com.android.application'
     id "org.sonarqube" version "3.0"
-    id "com.guardsquare.appsweep" version "latest.release"
 }
 
 apply plugin: "jacoco"
@@ -78,10 +77,7 @@ android {
             includeAndroidResources = true
         }
     }
-    appsweep {
-        apiKey "gs_appsweep_tdQ2qsH_d65tojVojPpCQVthrYctxlSeHn16yNvM"
-    }
-
+    
     }
 
 dependencies {
