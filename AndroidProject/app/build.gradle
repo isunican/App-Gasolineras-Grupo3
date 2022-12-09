@@ -78,11 +78,11 @@ android {
             includeAndroidResources = true
         }
     }
-    // Analisis appsweep
     appsweep {
-        apiKey "gs_appsweep_HnHASui_cHAljVRdmozUrnIkU5LTD5SntlQN9cim"
+        apiKey "gs_appsweep_tdQ2qsH_d65tojVojPpCQVthrYctxlSeHn16yNvM"
     }
-}
+
+    }
 
 dependencies {
 
