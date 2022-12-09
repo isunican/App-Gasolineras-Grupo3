@@ -23,6 +23,13 @@ jobs:
                 GITHUB_TOKEN: ${{ secrets.TOKEN }}
               run: ./gradlew clean jacocoTestReport sonarqube
               
+            # Ejecutar analisis de AppSweep
+            - name: Upload app to AppSweep with Gradle
+              working-directory: ./AndroidProject
+              env:
+                APPSWEEP_API_KEY: ${{ secrets.APPSWEEP_API_KEY }}
+              run: ./gradlew uploadToAppSweepRelease
+              
             # Show a report of the unit tests results
             - name: Android Test Report
               uses: asadmansr/android-test-report-action@v1.2.0
