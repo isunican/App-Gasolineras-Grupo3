@@ -50,6 +50,11 @@ public class DetailsView extends AppCompatActivity {
         ImageView ivRotulo = findViewById(R.id.ivRotulo);
         TextView tvRotulo = findViewById(R.id.tvRotulo);
         TextView tvMunicipio = findViewById(R.id.tvMunicipio);
+        TextView tvCP = findViewById(R.id.tvCP);
+        TextView tvHorario = findViewById(R.id.tvHorario);
+        TextView tvGasoleoA = findViewById(R.id.tvGasoleoA);
+        TextView tvGasolina95E5 = findViewById(R.id.tvGasolina95E5);
+        TextView tvPrecioSumario = findViewById(R.id.tvPrecioSumario);
 
         // Get Gas Station from the intent that triggered this activity
         Gasolinera gasolinera = Parcels.unwrap(getIntent().getExtras().getParcelable(INTENT_STATION));
@@ -62,6 +67,11 @@ public class DetailsView extends AppCompatActivity {
         // Set Texts
         tvRotulo.setText(gasolinera.getRotulo());
         tvMunicipio.setText(gasolinera.getMunicipio());
+        tvCP.setText(gasolinera.getCp());
+        tvHorario.setText(gasolinera.getHorario());
+        tvGasoleoA.setText(String.valueOf(gasolinera.getGasoleoA()));
+        tvGasolina95E5.setText(String.valueOf(gasolinera.getGasolina95E5()));
+        tvPrecioSumario.setText(String.valueOf(calcularPrecioSumario(gasolinera)));
     }
 
     /**
@@ -77,5 +87,11 @@ public class DetailsView extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public double calcularPrecioSumario(Gasolinera gasolinera) {
+        double precioSumario;
+        precioSumario = ((2 * gasolinera.getGasolina95E5()) + (gasolinera.getGasoleoA())) / 3;
+        return precioSumario;
     }
 }
