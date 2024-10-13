@@ -34,4 +34,28 @@ public class Gasolinera {
     @SerializedName("Precio Gasoleo A")             protected double gasoleoA;
     @SerializedName("Precio Gasolina 95 E5")        protected double gasolina95E5;
 
+
+    public String getRotulo() {
+        return this.rotulo;
+    }
+
+    public String  getMunicipio() {
+        return this.municipio;
+    }
+
+    public String  getCp() {
+        return this.cp;
+    }
+
+    public String  getHorario() {
+        return this.horario;
+    }
+
+    public double getGasoleoA() {
+        return this.gasoleoA;
+    }
+
+    public double getGasolina95E5() {
+        return this.gasolina95E5;
+    }
 }

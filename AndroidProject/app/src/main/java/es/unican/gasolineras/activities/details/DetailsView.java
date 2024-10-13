@@ -50,18 +50,12 @@ public class DetailsView extends AppCompatActivity {
         ImageView ivRotulo = findViewById(R.id.ivRotulo);
         TextView tvRotulo = findViewById(R.id.tvRotulo);
         TextView tvMunicipio = findViewById(R.id.tvMunicipio);
-<<<<<<< HEAD
-        TextView tvCP = findViewById(R.id.tvCP);
+        TextView tvCP = findViewById(R.id.tvDireccion);
         TextView tvHorario = findViewById(R.id.tvHorario);
         TextView tvGasoleoA = findViewById(R.id.tvGasoleoA);
-        TextView tvGasolina95E5 = findViewById(R.id.tvGasolina95E5);
+        TextView tvGasolina95E5 = findViewById(R.id.tvGasolina95);
         TextView tvPrecioSumario = findViewById(R.id.tvPrecioSumario);
-=======
-        TextView tvHorario = findViewById(R.id.tvHorario);
-        TextView tvDireccion = findViewById(R.id.tvDireccion);
-        TextView tvGasolina95 = findViewById(R.id.tvGasolina95);
-        TextView tvGasoleoA = findViewById(R.id.tvGasoleoA);
->>>>>>> feature/506191-vistaAndroidStudio
+
 
         // Get Gas Station from the intent that triggered this activity
         Gasolinera gasolinera = Parcels.unwrap(getIntent().getExtras().getParcelable(INTENT_STATION));
@@ -74,23 +68,12 @@ public class DetailsView extends AppCompatActivity {
         // Set Texts
         tvRotulo.setText(gasolinera.getRotulo());
         tvMunicipio.setText(gasolinera.getMunicipio());
-<<<<<<< HEAD
         tvCP.setText(gasolinera.getCp());
         tvHorario.setText(gasolinera.getHorario());
         tvGasoleoA.setText(String.valueOf(gasolinera.getGasoleoA()));
         tvGasolina95E5.setText(String.valueOf(gasolinera.getGasolina95E5()));
         tvPrecioSumario.setText(String.valueOf(calcularPrecioSumario(gasolinera)));
-=======
-        tvHorario.setText("Horario: 9:00 - 22:00");
-        tvDireccion.setText(gasolinera.getDireccion());
-        tvGasolina95.setText("Gasolina95jsjss");
-        tvGasoleoA.setText("GasoleaA9892347");
-        //tvGasolina95.setText(gasolinera.getGasolina95E5());
-        //tvGasoleoA.setText(gasolinera.getGasoleoA());
 
-
-
->>>>>>> feature/506191-vistaAndroidStudio
     }
 
     /**

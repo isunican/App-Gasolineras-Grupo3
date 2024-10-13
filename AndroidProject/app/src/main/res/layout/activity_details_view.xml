@@ -43,55 +43,73 @@
         android:id="@+id/tvMunicipio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        tools:text="Municipio"
+        android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="@+id/tvRotulo"
         app:layout_constraintStart_toStartOf="@+id/tvRotulo"
-        app:layout_constraintTop_toBottomOf="@+id/tvRotulo" />
+        app:layout_constraintTop_toBottomOf="@+id/tvRotulo"
+        tools:text="Municipio" />
 
 
-<<<<<<< HEAD
-=======
     <TextView
         android:id="@+id/tvHorario"
-        android:layout_width="147dp"
-        android:layout_height="159dp"
+        android:layout_width="128dp"
+        android:layout_height="99dp"
+        android:layout_marginTop="20dp"
         android:text="Horario"
         android:textColor="@android:color/black"
         android:textSize="16sp"
-        tools:layout_editor_absoluteX="132dp"
-        tools:layout_editor_absoluteY="396dp" />
+        app:layout_constraintEnd_toEndOf="@+id/tvDireccion"
+        app:layout_constraintStart_toStartOf="@+id/tvDireccion"
+        app:layout_constraintTop_toBottomOf="@+id/tvDireccion" />
 
     <TextView
         android:id="@+id/tvDireccion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:text="Direccion"
         android:textColor="@android:color/black"
         android:textSize="16sp"
-        tools:layout_editor_absoluteX="172dp"
-        tools:layout_editor_absoluteY="336dp" />
+        app:layout_constraintEnd_toEndOf="@+id/tvMunicipio"
+        app:layout_constraintStart_toStartOf="@+id/tvMunicipio"
+        app:layout_constraintTop_toBottomOf="@+id/tvMunicipio" />
 
     <TextView
         android:id="@+id/tvGasolina95"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
         android:text="Precio Gasoleo A"
         android:textColor="@android:color/black"
         android:textSize="16sp"
-        tools:layout_editor_absoluteX="144dp"
-        tools:layout_editor_absoluteY="592dp" />
+        app:layout_constraintEnd_toEndOf="@+id/tvHorario"
+        app:layout_constraintStart_toStartOf="@+id/tvHorario"
+        app:layout_constraintTop_toBottomOf="@+id/tvHorario" />
 
     <TextView
         android:id="@+id/tvGasoleoA"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
         android:text="Precio Gasolina 95 E5"
         android:textColor="@android:color/black"
         android:textSize="16sp"
-        tools:layout_editor_absoluteX="127dp"
-        tools:layout_editor_absoluteY="655dp" />
+        app:layout_constraintEnd_toEndOf="@+id/tvGasolina95"
+        app:layout_constraintHorizontal_bias="0.529"
+        app:layout_constraintStart_toStartOf="@+id/tvGasolina95"
+        app:layout_constraintTop_toBottomOf="@+id/tvGasolina95" />
 
+    <TextView
+        android:id="@+id/tvPrecioSumario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Precio sumario"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/tvGasoleoA"
+        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintStart_toStartOf="@+id/tvGasoleoA"
+        app:layout_constraintTop_toBottomOf="@+id/tvGasoleoA"
+        app:layout_constraintVertical_bias="0.477" />
 
->>>>>>> feature/506191-vistaAndroidStudio
 </androidx.constraintlayout.widget.ConstraintLayout>
