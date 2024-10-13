@@ -87,6 +87,9 @@ public class ExampleUITest {
         // Verifica que la localidad está visible
         onView(withId(R.id.tvMunicipio))
                 .check(matches(isDisplayed()));
+        // Verifica que el codigo postal esta visible
+        onView(withId(R.id.tvCp))
+                .check(matches(isDisplayed()));
         // Verifica que el horario está visible
         onView(withId(R.id.tvHorario))
                 .check(matches(isDisplayed()));
@@ -94,6 +97,9 @@ public class ExampleUITest {
         onView(withId(R.id.tvGasolina95))
                 .check(matches(isDisplayed()));
         onView(withId(R.id.tvGasoleoA))
+                .check(matches(isDisplayed()));
+        // Verifica que el precio sumario esta visible
+        onView(withId(R.id.tvPrecioSumario))
                 .check(matches(isDisplayed()));
     }
 

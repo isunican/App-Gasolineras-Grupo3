@@ -34,16 +34,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
-        tools:text="Rotulo"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivRotulo" />
+        app:layout_constraintTop_toBottomOf="@+id/ivRotulo"
+        tools:text="Rotulo" />
 
     <TextView
         android:id="@+id/tvMunicipio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="30dp"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="@+id/tvRotulo"
         app:layout_constraintStart_toStartOf="@+id/tvRotulo"
         app:layout_constraintTop_toBottomOf="@+id/tvRotulo"
@@ -52,22 +54,24 @@
 
     <TextView
         android:id="@+id/tvHorario"
-        android:layout_width="128dp"
-        android:layout_height="99dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="Horario"
+        android:textAlignment="center"
         android:textColor="@android:color/black"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@+id/tvDireccion"
-        app:layout_constraintStart_toStartOf="@+id/tvDireccion"
-        app:layout_constraintTop_toBottomOf="@+id/tvDireccion" />
+        app:layout_constraintEnd_toEndOf="@+id/tvCp"
+        app:layout_constraintStart_toStartOf="@+id/tvCp"
+        app:layout_constraintTop_toBottomOf="@+id/tvCp" />
 
     <TextView
         android:id="@+id/tvDireccion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:text="Direccion"
+        android:textAlignment="center"
         android:textColor="@android:color/black"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/tvMunicipio"
@@ -78,8 +82,9 @@
         android:id="@+id/tvGasolina95"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="30dp"
         android:text="Precio Gasoleo A"
+        android:textAlignment="center"
         android:textColor="@android:color/black"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/tvHorario"
@@ -90,8 +95,9 @@
         android:id="@+id/tvGasoleoA"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="30dp"
         android:text="Precio Gasolina 95 E5"
+        android:textAlignment="center"
         android:textColor="@android:color/black"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/tvGasolina95"
@@ -103,13 +109,24 @@
         android:id="@+id/tvPrecioSumario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:text="Precio sumario"
+        android:textAlignment="center"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/tvGasoleoA"
-        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintHorizontal_bias="0.367"
         app:layout_constraintStart_toStartOf="@+id/tvGasoleoA"
-        app:layout_constraintTop_toBottomOf="@+id/tvGasoleoA"
-        app:layout_constraintVertical_bias="0.477" />
+        app:layout_constraintTop_toBottomOf="@+id/tvGasoleoA" />
+
+    <TextView
+        android:id="@+id/tvCp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="CP"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@+id/tvDireccion"
+        app:layout_constraintStart_toStartOf="@+id/tvDireccion"
+        app:layout_constraintTop_toBottomOf="@+id/tvDireccion" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

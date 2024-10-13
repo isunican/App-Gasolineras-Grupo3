@@ -19,6 +19,8 @@ import org.parceler.Parcels;
 import es.unican.gasolineras.R;
 import es.unican.gasolineras.model.Gasolinera;
 
+
+
 /**
  * View that shows the details of one gas station. Since this view does not have business logic,
  * it can be implemented as an activity directly, without the MVP pattern.
@@ -50,7 +52,8 @@ public class DetailsView extends AppCompatActivity {
         ImageView ivRotulo = findViewById(R.id.ivRotulo);
         TextView tvRotulo = findViewById(R.id.tvRotulo);
         TextView tvMunicipio = findViewById(R.id.tvMunicipio);
-        TextView tvCP = findViewById(R.id.tvDireccion);
+        TextView tvDireccion = findViewById(R.id.tvDireccion);
+        TextView tvCP = findViewById(R.id.tvCp);
         TextView tvHorario = findViewById(R.id.tvHorario);
         TextView tvGasoleoA = findViewById(R.id.tvGasoleoA);
         TextView tvGasolina95E5 = findViewById(R.id.tvGasolina95);
@@ -63,16 +66,18 @@ public class DetailsView extends AppCompatActivity {
         // Set logo
         @SuppressLint("DiscouragedApi") int imageID =
                 getResources().getIdentifier("generic", "drawable", getPackageName());
+
         ivRotulo.setImageResource(imageID);
 
         // Set Texts
         tvRotulo.setText(gasolinera.getRotulo());
         tvMunicipio.setText(gasolinera.getMunicipio());
+        tvDireccion.setText(gasolinera.getDireccion());
         tvCP.setText(gasolinera.getCp());
         tvHorario.setText(gasolinera.getHorario());
-        tvGasoleoA.setText(String.valueOf(gasolinera.getGasoleoA()));
-        tvGasolina95E5.setText(String.valueOf(gasolinera.getGasolina95E5()));
-        tvPrecioSumario.setText(String.valueOf(calcularPrecioSumario(gasolinera)));
+        tvGasoleoA.setText(String.valueOf(String.format("%.2f",gasolinera.getGasoleoA())));
+        tvGasolina95E5.setText(String.valueOf(String.format("%.2f", gasolinera.getGasolina95E5())));
+        tvPrecioSumario.setText(String.valueOf(String.format("%.2f", calcularPrecioSumario(gasolinera))));
 
     }
 
