@@ -24,6 +24,7 @@ public class Gasolinera {
 
     @SerializedName("IDEESS")                       protected String id;
 
+
     @SerializedName("Rótulo")                       protected String rotulo;
     @SerializedName("C.P.")                         protected String cp;
     @SerializedName("Dirección")                    protected String direccion;
