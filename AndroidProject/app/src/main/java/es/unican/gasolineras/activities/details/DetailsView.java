@@ -50,6 +50,10 @@ public class DetailsView extends AppCompatActivity {
         ImageView ivRotulo = findViewById(R.id.ivRotulo);
         TextView tvRotulo = findViewById(R.id.tvRotulo);
         TextView tvMunicipio = findViewById(R.id.tvMunicipio);
+        TextView tvHorario = findViewById(R.id.tvHorario);
+        TextView tvDireccion = findViewById(R.id.tvDireccion);
+        TextView tvGasolina95 = findViewById(R.id.tvGasolina95);
+        TextView tvGasoleoA = findViewById(R.id.tvGasoleoA);
 
         // Get Gas Station from the intent that triggered this activity
         Gasolinera gasolinera = Parcels.unwrap(getIntent().getExtras().getParcelable(INTENT_STATION));
@@ -62,6 +66,15 @@ public class DetailsView extends AppCompatActivity {
         // Set Texts
         tvRotulo.setText(gasolinera.getRotulo());
         tvMunicipio.setText(gasolinera.getMunicipio());
+        tvHorario.setText("Horario: 9:00 - 22:00");
+        tvDireccion.setText(gasolinera.getDireccion());
+        tvGasolina95.setText("Gasolina95jsjsjs");
+        tvGasoleoA.setText("GasoleaA9892347");
+        //tvGasolina95.setText(gasolinera.getGasolina95E5());
+        //tvGasoleoA.setText(gasolinera.getGasoleoA());
+
+
+
     }
 
     /**

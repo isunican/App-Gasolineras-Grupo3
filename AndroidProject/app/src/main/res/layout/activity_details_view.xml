@@ -49,5 +49,45 @@
         app:layout_constraintTop_toBottomOf="@+id/tvRotulo" />
 
 
+    <TextView
+        android:id="@+id/tvHorario"
+        android:layout_width="147dp"
+        android:layout_height="159dp"
+        android:text="Horario"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        tools:layout_editor_absoluteX="132dp"
+        tools:layout_editor_absoluteY="396dp" />
+
+    <TextView
+        android:id="@+id/tvDireccion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Direccion"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        tools:layout_editor_absoluteX="172dp"
+        tools:layout_editor_absoluteY="336dp" />
+
+    <TextView
+        android:id="@+id/tvGasolina95"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Precio Gasoleo A"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        tools:layout_editor_absoluteX="144dp"
+        tools:layout_editor_absoluteY="592dp" />
+
+    <TextView
+        android:id="@+id/tvGasoleoA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Precio Gasolina 95 E5"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        tools:layout_editor_absoluteX="127dp"
+        tools:layout_editor_absoluteY="655dp" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
