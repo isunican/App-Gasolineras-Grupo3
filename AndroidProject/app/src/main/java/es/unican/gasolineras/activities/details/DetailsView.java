@@ -68,7 +68,7 @@ public class DetailsView extends AppCompatActivity {
         tvMunicipio.setText(gasolinera.getMunicipio());
         tvHorario.setText("Horario: 9:00 - 22:00");
         tvDireccion.setText(gasolinera.getDireccion());
-        tvGasolina95.setText("Gasolina95jsjsjs");
+        tvGasolina95.setText("Gasolina95jsjss");
         tvGasoleoA.setText("GasoleaA9892347");
         //tvGasolina95.setText(gasolinera.getGasolina95E5());
         //tvGasoleoA.setText(gasolinera.getGasoleoA());
