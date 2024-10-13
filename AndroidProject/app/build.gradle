@@ -73,7 +73,7 @@ android {
         versionName "1.0"
 
         // I need a custom test runner to support Hilt
-        // testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         testInstrumentationRunner "es.unican.gasolineras.utils.CustomTestRunner"
     }
 
@@ -101,6 +101,7 @@ dependencies {
     testImplementation libs.junit
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core
+    //androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1’
 
     // Parceler (automatically implements methods to create parcels)
     implementation libs.parceler.api
