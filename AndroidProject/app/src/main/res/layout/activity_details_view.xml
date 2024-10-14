@@ -18,6 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <ImageView
         android:id="@+id/ivRotulo"
         android:layout_width="wrap_content"
@@ -34,6 +35,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
         tools:text="Rotulo"
+        android:textColor="@android:color/black"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivRotulo" />
@@ -42,12 +45,80 @@
         android:id="@+id/tvMunicipio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        tools:text="Municipio"
+        android:layout_marginTop="32dp"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="@+id/tvRotulo"
         app:layout_constraintStart_toStartOf="@+id/tvRotulo"
-        app:layout_constraintTop_toBottomOf="@+id/tvRotulo" />
+        app:layout_constraintTop_toBottomOf="@+id/tvRotulo"
+        tools:text="Municipio" />
 
 
+    <TextView
+        android:id="@+id/tvHorario"
+        android:layout_width="101dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="32dp"
+        android:text="Horario"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/tvDireccion"
+        app:layout_constraintStart_toStartOf="@+id/tvDireccion"
+        app:layout_constraintTop_toBottomOf="@+id/tvDireccion" />
+
+    <TextView
+        android:id="@+id/tvDireccion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Direccion"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/tvMunicipio"
+        app:layout_constraintStart_toStartOf="@+id/tvMunicipio"
+        app:layout_constraintTop_toBottomOf="@+id/tvMunicipio" />
+
+    <TextView
+        android:id="@+id/tvGasolina95"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Precio Gasoleo A"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/tvHorario"
+        app:layout_constraintStart_toStartOf="@+id/tvHorario"
+        app:layout_constraintTop_toBottomOf="@+id/tvHorario" />
+
+    <TextView
+        android:id="@+id/tvGasoleoA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Precio Gasolina 95 E5"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/tvGasolina95"
+        app:layout_constraintHorizontal_bias="0.529"
+        app:layout_constraintStart_toStartOf="@+id/tvGasolina95"
+        app:layout_constraintTop_toBottomOf="@+id/tvGasolina95" />
+
+    <TextView
+        android:id="@+id/tvPrecioSumario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Precio sumario"
+        android:textColor="@android:color/black"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/tvGasoleoA"
+        app:layout_constraintHorizontal_bias="0.367"
+        app:layout_constraintStart_toStartOf="@+id/tvGasoleoA"
+        app:layout_constraintTop_toBottomOf="@+id/tvGasoleoA" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
