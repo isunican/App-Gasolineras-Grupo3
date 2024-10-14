@@ -133,6 +133,8 @@ dependencies {
     testImplementation libs.hilt.android.testing
     testAnnotationProcessor libs.hilt.compiler
 
+    implementation 'com.squareup.picasso:picasso:2.8'
+
     // Roboelectric (to get a proper Context object in unit tests)
     testImplementation libs.roboelectric
 }
