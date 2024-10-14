@@ -34,28 +34,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
-<<<<<<< HEAD
         tools:text="Rotulo"
         android:textColor="@android:color/black"
-=======
         android:textAlignment="center"
->>>>>>> abad709c8e85b114b76290b5388a877267e6810c
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivRotulo"
-        tools:text="Rotulo" />
+        app:layout_constraintTop_toBottomOf="@+id/ivRotulo" />
 
     <TextView
         android:id="@+id/tvMunicipio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-<<<<<<< HEAD
-        android:layout_marginTop="24dp"
-        android:textColor="@android:color/black"
-=======
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="32dp"
         android:textAlignment="center"
->>>>>>> abad709c8e85b114b76290b5388a877267e6810c
+        android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="@+id/tvRotulo"
         app:layout_constraintStart_toStartOf="@+id/tvRotulo"
         app:layout_constraintTop_toBottomOf="@+id/tvRotulo"
@@ -64,21 +56,16 @@
 
     <TextView
         android:id="@+id/tvHorario"
-<<<<<<< HEAD
-        android:layout_width="128dp"
-        android:layout_height="56dp"
-=======
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
->>>>>>> abad709c8e85b114b76290b5388a877267e6810c
-        android:layout_marginTop="20dp"
+        android:layout_width="101dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="32dp"
         android:text="Horario"
         android:textAlignment="center"
         android:textColor="@android:color/black"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@+id/tvCp"
-        app:layout_constraintStart_toStartOf="@+id/tvCp"
-        app:layout_constraintTop_toBottomOf="@+id/tvCp" />
+        app:layout_constraintEnd_toEndOf="@+id/tvDireccion"
+        app:layout_constraintStart_toStartOf="@+id/tvDireccion"
+        app:layout_constraintTop_toBottomOf="@+id/tvDireccion" />
 
     <TextView
         android:id="@+id/tvDireccion"
@@ -126,26 +113,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:text="Precio sumario"
-<<<<<<< HEAD
         android:textColor="@android:color/black"
-=======
         android:textAlignment="center"
->>>>>>> abad709c8e85b114b76290b5388a877267e6810c
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/tvGasoleoA"
         app:layout_constraintHorizontal_bias="0.367"
         app:layout_constraintStart_toStartOf="@+id/tvGasoleoA"
         app:layout_constraintTop_toBottomOf="@+id/tvGasoleoA" />
-
-    <TextView
-        android:id="@+id/tvCp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="CP"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="@+id/tvDireccion"
-        app:layout_constraintStart_toStartOf="@+id/tvDireccion"
-        app:layout_constraintTop_toBottomOf="@+id/tvDireccion" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

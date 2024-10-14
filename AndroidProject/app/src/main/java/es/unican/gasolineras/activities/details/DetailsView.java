@@ -15,8 +15,6 @@ import org.parceler.Parcels;
 import es.unican.gasolineras.R;
 import es.unican.gasolineras.model.Gasolinera;
 
-
-
 /**
  * View that shows the details of one gas station. Since this view does not have business logic,
  * it can be implemented as an activity directly, without the MVP pattern.
@@ -49,10 +47,6 @@ public class DetailsView extends AppCompatActivity {
         TextView tvRotulo = findViewById(R.id.tvRotulo);
         TextView tvMunicipio = findViewById(R.id.tvMunicipio);
         TextView tvDireccion = findViewById(R.id.tvDireccion);
-<<<<<<< HEAD
-=======
-        TextView tvCP = findViewById(R.id.tvCp);
->>>>>>> abad709c8e85b114b76290b5388a877267e6810c
         TextView tvHorario = findViewById(R.id.tvHorario);
         TextView tvGasoleoA = findViewById(R.id.tvGasoleoA);
         TextView tvGasolina95E5 = findViewById(R.id.tvGasolina95);
@@ -71,12 +65,7 @@ public class DetailsView extends AppCompatActivity {
         // Set Texts
         tvRotulo.setText(gasolinera.getRotulo());
         tvMunicipio.setText(gasolinera.getMunicipio());
-<<<<<<< HEAD
         tvDireccion.setText(gasolinera.getCp());
-=======
-        tvDireccion.setText(gasolinera.getDireccion());
-        tvCP.setText(gasolinera.getCp());
->>>>>>> abad709c8e85b114b76290b5388a877267e6810c
         tvHorario.setText(gasolinera.getHorario());
         tvGasoleoA.setText(String.valueOf(String.format("%.2f",gasolinera.getGasoleoA())));
         tvGasolina95E5.setText(String.valueOf(String.format("%.2f", gasolinera.getGasolina95E5())));

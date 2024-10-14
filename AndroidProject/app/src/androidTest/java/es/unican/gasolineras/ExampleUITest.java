@@ -82,14 +82,11 @@ public class ExampleUITest {
                 .atPosition(0)
                 .perform(click());
 
-        // Verifica que la dirección está visible
-        onView(withId(R.id.tvDireccion))
-                .check(matches(isDisplayed()));
         // Verifica que la localidad está visible
         onView(withId(R.id.tvMunicipio))
                 .check(matches(isDisplayed()));
         // Verifica que el codigo postal esta visible
-        onView(withId(R.id.tvCp))
+        onView(withId(R.id.tvDireccion))
                 .check(matches(isDisplayed()));
         // Verifica que el horario está visible
         onView(withId(R.id.tvHorario))
