@@ -98,9 +98,11 @@ public class GasolinerasArrayAdapter extends BaseAdapter {
 
         // address
         {
+
             TextView tv = convertView.findViewById(R.id.tvAddress);
             tv.setText(gasolinera.getDireccion());
         }
+
 
         // gasolina 95 price
         {
