@@ -9,6 +9,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.CoreMatchers.anything;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 
@@ -59,8 +60,8 @@ public class ExampleUITest {
     }
 
 
-   /* @Test
-    public void compruebaVistaDetalleGasolineraAbreCorrectamente {
+   @Test
+    public void compruebaVistaDetalleGasolineraAbreCorrectamente() {
         // Realiza clic en el primer elemento de la lista de gasolineras
         onData(anything())
                 .inAdapterView(withId(R.id.lvStations))
@@ -70,7 +71,7 @@ public class ExampleUITest {
         // Verifica que la vista de detalle se muestra comprobando un elemento de la DetailsView
         onView(withId(R.id.tvRotulo))
                 .check(matches(isDisplayed()));
-    }*/
+    }
 
 
     @Test
@@ -97,7 +98,8 @@ public class ExampleUITest {
                 .check(matches(isDisplayed()));
     }
 
-    /*@Test
+
+    @Test
     public void testFormatoPrecioCorrecto() {
         // Realiza clic en el primer elemento de la lista de gasolineras
         onData(anything())
@@ -107,28 +109,30 @@ public class ExampleUITest {
 
         // Verifica que el formato del precio es de dos decimales
         onView(withId(R.id.tvGasolina95))
-                .check(matches(withTextMatchingPrice()));
+                .check((view, noViewFoundException) -> {
+                    TextView textView = (TextView) view;
+                    String text = textView.getText().toString();
+                    assertTrue("El texto no tiene el formato correcto", text.matches("\\d+\\.\\d{2}"));
+                });
 
         onView(withId(R.id.tvGasoleoA))
-                .check(matches(withTextMatchingPrice()));
+                .check((view, noViewFoundException) -> {
+                    TextView textView = (TextView) view;
+                    String text = textView.getText().toString();
+                    assertTrue("El texto no tiene el formato correcto", text.matches("\\d+\\.\\d{2}"));
+                });
+
+        onView(withId(R.id.tvPrecioSumario))
+                .check((view, noViewFoundException) -> {
+                    TextView textView = (TextView) view;
+                    String text = textView.getText().toString();
+                    assertTrue("El texto no tiene el formato correcto", text.matches("\\d+\\.\\d{2}"));
+                });
     }
 
-    public static Matcher<? super android.view.View> withTextMatchingPrice() {
-        return new BoundedMatcher<View, TextView>(TextView.class) {
-            @Override
-            public void describeTo(Description description) {
-                description.appendText("with text matching price format (two decimal places)");
-            }
 
-            @Override
-            protected boolean matchesSafely(TextView textView) {
-                String text = textView.getText().toString();
-                return text.matches("\\d+\\.\\d{2}");
-            }
-        };
-    }*/
-
-    /*@Test
+    /*
+    @Test
     public void testDatosNoExistentesConGuion() {
         // Realiza clic en el primer elemento de la lista de gasolineras
         onData(anything())

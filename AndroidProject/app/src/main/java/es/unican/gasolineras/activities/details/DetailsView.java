@@ -6,13 +6,9 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import org.parceler.Parcels;
 
@@ -50,7 +46,7 @@ public class DetailsView extends AppCompatActivity {
         ImageView ivRotulo = findViewById(R.id.ivRotulo);
         TextView tvRotulo = findViewById(R.id.tvRotulo);
         TextView tvMunicipio = findViewById(R.id.tvMunicipio);
-        TextView tvCP = findViewById(R.id.tvDireccion);
+        TextView tvDireccion = findViewById(R.id.tvDireccion);
         TextView tvHorario = findViewById(R.id.tvHorario);
         TextView tvGasoleoA = findViewById(R.id.tvGasoleoA);
         TextView tvGasolina95E5 = findViewById(R.id.tvGasolina95);
@@ -68,7 +64,7 @@ public class DetailsView extends AppCompatActivity {
         // Set Texts
         tvRotulo.setText(gasolinera.getRotulo());
         tvMunicipio.setText(gasolinera.getMunicipio());
-        tvCP.setText(gasolinera.getCp());
+        tvDireccion.setText(gasolinera.getCp());
         tvHorario.setText(gasolinera.getHorario());
         tvGasoleoA.setText(String.valueOf(gasolinera.getGasoleoA()));
         tvGasolina95E5.setText(String.valueOf(gasolinera.getGasolina95E5()));
@@ -94,6 +90,6 @@ public class DetailsView extends AppCompatActivity {
     public double calcularPrecioSumario(Gasolinera gasolinera) {
         double precioSumario;
         precioSumario = ((2 * gasolinera.getGasolina95E5()) + (gasolinera.getGasoleoA())) / 3;
-        return precioSumario;
+        return Double.parseDouble(String.format("%.2f", precioSumario));
     }
 }

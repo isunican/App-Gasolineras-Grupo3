@@ -35,6 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
         tools:text="Rotulo"
+        android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivRotulo" />
@@ -44,6 +45,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
+        android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="@+id/tvRotulo"
         app:layout_constraintStart_toStartOf="@+id/tvRotulo"
         app:layout_constraintTop_toBottomOf="@+id/tvRotulo"
@@ -53,7 +55,7 @@
     <TextView
         android:id="@+id/tvHorario"
         android:layout_width="128dp"
-        android:layout_height="99dp"
+        android:layout_height="56dp"
         android:layout_marginTop="20dp"
         android:text="Horario"
         android:textColor="@android:color/black"
@@ -104,6 +106,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Precio sumario"
+        android:textColor="@android:color/black"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/tvGasoleoA"

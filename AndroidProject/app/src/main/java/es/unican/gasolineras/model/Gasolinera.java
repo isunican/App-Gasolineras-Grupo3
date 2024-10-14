@@ -36,26 +36,38 @@ public class Gasolinera {
 
 
     public String getRotulo() {
+        if (rotulo == null) {
+            rotulo = "-";
+        }
         return this.rotulo;
     }
 
     public String  getMunicipio() {
+        if (municipio == null) {
+            municipio = "-";
+        }
         return this.municipio;
     }
 
     public String  getCp() {
+        if (cp == null) {
+            cp = "-";
+        }
         return this.cp;
     }
 
     public String  getHorario() {
+        if (horario == null) {
+            horario = "-";
+        }
         return this.horario;
     }
 
     public double getGasoleoA() {
-        return this.gasoleoA;
+        return Double.parseDouble(String.format("%.2f", gasoleoA));
     }
 
     public double getGasolina95E5() {
-        return this.gasolina95E5;
+        return Double.parseDouble(String.format("%.2f",gasolina95E5));
     }
 }
