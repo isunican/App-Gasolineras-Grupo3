@@ -1,10 +1,13 @@
 package es.unican.gasolineras.activities.main;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -20,6 +23,8 @@ import javax.inject.Inject;
 
 import dagger.hilt.android.AndroidEntryPoint;
 import es.unican.gasolineras.R;
+import es.unican.gasolineras.activities.ConsultarRepostajeMenu.ConsultarView;
+import es.unican.gasolineras.activities.RegistrarRepostajeMenu.RegistrarView;
 import es.unican.gasolineras.activities.info.InfoView;
 import es.unican.gasolineras.activities.details.DetailsView;
 import es.unican.gasolineras.model.Gasolinera;
@@ -54,6 +59,8 @@ public class MainView extends AppCompatActivity implements IMainContract.View {
         presenter.init(this);
     }
 
+
+
     /**
      * This creates the menu that is shown in the action bar (the upper toolbar)
      * @param menu The options menu in which you place your items.
@@ -78,6 +85,14 @@ public class MainView extends AppCompatActivity implements IMainContract.View {
         int itemId = item.getItemId();
         if (itemId == R.id.menuItemInfo) {
             presenter.onMenuInfoClicked();
+            return true;
+        }
+        if (itemId == R.id.RegistrarRepostajeItem) {
+            presenter.onMenuRegistrarClicked();
+            return true;
+        }
+        if (itemId == R.id.ConsultarRepostajeItem) {
+            presenter.onMenuConsultarClicked();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -150,6 +165,25 @@ public class MainView extends AppCompatActivity implements IMainContract.View {
     @Override
     public void showInfoActivity() {
         Intent intent = new Intent(this, InfoView.class);
+        startActivity(intent);
+    }
+
+    /**
+     * @see IMainContract.View#showRegistrarActivity()
+     */
+    @Override
+    public void showRegistrarActivity() {
+        Intent intent = new Intent(this, RegistrarView.class);
+        startActivity(intent);
+    }
+
+
+    /**
+     * @see IMainContract.View#showConsultarActivity()
+     */
+    @Override
+    public void showConsultarActivity() {
+        Intent intent = new Intent(this, ConsultarView.class);
         startActivity(intent);
     }
 }

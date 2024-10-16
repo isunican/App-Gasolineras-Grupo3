@@ -44,6 +44,22 @@ public class MainPresenter implements IMainContract.Presenter {
     }
 
     /**
+     * @see IMainContract.Presenter#onMenuRegistrarClicked()
+     */
+    @Override
+    public void onMenuRegistrarClicked() { view.showRegistrarActivity();}
+
+    /**
+     * @see IMainContract.Presenter#onMenuConsultarClicked()
+     */
+    @Override
+    public void onMenuConsultarClicked() {
+        view.showConsultarActivity();
+    }
+
+
+
+    /**
      * Loads the gas stations from the repository, and sends them to the view
      */
     private void load() {

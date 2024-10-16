@@ -19,6 +19,12 @@
             android:name=".activities.info.InfoView"
             android:exported="false" />
         <activity
+            android:name=".activities.RegistrarRepostajeMenu.RegistrarView"
+            android:exported="false" />
+        <activity
+            android:name=".activities.ConsultarRepostajeMenu.ConsultarView"
+            android:exported="false" />
+        <activity
             android:name=".activities.details.DetailsView"
             android:exported="false" />
         <activity

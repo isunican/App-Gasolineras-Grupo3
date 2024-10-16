@@ -37,6 +37,19 @@ public interface IMainContract {
          */
         public void onMenuInfoClicked();
 
+        /**
+         * The presenter is informed that the Info item in the menu has been clicked
+         * Only the View should call this method
+         */
+        public void onMenuRegistrarClicked();
+
+
+        /**
+         * The presenter is informed that the Info item in the menu has been clicked
+         * Only the View should call this method
+         */
+        public void onMenuConsultarClicked();
+
     }
 
     /**
@@ -97,6 +110,19 @@ public interface IMainContract {
          * Only the Presenter should call this method
          */
         public void showInfoActivity();
+
+        /**
+         * The view is requested to open the registrar repostaje activity.
+         * Only the Presenter should call this method
+         */
+        public void showRegistrarActivity();
+
+        /**
+         * The view is requested to open the consultar repostaje activity.
+         * Only the Presenter should call this method
+         */
+        public void showConsultarActivity();
+
 
     }
 }
