@@ -34,17 +34,36 @@ public class RegistrarView extends AppCompatActivity {
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new AlertDialog.Builder(RegistrarView.this)
-                        .setTitle("Confirmación")
-                        .setMessage("Repostaje registrado correctamente")
-                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                //setContentView(R.layout.activity_consulta_repostaje_view);
 
-                            }
-                        })
-                        .show();
+                try {
+                    new AlertDialog.Builder(RegistrarView.this)
+                            .setTitle("Confirmación")
+                            .setMessage(getString(R.string.registro_exito))
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    //setContentView(R.layout.activity_consulta_repostaje_view);
+
+                                }
+                            })
+                            .show();
+
+                } catch (Exception e) {
+                    // Si ocurre una excepción, muestra el mensaje de error
+                    new AlertDialog.Builder(RegistrarView.this)
+                            .setTitle("Error")
+                            .setMessage(getString(R.string.error_acceso_bbdd))
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // Puedes agregar alguna acción adicional si es necesario
+                                    Intent intent = new Intent(RegistrarView.this, MainView.class);
+                                    startActivity(intent);
+                                }
+                            })
+                            .show();
+                }
+
             }
         });
 

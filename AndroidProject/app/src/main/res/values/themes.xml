@@ -4,13 +4,13 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+    <!-- <item name="colorAccent">@color/colorAccent</item> -->
 
-    </style>
+</style>
 
-    <style name="Theme.Gasolineras" parent="Base.Theme.Gasolineras" />
+<style name="Theme.Gasolineras" parent="Base.Theme.Gasolineras" />
 
-    <!--Custom theme for the toolbar, to have the text white-->
+<!--Custom theme for the toolbar, to have the text white-->
     <style name="ThemeOverlay.Gasolineras.Toolbar" parent="@style/ThemeOverlay.AppCompat.ActionBar">
         <item name="android:textColorPrimary">@android:color/white</item>
     </style>

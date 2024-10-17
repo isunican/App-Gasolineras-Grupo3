@@ -7,4 +7,8 @@
     <string name="loadCorrect">Se han cargado %d gasolineras</string>
     <string name="loadError">Ha habido un error cargando las gasolineras</string>
     <string name="info_text">Aplicación creada para el Proyecto Integrado Curso 2024-2025</string>
+    <string name ="error_datos_incorrectos">Los datos introducidos no tienen el formato correcto</string>
+    <string name ="error_acceso_bbdd">Ocurrió un error en el acceso a la base de datos. Inténtalo de nuevo más tarde.</string>
+    <string name ="error_datos_incompletos">Error, los datos son incompletos </string>
+    <string name ="registro_exito">Repostaje registrado correctamente</string>
 </resources>
