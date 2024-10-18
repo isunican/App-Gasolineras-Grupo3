@@ -54,7 +54,7 @@ public class RepostajesArrayAdapter extends BaseAdapter {
 
         if (convertView == null) {
             convertView = LayoutInflater.from(context)
-                    .inflate(R.layout.activity_consultar_list_item, parent, false);
+                    .inflate(R.layout.activity_consulta_repostaje_list_item_view, parent, false);
         }
 
         //fecha
@@ -66,19 +66,19 @@ public class RepostajesArrayAdapter extends BaseAdapter {
         //precio por litro
         {
 
-            TextView tv = convertView.findViewById(R.id.tvPreciolitro);
+            TextView tv = convertView.findViewById(R.id.tvPrecioPorLitroNum);
             tv.setText(String.valueOf(repostaje.getPrecioTotal() / repostaje.getLitros()));
         }
 
         //litros
         {
-            TextView tv = convertView.findViewById(R.id.tvLitros);
+            TextView tv = convertView.findViewById(R.id.tvLitrosNum);
             tv.setText(String.valueOf(repostaje.getLitros()));
         }
 
         //precio total
         {
-            TextView tv = convertView.findViewById(R.id.tvPrecioTotal);
+            TextView tv = convertView.findViewById(R.id.tvPrecioTotalNum);
             tv.setText(String.valueOf(repostaje.getPrecioTotal()));
         }
 

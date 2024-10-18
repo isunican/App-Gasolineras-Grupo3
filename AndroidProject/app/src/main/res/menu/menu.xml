@@ -11,11 +11,11 @@
         android:id="@+id/RegistrarRepostajeItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:title="Registrar repostaje" />
+        android:title="@string/registrarRepostaje" />
 
     <item
         android:id="@+id/ConsultarRepostajeItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:title="Historial repostajes" />
+        android:title="@string/historialRepostaje" />
 </menu>

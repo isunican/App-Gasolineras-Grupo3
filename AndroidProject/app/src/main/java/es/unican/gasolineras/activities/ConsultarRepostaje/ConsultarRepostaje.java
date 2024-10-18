@@ -1,5 +1,8 @@
 package es.unican.gasolineras.activities.ConsultarRepostaje;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -17,7 +20,9 @@ import java.util.Locale;
 
 import es.unican.gasolineras.GasolinerasApp;
 import es.unican.gasolineras.R;
+
 import es.unican.gasolineras.activities.main.IMainContract;
+import es.unican.gasolineras.activities.main.MainView;
 import es.unican.gasolineras.model.Repostaje;
 import es.unican.gasolineras.repository.AppDatabase;
 import es.unican.gasolineras.repository.RepostajeDAO;
@@ -31,14 +36,30 @@ public class ConsultarRepostaje extends AppCompatActivity implements IConsultar 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_consulta_repostaje_view);
+        try {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_consulta_repostaje_view);
+        } catch (Exception e) {
+            // Si ocurre una excepción, muestra el mensaje de error
+            new AlertDialog.Builder(ConsultarRepostaje.this)
+                    .setTitle("Error")
+                    .setMessage(getString(R.string.error_acceso_bbdd))
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // Puedes agregar alguna acción adicional si es necesario
+                            Intent intent = new Intent(ConsultarRepostaje.this, MainView.class);
+                            startActivity(intent);
+                        }
+                    })
+                    .show();
+        }
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar bar = getSupportActionBar();
-        assert bar != null;  // to avoid warning in the line below
-        bar.setDisplayHomeAsUpEnabled(true);  // show back button in action bar
+        //assert bar != null;  // to avoid warning in the line below
+        //bar.setDisplayHomeAsUpEnabled(true);  // show back button in action bar
 
         TextView repostajesMes = findViewById(R.id.tvRepostajesMes);
         TextView precioMedioLitro = findViewById(R.id.tvPrecioMedioLitro);

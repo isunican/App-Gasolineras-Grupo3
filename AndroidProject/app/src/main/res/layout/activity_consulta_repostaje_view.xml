@@ -11,20 +11,22 @@
         android:layout_width="331dp"
         android:layout_height="34dp"
         android:layout_marginStart="32dp"
+        android:gravity="center"
         android:text="Historico de Repostajes"
         android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="348dp" />
 
     <TextView
-        android:id="@+id/numImporteMes"
+        android:id="@+id/tvAcumuladoMes"
         android:layout_width="99dp"
         android:layout_height="35dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="48dp"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/numPrecioMedio"
+        app:layout_constraintTop_toBottomOf="@+id/tvPrecioMedioLitro"
         tools:text="242" />
 
     <TextView
@@ -50,14 +52,14 @@
         app:layout_constraintTop_toBottomOf="@+id/resumenMes" />
 
     <TextView
-        android:id="@+id/numPrecioMedio"
+        android:id="@+id/tvPrecioMedioLitro"
         android:layout_width="99dp"
         android:layout_height="35dp"
         android:layout_marginTop="28dp"
         android:layout_marginEnd="48dp"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/numRepostajes"
+        app:layout_constraintTop_toBottomOf="@+id/tvRepostajesMes"
         tools:text="1,534" />
 
     <TextView
@@ -66,13 +68,15 @@
         android:layout_height="30dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="88dp"
-        android:text="Resumen de Octubre"
-        android:textSize="24sp"
+        android:gravity="start"
+        android:text="Este mes "
+        android:textSize="28sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/numRepostajes"
+        android:id="@+id/tvRepostajesMes"
         android:layout_width="99dp"
         android:layout_height="35dp"
         android:layout_marginTop="28dp"
@@ -94,7 +98,7 @@
         app:layout_constraintTop_toBottomOf="@+id/repostajes" />
 
     <ListView
-        android:id="@+id/historicoRepostajes"
+        android:id="@+id/lvRepostajes"
         android:layout_width="409dp"
         android:layout_height="0dp"
         android:layout_marginTop="400dp"
@@ -106,8 +110,8 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar2"
-        android:layout_width="409dp"
-        android:layout_height="wrap_content"
+        android:layout_width="431dp"
+        android:layout_height="58dp"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"

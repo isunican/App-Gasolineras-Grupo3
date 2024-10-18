@@ -23,12 +23,13 @@ import javax.inject.Inject;
 
 import dagger.hilt.android.AndroidEntryPoint;
 import es.unican.gasolineras.R;
-import es.unican.gasolineras.activities.ConsultarRepostajeMenu.ConsultarView;
+import es.unican.gasolineras.activities.ConsultarRepostaje.ConsultarRepostaje;
 import es.unican.gasolineras.activities.RegistrarRepostajeMenu.RegistrarView;
 import es.unican.gasolineras.activities.info.InfoView;
 import es.unican.gasolineras.activities.details.DetailsView;
 import es.unican.gasolineras.model.Gasolinera;
 import es.unican.gasolineras.repository.IGasolinerasRepository;
+
 
 /**
  * The main view of the application. It shows a list of gas stations.
@@ -183,7 +184,7 @@ public class MainView extends AppCompatActivity implements IMainContract.View {
      */
     @Override
     public void showConsultarActivity() {
-        Intent intent = new Intent(this, ConsultarView.class);
+        Intent intent = new Intent(this, ConsultarRepostaje.class);
         startActivity(intent);
     }
 }

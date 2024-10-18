@@ -18,12 +18,12 @@ public class Repostaje {
     public int uid;
 
     @ColumnInfo(name = "fecha_repostaje")
-    protected String fechaRepostaje;
+    public String fechaRepostaje;
 
     @ColumnInfo(name = "precio_total")
-    protected double precioTotal;
+    public double precioTotal;
 
     @ColumnInfo(name = "litros")
-    protected double litros;
+    public double litros;
 
 }
