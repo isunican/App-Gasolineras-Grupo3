@@ -60,35 +60,24 @@ public class RepostajesArrayAdapter extends BaseAdapter {
         //fecha
         {
             TextView tv = convertView.findViewById(R.id.tvFecha);
-            tv.setText(repostaje.getFechaAnhadido());
+            tv.setText(repostaje.getFechaRepostaje());
         }
 
         //precio por litro
         {
-            TextView tvLabel = convertView.findViewById(R.id.tvPrecioLitroLabel);
-            String label = "Precio por litro";
-            tvLabel.setText(String.format("%s:", label));
 
             TextView tv = convertView.findViewById(R.id.tvPreciolitro);
-            tv.setText(String.valueOf(repostaje.getLitros()));
+            tv.setText(String.valueOf(repostaje.getPrecioTotal() / repostaje.getLitros()));
         }
 
         //litros
         {
-            TextView tvLabel = convertView.findViewById(R.id.tvLitrosLabel);
-            String label = "Litros";
-            tvLabel.setText(String.format("%s:", label));
-
             TextView tv = convertView.findViewById(R.id.tvLitros);
             tv.setText(String.valueOf(repostaje.getLitros()));
         }
 
         //precio total
         {
-            TextView tvLabel = convertView.findViewById(R.id.tvPrecioTotalLabel);
-            String label = "Precio total";
-            tvLabel.setText(String.format("%s:", label));
-
             TextView tv = convertView.findViewById(R.id.tvPrecioTotal);
             tv.setText(String.valueOf(repostaje.getPrecioTotal()));
         }
