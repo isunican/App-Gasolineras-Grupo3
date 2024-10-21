@@ -8,10 +8,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatAutoCompleteTextView;
+
 
 import es.unican.gasolineras.R;
 import es.unican.gasolineras.activities.main.MainView;
@@ -31,22 +31,15 @@ public class RegistrarView extends AppCompatActivity {
         Button btnCancelar = findViewById(R.id.btnCancelar);
 
         // Establece un listener para el botón
-        btnGuardar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                try {
-                    new AlertDialog.Builder(RegistrarView.this)
-                            .setTitle("Confirmación")
-                            .setMessage(getString(R.string.registro_exito))
-                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    //setContentView(R.layout.activity_consulta_repostaje_view);
-
-                                }
-                            })
-                            .show();
+        btnGuardar.setOnClickListener(view -> {
+            try {
+                new AlertDialog.Builder(RegistrarView.this)
+                        .setTitle("Confirmación")
+                        .setMessage(getString(R.string.registro_exito))
+                        .setPositiveButton("OK", (dialog, which) -> {
+                            setContentView(R.layout.activity_consulta_repostaje_view);
+                        })
+                        .show();
 
                 } catch (Exception e) {
                     // Si ocurre una excepción, muestra el mensaje de error
@@ -63,8 +56,6 @@ public class RegistrarView extends AppCompatActivity {
                             })
                             .show();
                 }
-
-            }
         });
 
         btnCancelar.setOnClickListener(new View.OnClickListener() {

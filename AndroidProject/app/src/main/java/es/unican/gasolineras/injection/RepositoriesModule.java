@@ -20,6 +20,10 @@ import es.unican.gasolineras.repository.GasolinerasRepository;
 @InstallIn(ActivityComponent.class)
 public abstract class RepositoriesModule {
 
+    private RepositoriesModule() {
+
+    }
+
     @Provides
     public static IGasolinerasRepository provideRepository() {
         return GasolinerasRepository.INSTANCE;

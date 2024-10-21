@@ -47,17 +47,15 @@ public class ConsultarView extends AppCompatActivity implements IConsultar.View 
             new AlertDialog.Builder(ConsultarView.this)
                     .setTitle("Error")
                     .setMessage(getString(R.string.error_acceso_bbdd))
-                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            // Puedes agregar alguna acción adicional si es necesario
-                            Intent intent = new Intent(ConsultarView.this, MainView.class);
-                            startActivity(intent);
-                        }
+                    .setPositiveButton("OK", (dialog, which) -> {
+                        // Puedes agregar alguna acción adicional si es necesario
+                        Intent intent = new Intent(ConsultarView.this, MainView.class);
+                        startActivity(intent);
                     })
                     .show();
         }
         db = DatabaseFunction.getDatabase(this);
+
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
