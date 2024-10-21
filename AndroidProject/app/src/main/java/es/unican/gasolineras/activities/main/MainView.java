@@ -1,13 +1,10 @@
 package es.unican.gasolineras.activities.main;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -23,7 +20,7 @@ import javax.inject.Inject;
 
 import dagger.hilt.android.AndroidEntryPoint;
 import es.unican.gasolineras.R;
-import es.unican.gasolineras.activities.ConsultarRepostaje.ConsultarRepostaje;
+import es.unican.gasolineras.activities.ConsultarRepostaje.ConsultarView;
 import es.unican.gasolineras.activities.RegistrarRepostajeMenu.RegistrarView;
 import es.unican.gasolineras.activities.info.InfoView;
 import es.unican.gasolineras.activities.details.DetailsView;
@@ -184,7 +181,7 @@ public class MainView extends AppCompatActivity implements IMainContract.View {
      */
     @Override
     public void showConsultarActivity() {
-        Intent intent = new Intent(this, ConsultarRepostaje.class);
+        Intent intent = new Intent(this, ConsultarView.class);
         startActivity(intent);
     }
 }

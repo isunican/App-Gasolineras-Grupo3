@@ -14,13 +14,8 @@ public interface RepostajeDAO {
     @Query("SELECT * FROM repostaje")
     List<Repostaje> repostajes();
 
-    /*
-    @Query("SELECT * FROM repostaje where fecha_repostaje = getdate()")
-    Repostaje repostajePorFecha(String fecha);*/
-
-    // Obtener todos los repostajes de un mes específico (mes y año)
-    @Query("SELECT * FROM repostaje WHERE strftime('%Y-%m', fecha_repostaje) = :anioMes")
-    List<Repostaje> repostajesPorMes(String anioMes);
+    @Query("SELECT * FROM Repostaje WHERE fecha_repostaje BETWEEN :fechaInicio AND :fechaFin")
+    List<Repostaje> repostajesPorRangoDeFechas(String fechaInicio, String fechaFin);
 
     @Insert
     void registrarRepostaje(Repostaje r);

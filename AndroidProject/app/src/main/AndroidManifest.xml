@@ -22,7 +22,7 @@
             android:name=".activities.RegistrarRepostajeMenu.RegistrarView"
             android:exported="false" />
         <activity
-            android:name=".activities.ConsultarRepostaje.ConsultarRepostaje"
+            android:name=".activities.ConsultarRepostaje.ConsultarView"
             android:exported="false" />
         <activity
             android:name=".activities.details.DetailsView"
