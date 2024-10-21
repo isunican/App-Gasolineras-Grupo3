@@ -13,7 +13,7 @@ public class DatabaseFunction {
             // Inicializa la base de datos si aún no lo está
             database = Room.databaseBuilder(context.getApplicationContext(),
                             AppDatabase.class, "database-name")
-                    .fallbackToDestructiveMigration()  // Opcional: elimina la base de datos si hay un cambio de esquema.
+                    .allowMainThreadQueries()
                     .build();
         }
         return database;

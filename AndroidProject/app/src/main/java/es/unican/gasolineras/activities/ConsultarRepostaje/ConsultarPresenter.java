@@ -98,7 +98,7 @@ public class ConsultarPresenter implements  IConsultar.Presenter {
         try {
             view.showRepostajes(repostajes);
             view.showLoadCorrect(repostajes.size());
-        } catch (Throwable e) {
+        } catch (Exception e) {
             view.showLoadError();
         }
     }
