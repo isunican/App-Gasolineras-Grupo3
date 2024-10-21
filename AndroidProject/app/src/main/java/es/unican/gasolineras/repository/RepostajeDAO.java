@@ -23,4 +23,7 @@ public interface RepostajeDAO {
     @Delete
     void eliminarRepostaje(Repostaje r);
 
+    @Query("DELETE from Repostaje")
+    void eliminarRepostajes();
+
 }
