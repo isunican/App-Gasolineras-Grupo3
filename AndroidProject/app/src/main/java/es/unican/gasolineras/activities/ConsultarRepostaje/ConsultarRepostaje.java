@@ -44,16 +44,14 @@ public class ConsultarRepostaje extends AppCompatActivity implements IConsultar 
             new AlertDialog.Builder(ConsultarRepostaje.this)
                     .setTitle("Error")
                     .setMessage(getString(R.string.error_acceso_bbdd))
-                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            // Puedes agregar alguna acción adicional si es necesario
-                            Intent intent = new Intent(ConsultarRepostaje.this, MainView.class);
-                            startActivity(intent);
-                        }
+                    .setPositiveButton("OK", (dialog, which) -> {
+                        // Puedes agregar alguna acción adicional si es necesario
+                        Intent intent = new Intent(ConsultarRepostaje.this, MainView.class);
+                        startActivity(intent);
                     })
                     .show();
         }
+
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -160,7 +158,7 @@ public class ConsultarRepostaje extends AppCompatActivity implements IConsultar 
         try {
             showRepostajes(repostajes);
             showLoadCorrect(repostajes.size());
-        } catch (Throwable e) {
+        } catch (Exception e) {
             showLoadError();
         }
     }

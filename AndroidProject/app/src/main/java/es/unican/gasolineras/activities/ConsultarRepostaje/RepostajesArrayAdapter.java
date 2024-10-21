@@ -57,31 +57,34 @@ public class RepostajesArrayAdapter extends BaseAdapter {
                     .inflate(R.layout.activity_consulta_repostaje_list_item_view, parent, false);
         }
 
-        //fecha
-        {
-            TextView tv = convertView.findViewById(R.id.tvFecha);
-            tv.setText(repostaje.getFechaRepostaje());
-        }
 
-        //precio por litro
-        {
+        setFecha(convertView, repostaje);
+        setPrecioPorLitro(convertView, repostaje);
+        setLitros(convertView, repostaje);
+        setPrecioTotal(convertView, repostaje);
 
-            TextView tv = convertView.findViewById(R.id.tvPrecioPorLitroNum);
-            tv.setText(String.valueOf(repostaje.getPrecioTotal() / repostaje.getLitros()));
-        }
-
-        //litros
-        {
-            TextView tv = convertView.findViewById(R.id.tvLitrosNum);
-            tv.setText(String.valueOf(repostaje.getLitros()));
-        }
-
-        //precio total
-        {
-            TextView tv = convertView.findViewById(R.id.tvPrecioTotalNum);
-            tv.setText(String.valueOf(repostaje.getPrecioTotal()));
-        }
 
         return convertView;
+    }
+
+
+    private void setFecha(View convertView, Repostaje repostaje) {
+        TextView tv = convertView.findViewById(R.id.tvFecha);
+        tv.setText(repostaje.getFechaRepostaje());
+    }
+
+    private void setPrecioPorLitro(View convertView, Repostaje repostaje) {
+        TextView tv = convertView.findViewById(R.id.tvPrecioPorLitroNum);
+        tv.setText(String.valueOf(repostaje.getPrecioTotal() / repostaje.getLitros()));
+    }
+
+    private void setLitros(View convertView, Repostaje repostaje) {
+        TextView tv = convertView.findViewById(R.id.tvLitrosNum);
+        tv.setText(String.valueOf(repostaje.getLitros()));
+    }
+
+    private void setPrecioTotal(View convertView, Repostaje repostaje) {
+        TextView tv = convertView.findViewById(R.id.tvPrecioTotalNum);
+        tv.setText(String.valueOf(repostaje.getPrecioTotal()));
     }
 }
