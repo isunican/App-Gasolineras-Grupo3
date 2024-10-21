@@ -30,7 +30,10 @@ import dagger.hilt.android.testing.UninstallModules;
 import es.unican.gasolineras.R;
 import es.unican.gasolineras.activities.main.MainView;
 import es.unican.gasolineras.injection.RepositoriesModule;
+import es.unican.gasolineras.repository.AppDatabase;
+import es.unican.gasolineras.repository.DatabaseFunction;
 import es.unican.gasolineras.repository.IGasolinerasRepository;
+import es.unican.gasolineras.repository.RepostajeDAO;
 
 @UninstallModules(RepositoriesModule.class)
 @HiltAndroidTest
@@ -52,11 +55,14 @@ public class ConsultarRepostajeDatosAusentesUITest {
 
     @Test
     public void DatosAusentesContext(){
+        AppDatabase bd = DatabaseFunction.getDatabase(ApplicationProvider.getApplicationContext());
+        RepostajeDAO dao = bd.repostajeDao();
+        dao.eliminarRepostajes();
         openActionBarOverflowOrOptionsMenu(ApplicationProvider.getApplicationContext());
         onData(hasToString(containsString("Historial repostaje"))).perform(click());
-        onView(withId(R.id.tvAcumuladoMes)).check(matches(withText("0.0")));
-        onView(withId(R.id.tvPrecioMedioLitro)).check(matches(withText("0.0")));
-        onView(withId(R.id.tvAcumuladoMes)).check(matches(withText("0.0")));
+        onView(withId(R.id.tvRepostajesMes)).check(matches(withText("0")));
+        onView(withId(R.id.tvPrecioMedioLitro)).check(matches(withText("0.00")));
+        onView(withId(R.id.tvAcumuladoMes)).check(matches(withText("0.00")));
         onView(withId(R.id.lvRepostajes)).check(matches(hasChildCount(0)));
     }
 }
