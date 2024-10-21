@@ -106,6 +106,8 @@ dependencies {
 
     // Parceler (automatically implements methods to create parcels)
     implementation libs.parceler.api
+    androidTestImplementation libs.core
+    androidTestImplementation libs.core
     annotationProcessor libs.parceler
 
     // Lombok (auto generate getters, etc.)
