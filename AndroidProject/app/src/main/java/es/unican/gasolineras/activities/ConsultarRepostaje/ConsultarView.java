@@ -56,7 +56,6 @@ public class ConsultarView extends AppCompatActivity implements IConsultar.View 
         }
         db = DatabaseFunction.getDatabase(this);
 
-
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -67,6 +66,25 @@ public class ConsultarView extends AppCompatActivity implements IConsultar.View 
 
     @Override
     public void init() {
+
+    }
+
+    /**
+     * @see IConsultar.View#showRepostajes(List)
+     */
+    @Override
+    public void showRepostajes(List<Repostaje> repostajes) {
+        ListView list = findViewById(R.id.lvRepostajes);
+        RepostajesArrayAdapter adapter = new RepostajesArrayAdapter(this, repostajes);
+        list.setAdapter(adapter);
+    }
+
+    /**
+     * @see IConsultar.View#showCalculosRepostajes()
+     */
+    @Override
+    public void showCalculosRepostajes() {
+
         TextView repostajesMes = findViewById(R.id.tvRepostajesMes);
         TextView precioMedioLitro = findViewById(R.id.tvPrecioMedioLitro);
         TextView acumuladoMes = findViewById(R.id.tvAcumuladoMes);
@@ -78,19 +96,7 @@ public class ConsultarView extends AppCompatActivity implements IConsultar.View 
     }
 
     /**
-     * Muestra los repostajes realizados
-     * @param repostajes the list of charging stations
-     */
-    @Override
-    public void showRepostajes(List<Repostaje> repostajes) {
-        ListView list = findViewById(R.id.lvRepostajes);
-        RepostajesArrayAdapter adapter = new RepostajesArrayAdapter(this, repostajes);
-        list.setAdapter(adapter);
-    }
-
-    /**
-     *
-     * @param
+     * @see IConsultar.View#showLoadCorrect(int)
      */
     @Override
     public void showLoadCorrect(int repostajes) {
@@ -98,7 +104,7 @@ public class ConsultarView extends AppCompatActivity implements IConsultar.View 
     }
 
     /**
-     * @see IMainContract.View#showLoadError()
+     * @see IConsultar.View#showLoadError()
      */
     @Override
     public void showLoadError() {

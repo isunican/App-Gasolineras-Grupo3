@@ -37,8 +37,10 @@ public class ConsultarPresenter implements  IConsultar.Presenter {
         load();
     }
 
-
-    @Override
+    /**
+     * Cacula el precio medio del litro en el mes actual teniendo en cuenta los pesos
+     * @return el precio medio
+     */
     public double calcularPrecioMedioLitro() {
         List<Repostaje> repostajesMesAnterior = obtenerRepostajesDelMes();
 
@@ -57,12 +59,16 @@ public class ConsultarPresenter implements  IConsultar.Presenter {
         return sumaPreciosPonderados / sumaLitros;
     }
 
-    @Override
+    /**
+     * Obtiene los repostajes realizados en el mes actual
+     * @return una lista con los repostajes
+     */
     public List<Repostaje> obtenerRepostajesDelMes() {
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.DAY_OF_MONTH, 1);  // Primer día del mes actual
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         String inicioDelMes = sdf.format(calendar.getTime());
+
 
         // Establecer el último día del mes actual
         calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
@@ -73,7 +79,10 @@ public class ConsultarPresenter implements  IConsultar.Presenter {
 
     }
 
-    @Override
+    /**
+     * Calcula el precio invertido en repostajes en el mes actual
+     * @return el precio total del mes
+     */
     public double calcularAcumuladoMes() {
         List<Repostaje> repostajesMes = obtenerRepostajesDelMes();
 
@@ -90,6 +99,9 @@ public class ConsultarPresenter implements  IConsultar.Presenter {
         return totalAcumulado;
     }
 
+    /**
+     * Carga los datos a mostrar desde la vista
+     */
     private void load() {
 
 
@@ -97,6 +109,7 @@ public class ConsultarPresenter implements  IConsultar.Presenter {
 
         try {
             view.showRepostajes(repostajes);
+            view.showCalculosRepostajes();
             view.showLoadCorrect(repostajes.size());
         } catch (Exception e) {
             view.showLoadError();
