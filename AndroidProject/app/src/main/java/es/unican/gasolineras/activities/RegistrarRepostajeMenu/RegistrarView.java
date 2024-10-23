@@ -3,6 +3,7 @@ package es.unican.gasolineras.activities.RegistrarRepostajeMenu;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -80,15 +81,31 @@ public class RegistrarView extends AppCompatActivity implements IRegistrar.View 
 
     /**
      *
-     * @see IRegistrar.View#mostrarError(String)
+     * @see IRegistrar.View#mostrarError(String, boolean, boolean)
      *
      * @param mensajeError the error message to show
      */
     @Override
-    public void mostrarError(String mensajeError) {
+    public void mostrarError(String mensajeError, boolean errorLitros, boolean errorPrecioTotal) {
         TextView tvError = findViewById(R.id.tvError);
         tvError.setText(mensajeError);
         tvError.setVisibility(View.VISIBLE); // Muestra el TextView del error
+
+        EditText editTextLitros = findViewById(R.id.textLitros);
+        EditText editTextPrecioTotal = findViewById(R.id.textPrecioTotal);
+
+        //Cambiar el fondo del campo correspondiente a roro si hay un error
+        if(errorLitros) {
+            editTextLitros.setBackgroundResource(R.drawable.border_red);
+        }else {
+            editTextLitros.setBackgroundResource(R.drawable.border_default);
+        }
+
+        if(errorPrecioTotal) {
+            editTextPrecioTotal.setBackgroundResource(R.drawable.border_red);
+        }else {
+            editTextPrecioTotal.setBackgroundResource(R.drawable.border_default);
+        }
     }
 
     /**

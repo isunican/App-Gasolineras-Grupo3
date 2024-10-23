@@ -33,8 +33,10 @@ public interface IRegistrar {
         /**
          * Shows an error message on the screen.
          * @param mensajeError the error message to show
+         * @param errorLitros a boolean which tells you if there is an error with that insert
+         * @param errorPrecioTotal a boolean which tells you if there is an error with that insert
          */
-        void mostrarError(String mensajeError);
+        void mostrarError(String mensajeError, boolean errorLitros, boolean errorPrecioTotal);
 
         /**
          * Muestra si el repostaje se ha realizado correctamente o si hay algun problema

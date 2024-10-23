@@ -1,5 +1,6 @@
 package es.unican.gasolineras.activities.RegistrarRepostajeMenu;
 
+import android.graphics.Color;
 import android.util.Log;
 
 import java.text.SimpleDateFormat;
@@ -36,10 +37,14 @@ public class RegistrarPresenter implements IRegistrar.Presenter {
      */
     @Override
     public void onBtnGuardarClicked(String litros, String precioTotal) {
+        boolean errorLitros;
+        boolean errorPrecioTotal;
 
         // Validación de los datos de entrada
         if (litros.isEmpty() || precioTotal.isEmpty()) {
-            view.mostrarError("Error: Los campos no deben estar vacíos");
+            errorLitros = litros.isEmpty();
+            errorPrecioTotal = precioTotal.isEmpty();
+            view.mostrarError("Error: Los campos no deben estar vacíos", errorLitros, errorPrecioTotal);
             return;
         }
 
@@ -50,7 +55,9 @@ public class RegistrarPresenter implements IRegistrar.Presenter {
 
             // Validar que los valores sean positivos
             if (litrosNum <= 0 || precioTotalNum <= 0) {
-                view.mostrarError("Error: Los valores deben ser positivos");
+                errorLitros = litrosNum <= 0;
+                errorPrecioTotal = precioTotalNum <= 0;
+                view.mostrarError("Error: Los valores deben ser positivos", errorLitros, errorPrecioTotal);
                 return;
             }
 
@@ -72,12 +79,26 @@ public class RegistrarPresenter implements IRegistrar.Presenter {
                 view.showBtnGuardar(litros, precioTotal);
 
             } catch (Exception e) {
-                view.mostrarError("Error al registrar el repostaje en la base de datos");
+                view.mostrarError("Error al registrar el repostaje en la base de datos", false, false);
             }
 
         } catch (NumberFormatException e) {
             // Manejo de excepciones si los valores ingresados no son válidos
-            view.mostrarError("Error: Los datos introducidos no son válidos");
+            errorLitros = false;
+            errorPrecioTotal = false;
+
+            try{
+                Double.parseDouble(litros);
+            }catch(NumberFormatException ex) {
+                errorLitros = true;
+            }
+
+            try{
+                Double.parseDouble(precioTotal);
+            }catch(NumberFormatException ex) {
+                errorPrecioTotal = true;
+            }
+            view.mostrarError("Error: Los datos introducidos no son válidos", errorLitros, errorPrecioTotal);
         }
     }
 
