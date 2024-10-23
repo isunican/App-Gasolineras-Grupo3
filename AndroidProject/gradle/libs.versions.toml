@@ -17,6 +17,7 @@ robolectric = "4.13"
 sonarqube = "5.1.0.4882"
 filamentAndroid = "1.17.1"
 core = "1.4.0"
+junitJupiter = "5.8.1"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -40,6 +41,7 @@ mockito-android = { group = "org.mockito", name = "mockito-android", version.ref
 roboelectric = { group = "org.robolectric", name = "robolectric", version.ref = "robolectric"}
 filament-android = { group = "com.google.ar.sceneform", name = "filament-android", version.ref = "filamentAndroid" }
 core = { group = "androidx.test", name = "core", version.ref = "core" }
+junit-jupiter = { group = "org.junit.jupiter", name = "junit-jupiter", version.ref = "junitJupiter" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

@@ -5,6 +5,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import lombok.Getter;
+import lombok.Setter;
 
 
 /**
@@ -12,6 +13,7 @@ import lombok.Getter;
  * Recoge las propiedades que se guardan de un repostaje
  */
 @Getter
+@Setter
 @Entity
 public class Repostaje {
     @PrimaryKey
