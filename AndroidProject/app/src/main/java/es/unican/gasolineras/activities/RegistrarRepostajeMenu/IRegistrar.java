@@ -18,7 +18,7 @@ public interface IRegistrar {
         void onBtnGuardarClicked(String litros, String precioTotal);
 
         /**
-         *
+         * Llamado cuando se pulsa el boton de cancelar
          */
         void onBtnCancelarClicked();
     }
@@ -36,9 +36,16 @@ public interface IRegistrar {
          */
         void mostrarError(String mensajeError);
 
-
+        /**
+         * Muestra si el repostaje se ha realizado correctamente o si hay algun problema
+         * @param litros
+         * @param precioTotal
+         */
         void showBtnGuardar(String litros, String precioTotal);
 
+        /**
+         * Vuelve al main cuando se pulsa cancelar
+         */
         void showBtnCancelar();
     }
 }

@@ -19,6 +19,7 @@ import androidx.appcompat.widget.Toolbar;
 import org.w3c.dom.Text;
 
 import es.unican.gasolineras.R;
+import es.unican.gasolineras.activities.ConsultarRepostaje.ConsultarView;
 import es.unican.gasolineras.activities.main.MainView;
 import es.unican.gasolineras.model.Gasolinera;
 import es.unican.gasolineras.repository.AppDatabase;
@@ -47,6 +48,9 @@ public class RegistrarView extends AppCompatActivity implements IRegistrar.View 
         presenter.init(this);
     }
 
+    /**
+     * @see IRegistrar.View#init()
+     */
     @Override
     public void init() {
 
@@ -74,6 +78,12 @@ public class RegistrarView extends AppCompatActivity implements IRegistrar.View 
     }
 
 
+    /**
+     *
+     * @see IRegistrar.View#mostrarError(String)
+     *
+     * @param mensajeError the error message to show
+     */
     @Override
     public void mostrarError(String mensajeError) {
         TextView tvError = findViewById(R.id.tvError);
@@ -81,36 +91,46 @@ public class RegistrarView extends AppCompatActivity implements IRegistrar.View 
         tvError.setVisibility(View.VISIBLE); // Muestra el TextView del error
     }
 
+    /**
+     * @see IRegistrar.View#showBtnGuardar(String, String)
+     */
     @Override
     public void showBtnGuardar(String litros, String precioTotal) {
 
-            try {
-                new AlertDialog.Builder(RegistrarView.this)
-                        .setTitle("Confirmación")
-                        .setMessage(getString(R.string.registro_exito))
-                        .setPositiveButton("OK", (dialog, which) -> {
-                            setContentView(R.layout.activity_consulta_repostaje_view);
-                        })
-                        .show();
+        try {
+            new AlertDialog.Builder(RegistrarView.this)
+                    .setTitle("Confirmación")
+                    .setMessage(getString(R.string.registro_exito))
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // Puedes agregar alguna acción adicional si es necesario
+                            Intent intent = new Intent(RegistrarView.this, ConsultarView.class);
+                            startActivity(intent);
+                        }
+                    })
+                    .show();
 
-            } catch (Exception e) {
-                // Si ocurre una excepción, muestra el mensaje de error
-                new AlertDialog.Builder(RegistrarView.this)
-                        .setTitle("Error")
-                        .setMessage(getString(R.string.error_acceso_bbdd))
-                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                // Puedes agregar alguna acción adicional si es necesario
-                                Intent intent = new Intent(RegistrarView.this, MainView.class);
-                                startActivity(intent);
-                            }
-                        })
-                        .show();
-            }
+        } catch (Exception e) {
 
+            new AlertDialog.Builder(RegistrarView.this)
+                    .setTitle("Error")
+                    .setMessage(getString(R.string.error_acceso_bbdd))
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // Puedes agregar alguna acción adicional si es necesario
+                            Intent intent = new Intent(RegistrarView.this, MainView.class);
+                            startActivity(intent);
+                        }
+                    })
+                    .show();
+        }
     }
 
+    /**
+     * @see IRegistrar.View#showBtnCancelar()
+     */
     @Override
     public void showBtnCancelar() {
 

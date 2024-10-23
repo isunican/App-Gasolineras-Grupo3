@@ -14,7 +14,7 @@ public class ConsultarRepostajeTest {
     @Test
     public void calcularAcumuladoMesTest(){
         //Context context = ApplicationProvider.getApplicationContext();
-        assertEquals()
+
 
 
     }
