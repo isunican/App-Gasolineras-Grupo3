@@ -9,10 +9,10 @@
         android:id="@+id/tvLitrosNum"
         android:layout_width="79dp"
         android:layout_height="22dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="30dp"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/litrosTexto"
         app:layout_constraintTop_toBottomOf="@+id/tvFecha"
         tools:text="40" />
 
@@ -21,9 +21,8 @@
         android:layout_width="79dp"
         android:layout_height="24dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="30dp"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tvPrecioPorLitroNum"
         app:layout_constraintTop_toBottomOf="@+id/tvPrecioPorLitroNum"
         tools:text="60" />
 
@@ -32,9 +31,8 @@
         android:layout_width="79dp"
         android:layout_height="26dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="30dp"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tvLitrosNum"
         app:layout_constraintTop_toBottomOf="@+id/tvLitrosNum"
         tools:text="1,432" />
 
@@ -42,10 +40,11 @@
         android:id="@+id/litrosTexto"
         android:layout_width="142dp"
         android:layout_height="22dp"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="10dp"
         android:textSize="20sp"
-        app:layout_constraintStart_toEndOf="@+id/logoGasolinera"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvFecha"
         tools:text="Litros:" />
 
@@ -53,10 +52,10 @@
         android:id="@+id/tvPrecioLitro"
         android:layout_width="145dp"
         android:layout_height="26dp"
-        android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
         android:textSize="20sp"
-        app:layout_constraintStart_toEndOf="@+id/logoGasolinera"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/litrosTexto"
         app:layout_constraintTop_toBottomOf="@+id/litrosTexto"
         tools:text="Precio por litro:" />
 
@@ -64,25 +63,12 @@
         android:id="@+id/precioTotal"
         android:layout_width="152dp"
         android:layout_height="24dp"
-        android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
         android:textSize="20sp"
-        app:layout_constraintStart_toEndOf="@+id/logoGasolinera"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/tvPrecioLitro"
         app:layout_constraintTop_toBottomOf="@+id/tvPrecioLitro"
         tools:text="Precio total:" />
-
-    <ImageView
-        android:id="@+id/logoGasolinera"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="15dp"
-        android:contentDescription="Logo"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="ImageContrastCheck"
-        tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/tvFecha"
@@ -90,6 +76,7 @@
         android:layout_height="22dp"
         android:layout_marginTop="2dp"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
