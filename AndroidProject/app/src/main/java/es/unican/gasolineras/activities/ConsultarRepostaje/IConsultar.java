@@ -17,26 +17,6 @@ public interface IConsultar {
          * @param view
          */
         public void init(View view);
-
-
-        /**
-         * Calcula el precio medio por litro pagado en el mes actual
-         * teniendo en cuenta el peso de cada repostajes
-         * @return el precio medio
-         */
-        public double calcularPrecioMedioLitro();
-
-        /**
-         * Obtiene los repostajes realizados en el mes actual
-         * @return la lista de repostajes del mes
-         */
-        public List<Repostaje> obtenerRepostajesDelMes();
-
-        /**
-         * Calcula el precio total invertido en repostajes en el mes.
-         * @return el precio total gastado en repostajes en el mes actual
-         */
-        public double calcularAcumuladoMes();
     }
 
     public interface View {
@@ -51,6 +31,11 @@ public interface IConsultar {
          * @param repostajes the list of charging stations
          */
         public void showRepostajes(List<Repostaje> repostajes);
+
+        /**
+         * Muestra los calculos sobre el mes actual de los repostajes
+         */
+        public void showCalculosRepostajes();
 
         /**
          * The view is requested to display a notification indicating  that the refueling

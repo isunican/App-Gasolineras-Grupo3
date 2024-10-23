@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import java.util.List;
+import java.util.Locale;
 
 import es.unican.gasolineras.R;
 import es.unican.gasolineras.model.Repostaje;
@@ -70,7 +71,13 @@ public class RepostajesArrayAdapter extends BaseAdapter {
 
     private void setFecha(View convertView, Repostaje repostaje) {
         TextView tv = convertView.findViewById(R.id.tvFecha);
-        tv.setText(repostaje.getFechaRepostaje());
+
+        String fechaOriginal = repostaje.getFechaRepostaje(); // Formato "yyyy-MM-dd"
+
+        String[] partesFecha = fechaOriginal.split("-");
+
+        String fechaFormateada = partesFecha[2] + "-" + partesFecha[1] + "-" + partesFecha[0];
+        tv.setText(fechaFormateada);
     }
 
     private void setPrecioPorLitro(View convertView, Repostaje repostaje) {
@@ -78,7 +85,7 @@ public class RepostajesArrayAdapter extends BaseAdapter {
         String label = "Precio por litro: ";
         tvLabel.setText(String.format("%s:", label));
         TextView tv = convertView.findViewById(R.id.tvPrecioPorLitroNum);
-        tv.setText(String.valueOf(repostaje.getPrecioTotal() / repostaje.getLitros()));
+        tv.setText(String.format(Locale.getDefault(), "%.2f",repostaje.getPrecioTotal() / repostaje.getLitros()));
     }
 
     private void setLitros(View convertView, Repostaje repostaje) {
