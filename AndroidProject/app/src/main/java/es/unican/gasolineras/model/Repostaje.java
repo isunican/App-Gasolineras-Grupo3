@@ -16,7 +16,7 @@ import lombok.Setter;
 @Setter
 @Entity
 public class Repostaje {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     public int uid;
 
     @ColumnInfo(name = "fecha_repostaje")

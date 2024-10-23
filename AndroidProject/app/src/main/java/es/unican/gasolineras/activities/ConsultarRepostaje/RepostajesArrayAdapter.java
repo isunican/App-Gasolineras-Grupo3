@@ -64,10 +64,8 @@ public class RepostajesArrayAdapter extends BaseAdapter {
         setLitros(convertView, repostaje);
         setPrecioTotal(convertView, repostaje);
 
-
         return convertView;
     }
-
 
     private void setFecha(View convertView, Repostaje repostaje) {
         TextView tv = convertView.findViewById(R.id.tvFecha);
@@ -82,7 +80,7 @@ public class RepostajesArrayAdapter extends BaseAdapter {
 
     private void setPrecioPorLitro(View convertView, Repostaje repostaje) {
         TextView tvLabel = convertView.findViewById(R.id.tvPrecioLitro);
-        String label = "Precio por litro: ";
+        String label = "Precio por litro ";
         tvLabel.setText(String.format("%s:", label));
         TextView tv = convertView.findViewById(R.id.tvPrecioPorLitroNum);
         tv.setText(String.format(Locale.getDefault(), "%.2f",repostaje.getPrecioTotal() / repostaje.getLitros()));
@@ -90,7 +88,7 @@ public class RepostajesArrayAdapter extends BaseAdapter {
 
     private void setLitros(View convertView, Repostaje repostaje) {
         TextView tvLabel = convertView.findViewById(R.id.litrosTexto);
-        String label = "Litros: ";
+        String label = "Litros ";
         tvLabel.setText(String.format("%s:", label));
         TextView tv = convertView.findViewById(R.id.tvLitrosNum);
         tv.setText(String.valueOf(repostaje.getLitros()));
@@ -98,7 +96,7 @@ public class RepostajesArrayAdapter extends BaseAdapter {
 
     private void setPrecioTotal(View convertView, Repostaje repostaje) {
         TextView tvLabel = convertView.findViewById(R.id.precioTotal);
-        String label = "Precio total: ";
+        String label = "Precio total ";
         tvLabel.setText(String.format("%s:", label));
         TextView tv = convertView.findViewById(R.id.tvPrecioTotalNum);
         tv.setText(String.valueOf(repostaje.getPrecioTotal()));
