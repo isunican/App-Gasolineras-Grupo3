@@ -15,7 +15,12 @@ public interface IRegistrar {
          * Handles the process of validating and registering the repostaje
          * Called when the user clicks the save button.
          */
-        void onGuardarRepostaje(String litros, String precioTotal);
+        void onBtnGuardarClicked(String litros, String precioTotal);
+
+        /**
+         *
+         */
+        void onBtnCancelarClicked();
     }
 
     public interface View {
@@ -31,10 +36,9 @@ public interface IRegistrar {
          */
         void mostrarError(String mensajeError);
 
-        /**
-         * Shows a confirmation dialog when the repostaje is successfully registered.
-         * @param mensajeConfirmacion the confirmation message
-         */
-        void mostrarConfirmacion(String mensajeConfirmacion);
+
+        void showBtnGuardar(String litros, String precioTotal);
+
+        void showBtnCancelar();
     }
 }
