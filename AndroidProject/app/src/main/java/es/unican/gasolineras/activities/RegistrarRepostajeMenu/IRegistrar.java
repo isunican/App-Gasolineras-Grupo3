@@ -1,5 +1,7 @@
 package es.unican.gasolineras.activities.RegistrarRepostajeMenu;
 
+import es.unican.gasolineras.model.Repostaje;
+
 public interface IRegistrar {
 
     public interface Presenter {
@@ -15,7 +17,7 @@ public interface IRegistrar {
          * Handles the process of validating and registering the repostaje
          * Called when the user clicks the save button.
          */
-        void onBtnGuardarClicked(String litros, String precioTotal);
+        Repostaje onBtnGuardarClicked(String litros, String precioTotal);
 
         /**
          * Llamado cuando se pulsa el boton de cancelar
