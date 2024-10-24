@@ -52,8 +52,8 @@ public class RegistrarPresenter implements IRegistrar.Presenter {
 
         try {
             // Conversión de litros y precio total
-            double litrosNum = Double.parseDouble(litros);
-            double precioTotalNum = Double.parseDouble(precioTotal);
+            double litrosNum = Double.parseDouble(litros.replace(",","."));
+            double precioTotalNum = Double.parseDouble(precioTotal.replace(",","."));
 
             // Validar que los valores sean positivos
             if (litrosNum <= 0 || precioTotalNum <= 0) {
@@ -90,13 +90,13 @@ public class RegistrarPresenter implements IRegistrar.Presenter {
             errorPrecioTotal = false;
 
             try{
-                Double.parseDouble(litros);
+                Double.parseDouble(litros.replace(",","."));
             }catch(NumberFormatException ex) {
                 errorLitros = true;
             }
 
             try{
-                Double.parseDouble(precioTotal);
+                Double.parseDouble(precioTotal.replace(",","."));
             }catch(NumberFormatException ex) {
                 errorPrecioTotal = true;
             }

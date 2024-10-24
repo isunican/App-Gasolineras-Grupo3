@@ -64,10 +64,10 @@ public class Gasolinera {
     }
 
     public double getGasoleoA() {
-        return Double.parseDouble(String.format("%.2f", gasoleoA));
+        return Double.parseDouble(String.format("%.2f", gasoleoA).replace(",","."));
     }
 
     public double getGasolina95E5() {
-        return Double.parseDouble(String.format("%.2f",gasolina95E5));
+        return Double.parseDouble(String.format("%.2f",gasolina95E5).replace(",","."));
     }
 }

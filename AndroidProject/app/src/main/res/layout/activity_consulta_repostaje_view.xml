@@ -59,7 +59,7 @@
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="@+id/tvRepostajesMes"
         app:layout_constraintTop_toBottomOf="@+id/tvRepostajesMes"
-        tools:text="1,534" />
+        tools:text="1.534" />
 
     <TextView
         android:id="@+id/resumenMes"

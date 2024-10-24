@@ -34,7 +34,7 @@
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/tvLitrosNum"
         app:layout_constraintTop_toBottomOf="@+id/tvLitrosNum"
-        tools:text="1,432" />
+        tools:text="1.432" />
 
     <TextView
         android:id="@+id/litrosTexto"

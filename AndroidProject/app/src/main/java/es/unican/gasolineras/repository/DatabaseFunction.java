@@ -14,6 +14,7 @@ public class DatabaseFunction {
             database = Room.databaseBuilder(context.getApplicationContext(),
                             AppDatabase.class, "database-name")
                     .allowMainThreadQueries()
+                    .fallbackToDestructiveMigration()
                     .build();
         }
         return database;
