@@ -76,7 +76,7 @@ public class RegistrarRepostajeITest {
     }
 
     @Test
-    public void testRegistrarRepostajeValoresNegativos() {
+    public void itestRegistrarRepostajeValoresNegativos() {
 
         litros = "-50";
         precioTotal = "50";
@@ -87,7 +87,7 @@ public class RegistrarRepostajeITest {
     }
 
     @Test
-    public void testRegistrarRepostajeValoresVacios() {
+    public void itestRegistrarRepostajeValoresVacios() {
 
         litros = "";
         precioTotal = "";
