@@ -7,13 +7,31 @@ skinparam arrowLollipopColor #ADD1B2
 MainView -right(0- MainPresenter : IMainContract.Presenter
 MainView -right0)- MainPresenter : IMainContract.View
 MainView -up..-> InfoView : <<use>>
-MainView -down..> DetailsView : <<use>>
+MainView -down..-> ConsultarView : <<use>>
+MainView -down..->RegistrarView : <<use>>
+MainView -up..> DetailsView : <<use>>
 MainPresenter -right(0- GasolinerasRepository : IGasolinerasRepository
+RegistrarView -right(0- RegistrarPresenter : IRegistrarContract.Presenter
+RegistrarView -right(0- RegistrarPresenter : IRegistrarContract.View
+ConsultarView -right(0- ConsultarPresenter : IConsultarContract.Presenter
+ConsultarView -right(0- ConsultarPresenter : IConsultarContract.View
 
 
 class MainPresenter {
     -load()
 }
+
+class RegistrarPresenter {
+    + RegistrarPresenter(RepostajeDAO repostajeDAO)
+
+}
+class ConsultarPresenter {
+    - load()
+    + calculaPrecioMedioLitro(): double
+    + obtenerRepostajesDelMes(): List<Repostaje>
+    + calcularAcumuladoMes(): double
+}
+
 
 interface IMainContract#View {
     + init()
@@ -23,17 +41,51 @@ interface IMainContract#View {
     + showLoadError()
     + showStationDetails(Gasolinera station)
     + showInfoActivity()
+    + showConsultarActivity()
+    + showRegistrarActivity()
+
 }
 
 interface IMainContract#Presenter {
     + init(View view)
     + onStationClicked(Gasolinera station)
     + onMenuInfoClicked()
+    + onMenuRegistrarClicked()
+    + onMenuConsultarClicked()
 }
 
 interface IGasolinerasRepository {
     + requestGasolineras(ICallBack cb, String ccaa)
 }
+
+
+interface IRegistrar#View {
+    + init()
+    + mostrarError(String mensajeError, boolean errorLitros, boolean errorPrecioTotal)
+    +showBtnGuardar(String litros, String precioTotal)
+    +showBtnCancelar()
+}
+
+interface IRegistrar#Presenter {
+    + init(View view)
+    + onBtnGuardarClicked(String litros,String precioTotal)
+    + onBtnCancelarClicked()
+}
+
+interface IConsultar#View {
+    + init()
+    + showRepostajes(List<Repostajes> repostajes)
+    + showLoadCorrect(int reepostajes)
+    + showLoadError()
+    + showCalculosRepostajes()
+    
+}
+
+interface IConsultar#Presenter {
+    + init()
+}
+
+
 
 interface ICallBack {
     + onSuccess(List<Gasolinera> gasolineras)
