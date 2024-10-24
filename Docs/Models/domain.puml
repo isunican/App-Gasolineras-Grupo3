@@ -18,6 +18,12 @@ class GasolinerasResponse {
     - String consulta
 }
 
+class Repostaje {
+      - String fechaRepostaje
+      - double precioTotal
+      - double litros
+}
+
 GasolinerasResponse *-- "*" Gasolinera : gasolineras
 
 @enduml
