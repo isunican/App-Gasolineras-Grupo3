@@ -27,7 +27,7 @@ import es.unican.gasolineras.repository.RepostajeDAO;
 
 
 @RunWith(RobolectricTestRunner.class)
-@Config(sdk = {Build.VERSION_CODES.O_MR1})
+@Config(sdk = {Build.VERSION_CODES.P}) // P corresponds to API level 28
 public class RegistrarRepostajeITest {
 
     private static RegistrarPresenter sut;
@@ -42,12 +42,11 @@ public class RegistrarRepostajeITest {
     @Before
     public void inicializa(){
 
+        MockitoAnnotations.openMocks(this);
         Context context = ApplicationProvider.getApplicationContext();
 
         AppDatabase db = DatabaseFunction.getDatabase(context);
         sut = new RegistrarPresenter(db.repostajeDao());
-
-        MockitoAnnotations.openMocks(this);
         sut.init(mockRegistrarView);
     }
 
