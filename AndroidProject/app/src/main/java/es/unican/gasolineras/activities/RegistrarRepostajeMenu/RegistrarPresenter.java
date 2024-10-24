@@ -36,9 +36,8 @@ public class RegistrarPresenter implements IRegistrar.Presenter {
      * @param precioTotal precioTotal del repostaje a anhadir
      */
     @Override
-    public Repostaje onBtnGuardarClicked(String litros, String precioTotal) {
-        // Crear el objeto Repostaje
-        Repostaje repostaje = new Repostaje();
+    public void onBtnGuardarClicked(String litros, String precioTotal) {
+
         boolean errorLitros;
         boolean errorPrecioTotal;
 
@@ -47,7 +46,8 @@ public class RegistrarPresenter implements IRegistrar.Presenter {
             errorLitros = litros.isEmpty();
             errorPrecioTotal = precioTotal.isEmpty();
             view.mostrarError("Error: Los campos no deben estar vacíos", errorLitros, errorPrecioTotal);
-            return null;
+            return;
+
         }
 
         try {
@@ -60,9 +60,11 @@ public class RegistrarPresenter implements IRegistrar.Presenter {
                 errorLitros = litrosNum <= 0;
                 errorPrecioTotal = precioTotalNum <= 0;
                 view.mostrarError("Error: Los valores deben ser positivos", errorLitros, errorPrecioTotal);
-                return null;
+                return;
             }
 
+            // Crear el objeto Repostaje
+            Repostaje repostaje = new Repostaje();
             //repostaje.setUid(uid);
             repostaje.setLitros(litrosNum);
             repostaje.setPrecioTotal(precioTotalNum);
@@ -101,7 +103,6 @@ public class RegistrarPresenter implements IRegistrar.Presenter {
             view.mostrarError("Error: Los datos introducidos no son válidos", errorLitros, errorPrecioTotal);
         }
 
-        return repostaje;
     }
 
     /**

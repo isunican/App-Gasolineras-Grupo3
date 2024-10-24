@@ -17,7 +17,7 @@ public interface IRegistrar {
          * Handles the process of validating and registering the repostaje
          * Called when the user clicks the save button.
          */
-        Repostaje onBtnGuardarClicked(String litros, String precioTotal);
+        void onBtnGuardarClicked(String litros, String precioTotal);
 
         /**
          * Llamado cuando se pulsa el boton de cancelar

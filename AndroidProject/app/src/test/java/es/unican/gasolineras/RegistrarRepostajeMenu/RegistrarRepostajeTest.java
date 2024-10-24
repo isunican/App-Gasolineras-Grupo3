@@ -2,12 +2,15 @@ package es.unican.gasolineras.RegistrarRepostajeMenu;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
+
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import es.unican.gasolineras.activities.RegistrarRepostajeMenu.RegistrarPresenter;
+import es.unican.gasolineras.activities.RegistrarRepostajeMenu.RegistrarView;
 import es.unican.gasolineras.model.Repostaje;
 import es.unican.gasolineras.repository.RepostajeDAO;
 
@@ -20,12 +23,16 @@ public class RegistrarRepostajeTest {
     @Mock
     private static RepostajeDAO mockRepostajeDAO;
 
-    @BeforeEach
+    @Mock
+    private static RegistrarView mockRegistrarView;
+
+    @Before
     public void inicializa(){
 
         MockitoAnnotations.openMocks(this);
 
         sut = new RegistrarPresenter(mockRepostajeDAO);
+        sut.init(mockRegistrarView);
     }
 
     @Test
@@ -33,14 +40,11 @@ public class RegistrarRepostajeTest {
 
         litros = "20";
         precioTotal = "30";
-        Repostaje repostaje = new Repostaje();
-        repostaje.setLitros(Double.parseDouble(litros));
-        repostaje.setPrecioTotal(Double.parseDouble(precioTotal));
 
-        Repostaje repostajeIntroducido = sut.onBtnGuardarClicked(litros, precioTotal);
+        sut.onBtnGuardarClicked(litros, precioTotal);
 
-        verify(mockRepostajeDAO).registrarRepostaje(repostajeIntroducido);
-        assertEquals(repostaje, repostajeIntroducido);
+        verify(mockRepostajeDAO).registrarRepostaje(any(Repostaje.class));
+        verify(mockRegistrarView).showBtnGuardar(litros, precioTotal);
 
     }
 
@@ -50,11 +54,9 @@ public class RegistrarRepostajeTest {
         litros = "Veinte";
         precioTotal = "50";
 
-        assertThrows(OperacionNoValidaException.class, () -> {
-            Repostaje repostaje = sut.onBtnGuardarClicked(litros, precioTotal);
-        });
+        sut.onBtnGuardarClicked(litros, precioTotal);
 
-        assertNull(repostaje);
+        verify(mockRegistrarView).mostrarError("Error: Los datos introducidos no son válidos", true, false);
         verify(mockRepostajeDAO, never()).registrarRepostaje(any());
     }
 
@@ -64,11 +66,9 @@ public class RegistrarRepostajeTest {
         litros = "-50";
         precioTotal = "50";
 
-        assertThrows(OperacionNoValidaException.class, () -> {
-            Repostaje repostaje = sut.onBtnGuardarClicked(litros, precioTotal);
-        });
+        sut.onBtnGuardarClicked(litros, precioTotal);
 
-        assertNull(repostaje);
+        verify(mockRegistrarView).mostrarError("Error: Los valores deben ser positivos", true, false);
         verify(mockRepostajeDAO, never()).registrarRepostaje(any());
     }
 
@@ -78,11 +78,9 @@ public class RegistrarRepostajeTest {
         litros = "";
         precioTotal = "";
 
-        assertThrows(OperacionNoValidaException.class, () -> {
-            Repostaje repostaje = sut.onBtnGuardarClicked(litros, precioTotal);
-        });
+        sut.onBtnGuardarClicked(litros, precioTotal);
 
-        assertNull(repostaje);
+        verify(mockRegistrarView).mostrarError("Error: Los campos no deben estar vacíos", true, true);
         verify(mockRepostajeDAO, never()).registrarRepostaje(any());
     }
 
