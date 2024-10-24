@@ -94,7 +94,7 @@ public class RegistrarView extends AppCompatActivity implements IRegistrar.View 
         EditText editTextLitros = findViewById(R.id.textLitros);
         EditText editTextPrecioTotal = findViewById(R.id.textPrecioTotal);
 
-        //Cambiar el fondo del campo correspondiente a roro si hay un error
+        //Cambiar el fondo del campo correspondiente a rojo si hay un error
         if(errorLitros) {
             editTextLitros.setBackgroundResource(R.drawable.border_red);
         }else {

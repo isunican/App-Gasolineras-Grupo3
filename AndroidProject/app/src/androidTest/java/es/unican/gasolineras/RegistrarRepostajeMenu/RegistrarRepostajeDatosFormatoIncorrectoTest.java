@@ -6,13 +6,14 @@ import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
-import static es.unican.gasolineras.utils.Matchers.withBackgroundColor;
+import static es.unican.gasolineras.utils.Matchers.DrawableMatcher;
 import static es.unican.gasolineras.utils.MockRepositories.getTestRepository;
 
 import android.content.Context;
 import android.graphics.Color;
 
 import androidx.test.espresso.Espresso;
+import androidx.test.espresso.matcher.HasBackgroundMatcher;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
@@ -29,6 +30,7 @@ import es.unican.gasolineras.R;
 import es.unican.gasolineras.activities.RegistrarRepostajeMenu.RegistrarView;
 import es.unican.gasolineras.injection.RepositoriesModule;
 import es.unican.gasolineras.repository.IGasolinerasRepository;
+import es.unican.gasolineras.utils.Matchers;
 
 @UninstallModules(RepositoriesModule.class)
 @HiltAndroidTest
@@ -60,9 +62,9 @@ public class RegistrarRepostajeDatosFormatoIncorrectoTest {
 
         onView(withId(R.id.btnGuardar)).perform(click());
 
-        onView(withId(R.id.tvError)).check(matches(withText("Error: Los datos introducidos no tienen el formato correcto")));
+        onView(withId(R.id.tvError)).check(matches(withText("Error: Los datos introducidos no son válidos")));
 
-        onView(withId(R.id.textLitros)).check(matches(withBackgroundColor(Color.RED)));
+        onView(withId(R.id.textLitros)).check(matches(new DrawableMatcher(R.drawable.border_red)));
 
 
     }

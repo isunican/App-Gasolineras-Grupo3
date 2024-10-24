@@ -37,6 +37,7 @@ public class RegistrarPresenter implements IRegistrar.Presenter {
      */
     @Override
     public void onBtnGuardarClicked(String litros, String precioTotal) {
+
         boolean errorLitros;
         boolean errorPrecioTotal;
 
@@ -46,6 +47,7 @@ public class RegistrarPresenter implements IRegistrar.Presenter {
             errorPrecioTotal = precioTotal.isEmpty();
             view.mostrarError("Error: Los campos no deben estar vacíos", errorLitros, errorPrecioTotal);
             return;
+
         }
 
         try {
@@ -100,6 +102,7 @@ public class RegistrarPresenter implements IRegistrar.Presenter {
             }
             view.mostrarError("Error: Los datos introducidos no son válidos", errorLitros, errorPrecioTotal);
         }
+
     }
 
     /**

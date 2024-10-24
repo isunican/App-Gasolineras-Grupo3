@@ -1,5 +1,7 @@
 package es.unican.gasolineras.activities.RegistrarRepostajeMenu;
 
+import es.unican.gasolineras.model.Repostaje;
+
 public interface IRegistrar {
 
     public interface Presenter {
