@@ -1,18 +1,13 @@
 package es.unican.gasolineras.activities.ConsultarRepostaje;
 
-import android.content.Context;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
-import es.unican.gasolineras.activities.main.IMainContract;
-import es.unican.gasolineras.model.Gasolinera;
+
 import es.unican.gasolineras.model.Repostaje;
-import es.unican.gasolineras.repository.AppDatabase;
-import es.unican.gasolineras.repository.DatabaseFunction;
 import es.unican.gasolineras.repository.RepostajeDAO;
 
 public class ConsultarPresenter implements  IConsultar.Presenter {
