@@ -1,31 +1,27 @@
 package es.unican.gasolineras.activities.ConsultarRepostaje;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.ActionBar;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
+
 import java.util.List;
 import java.util.Locale;
 
 import es.unican.gasolineras.R;
 
-import es.unican.gasolineras.activities.main.IMainContract;
 import es.unican.gasolineras.activities.main.MainView;
-import es.unican.gasolineras.model.Gasolinera;
 import es.unican.gasolineras.model.Repostaje;
 import es.unican.gasolineras.repository.AppDatabase;
 import es.unican.gasolineras.repository.DatabaseFunction;
-import es.unican.gasolineras.repository.RepostajeDAO;
+
 
 public class ConsultarView extends AppCompatActivity implements IConsultar.View {
 

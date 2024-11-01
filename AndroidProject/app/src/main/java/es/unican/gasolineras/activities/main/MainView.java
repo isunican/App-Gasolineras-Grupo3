@@ -23,6 +23,7 @@ import javax.inject.Inject;
 import dagger.hilt.android.AndroidEntryPoint;
 import es.unican.gasolineras.R;
 import es.unican.gasolineras.activities.ConsultarRepostaje.ConsultarView;
+import es.unican.gasolineras.activities.RegistrarDescuentoEnMarca.RegistrarDescuentoView;
 import es.unican.gasolineras.activities.RegistrarRepostajeMenu.RegistrarView;
 import es.unican.gasolineras.activities.info.InfoView;
 import es.unican.gasolineras.activities.details.DetailsView;
@@ -93,6 +94,10 @@ public class MainView extends AppCompatActivity implements IMainContract.View {
         }
         if (itemId == R.id.ConsultarRepostajeItem) {
             presenter.onMenuConsultarClicked();
+            return true;
+        }
+        if(itemId == R.id.menuItemDescuento) {
+            presenter.onMenuDescuentoClicked();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -184,6 +189,15 @@ public class MainView extends AppCompatActivity implements IMainContract.View {
     @Override
     public void showConsultarActivity() {
         Intent intent = new Intent(this, ConsultarView.class);
+        startActivity(intent);
+    }
+
+    /**
+     * @see IMainContract.View#showDescuentoActivity()
+     */
+    @Override
+    public void showDescuentoActivity() {
+        Intent intent = new Intent(this, RegistrarDescuentoView.class);
         startActivity(intent);
     }
 }
