@@ -14,4 +14,14 @@
     <string name ="error_datos_incompletos">Error, los datos son incompletos </string>
     <string name ="registro_exito">Repostaje registrado correctamente</string>
     <string name ="registro_descuento_exito">Descuento registrado correctamente</string>
+    <string-array name="marcasArray">
+        <item>Avia</item>
+        <item>Carrefour</item>
+        <item>Cepsa</item>
+        <item>Easygas</item>
+        <item>Galp</item>
+        <item>Petroprix</item>
+        <item>Repsol</item>
+        <item>Shell</item>
+    </string-array>
 </resources>

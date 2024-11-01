@@ -59,6 +59,12 @@ public class MainPresenter implements IMainContract.Presenter {
         view.showConsultarActivity();
     }
 
+    /**
+     * @see IMainContract.Presenter#onMenuDescuentoClicked()
+     */
+    @Override
+    public void onMenuDescuentoClicked()  { view.showDescuentoActivity();}
+
 
 
     /**

@@ -50,6 +50,7 @@ public interface IMainContract {
          */
         public void onMenuConsultarClicked();
 
+        void onMenuDescuentoClicked();
     }
 
     /**
@@ -124,5 +125,6 @@ public interface IMainContract {
         public void showConsultarActivity();
 
 
+        void showDescuentoActivity();
     }
 }
