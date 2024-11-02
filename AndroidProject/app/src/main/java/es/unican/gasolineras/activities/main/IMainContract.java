@@ -140,7 +140,10 @@ public interface IMainContract {
          */
         public void showConsultarActivity();
 
-
         void showDescuentoActivity();
+
+        public void mostrarErrorNoGaolinerasEnMunicipio(String s);
+
+        public void showBtnCancelarFiltro();
     }
 }
