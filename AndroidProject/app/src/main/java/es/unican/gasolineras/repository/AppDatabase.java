@@ -5,10 +5,9 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import es.unican.gasolineras.model.Repostaje;
-import es.unican.gasolineras.model.Descuento;
 import lombok.Getter;
 
-@Database(entities = {Repostaje.class, Descuento.class}, version = 2, exportSchema = false)
+@Database(entities = {Repostaje.class, }, version = 2)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract RepostajeDAO repostajeDao();
     public abstract DescuentoDAO descuentoDao();
