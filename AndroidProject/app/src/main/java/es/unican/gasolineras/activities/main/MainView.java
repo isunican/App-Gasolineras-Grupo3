@@ -186,4 +186,14 @@ public class MainView extends AppCompatActivity implements IMainContract.View {
         Intent intent = new Intent(this, ConsultarView.class);
         startActivity(intent);
     }
+
+    @Override
+    public void mostrarErrorNoGaolinerasEnMunicipio(String s) {
+        
+    }
+
+    @Override
+    public void showBtnCancelarFiltro() {
+
+    }
 }
