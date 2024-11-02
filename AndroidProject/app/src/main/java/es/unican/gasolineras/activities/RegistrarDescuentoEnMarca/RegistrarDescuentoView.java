@@ -31,8 +31,8 @@ public class RegistrarDescuentoView extends AppCompatActivity implements IRegist
     @Override
     public void onCreate (Bundle SavedInstanceState){
 
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registrar_descuento_en_marca_view);
+        super.onCreate(SavedInstanceState);
+        setContentView(R.layout.activity_registrar_descuento_view);
 
         // The default theme does not include a toolbar.
         // In this app the toolbar is explicitly declared in the layout
@@ -51,7 +51,7 @@ public class RegistrarDescuentoView extends AppCompatActivity implements IRegist
      */
     @Override
     public void init(){
-        Spinner spMarca = findViewById(R.id.spMarca);
+        Spinner spMarca = findViewById(R.id.spMarcas);
         EditText textDescuento = findViewById(R.id.etDescuento);
 
         Button btnGuardar = findViewById(R.id.btnGuardar);
