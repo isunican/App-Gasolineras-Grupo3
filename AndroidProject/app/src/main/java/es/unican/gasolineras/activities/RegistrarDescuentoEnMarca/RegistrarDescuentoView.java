@@ -10,7 +10,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -98,7 +97,7 @@ public class RegistrarDescuentoView extends AppCompatActivity implements IRegist
      * @see IRegistrarDescuento.View#showBtnGuardar(String, int)
      */
     @Override
-    public void showBtnGuardar(String marca, String precioTotal) {
+    public void showBtnGuardar(String marca, int descuento) {
 
         try {
             new AlertDialog.Builder(RegistrarDescuentoView.this)
@@ -128,5 +127,11 @@ public class RegistrarDescuentoView extends AppCompatActivity implements IRegist
                     .show();
         }
     }
+
+    /**
+     * @see IRegistrarDescuento.View#showBtnCancelar()
+     */
+    @Override
+    public void showBtnCancelar(){};
 
 }

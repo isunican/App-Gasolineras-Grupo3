@@ -43,6 +43,8 @@ public interface IRegistrarDescuento {
         void showBtnGuardar(String marca, int descuento);
 
         void showBtnCancelar();
+
+        void mostrarError(String mensajeError, boolean errorDescuento);
     }
 
 
