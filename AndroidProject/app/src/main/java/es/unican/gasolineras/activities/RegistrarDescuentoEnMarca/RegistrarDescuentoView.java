@@ -82,7 +82,7 @@ public class RegistrarDescuentoView extends AppCompatActivity implements IRegist
     }
 
     /**
-     * @see IRegistrar.View#showBtnGuardar(String, String)
+     * @see IRegistrarDescuento.View#showBtnGuardar(String, int)
      */
     @Override
     public void showBtnGuardar(String marca, int descuento) {
