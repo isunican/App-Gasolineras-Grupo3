@@ -51,6 +51,22 @@ public interface IMainContract {
         public void onMenuConsultarClicked();
 
         void onMenuDescuentoClicked();
+        /**
+         * Handles the process of filtered of the gas stations
+         * Called when the user clicks the filter button.
+         * Give the View the list already filtered
+         * Only the View should call this method
+         * @param municipio the municipality to be used on the filter
+         */
+        public void onBtnFiltrarClicked(String municipio);
+
+
+        /**
+         * Called when the user clicks the cancel button on the filter pop-up
+         * Cancels the filter
+         * Only the View should call this method
+         */
+        public void onBtnCancelarFiltroClicked();
     }
 
     /**
