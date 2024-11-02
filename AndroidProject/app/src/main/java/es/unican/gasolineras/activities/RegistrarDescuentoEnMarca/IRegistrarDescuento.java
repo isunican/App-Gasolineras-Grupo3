@@ -36,7 +36,7 @@ public interface IRegistrarDescuento {
         public void init();
 
         /**
-         * Muestra si el repostaje se ha realizado correctamente o si hay algun problema
+         * Muestra si el descuento se ha realizado correctamente o si hay algun problema
          * @param marca marca a la que aplica el descuento
          * @param descuento cantidad en % a descontar
          */

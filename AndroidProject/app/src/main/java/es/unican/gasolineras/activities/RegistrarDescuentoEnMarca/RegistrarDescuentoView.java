@@ -14,18 +14,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import java.util.Locale;
+
 
 import es.unican.gasolineras.R;
-import es.unican.gasolineras.activities.ConsultarRepostaje.ConsultarPresenter;
-import es.unican.gasolineras.activities.ConsultarRepostaje.ConsultarView;
-import es.unican.gasolineras.activities.ConsultarRepostaje.IConsultar;
-import es.unican.gasolineras.activities.RegistrarRepostajeMenu.IRegistrar;
-import es.unican.gasolineras.activities.RegistrarRepostajeMenu.RegistrarView;
 import es.unican.gasolineras.activities.main.MainView;
 import es.unican.gasolineras.repository.AppDatabase;
 import es.unican.gasolineras.repository.DatabaseFunction;
-import es.unican.gasolineras.repository.DescuentoDAO;
 
 public class RegistrarDescuentoView extends AppCompatActivity implements IRegistrarDescuento.View {
 
@@ -82,7 +76,7 @@ public class RegistrarDescuentoView extends AppCompatActivity implements IRegist
 
     /**
      *
-     * @see IRegistrar.View#mostrarError(String mensajeError, boolean errorDescuento)
+     * @see IRegistrarDescuento.View#mostrarError(String mensajeError, boolean errorDescuento)
      *
      * @param mensajeError the error message to show
      */
@@ -101,7 +95,7 @@ public class RegistrarDescuentoView extends AppCompatActivity implements IRegist
     }
 
     /**
-     * @see IRegistrar.View#showBtnGuardar(String, String)
+     * @see IRegistrarDescuento.View#showBtnGuardar(String, int)
      */
     @Override
     public void showBtnGuardar(String marca, String precioTotal) {
