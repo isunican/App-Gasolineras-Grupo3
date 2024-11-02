@@ -13,7 +13,7 @@ import es.unican.gasolineras.model.Descuento;
 @Dao
 public interface DescuentoDAO {
 
-    @Query("SELECT * FROM descuento")
+    @Query("SELECT * FROM Descuento")
     List<Descuento> descuentos();
 
     @Insert
