@@ -13,8 +13,6 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-
-
 import es.unican.gasolineras.R;
 import es.unican.gasolineras.activities.main.MainView;
 import es.unican.gasolineras.repository.AppDatabase;
@@ -38,6 +36,7 @@ public class RegistrarDescuentoView extends AppCompatActivity implements IRegist
         // In this app the toolbar is explicitly declared in the layout
         // Set this toolbar as the activity ActionBar
         Toolbar toolbar = findViewById(R.id.toolbar3);
+        toolbar.setTitle("Registrar descuento");
         setSupportActionBar(toolbar);
 
         AppDatabase db = DatabaseFunction.getDatabase(this);
@@ -51,16 +50,25 @@ public class RegistrarDescuentoView extends AppCompatActivity implements IRegist
      */
     @Override
     public void init(){
-        Spinner spMarca = findViewById(R.id.spMarcas);
+        Spinner spMarcas = findViewById(R.id.spMarcas);
         EditText textDescuento = findViewById(R.id.etDescuento);
 
         Button btnGuardar = findViewById(R.id.btnGuardar);
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                String marca = spMarca.toString();
-                int descuento = Integer.parseInt(textDescuento.getText().toString());
-                presenter.onBtnGuardarClicked(marca, descuento);
+                String marca = spMarcas.getSelectedItem().toString();
+                String descuentoStr = textDescuento.getText().toString().trim();
+                if(descuentoStr.isEmpty()){
+                    mostrarError("Los campos no deben estar vacios", true);
+                    return;
+                }
+                try {
+                    Integer descuento = Integer.parseInt(descuentoStr);
+                    presenter.onBtnGuardarClicked(marca, descuento);
+                }catch(NumberFormatException e){
+                    mostrarError("El valor del campo debe ser un número entero", true);
+                }
             }
         });
 
@@ -71,6 +79,48 @@ public class RegistrarDescuentoView extends AppCompatActivity implements IRegist
                 presenter.onBtnCancelarClicked();
             }
         });
+    }
+
+
+    /**
+     * @see IRegistrarDescuento.View#showBtnGuardar(String, Integer)
+     */
+    @Override
+    public void showBtnGuardar(String marca, Integer descuento) {
+        try {
+            new AlertDialog.Builder(RegistrarDescuentoView.this)
+                    .setMessage(getString(R.string.registro_descuento_exito))
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent intent = new Intent(RegistrarDescuentoView.this, MainView.class);
+                            startActivity(intent);
+                        }
+                    })
+                    .show();
+
+        } catch (Exception e) {
+            new AlertDialog.Builder(RegistrarDescuentoView.this)
+                    .setTitle("Error")
+                    .setMessage(getString(R.string.error_acceso_bbdd))
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent intent = new Intent(RegistrarDescuentoView.this, MainView.class);
+                            startActivity(intent);
+                        }
+                    })
+                    .show();
+        }
+    }
+
+    /**
+     * @see IRegistrarDescuento.View#showBtnCancelar()
+     */
+    @Override
+    public void showBtnCancelar(){
+        Intent intent = new Intent(RegistrarDescuentoView.this, MainView.class);
+        startActivity(intent);
     }
 
     /**
@@ -92,46 +142,5 @@ public class RegistrarDescuentoView extends AppCompatActivity implements IRegist
             etDescuento.setBackgroundResource(R.drawable.border_default);
         }
     }
-
-    /**
-     * @see IRegistrarDescuento.View#showBtnGuardar(String, int)
-     */
-    @Override
-    public void showBtnGuardar(String marca, int descuento) {
-
-        try {
-            new AlertDialog.Builder(RegistrarDescuentoView.this)
-                    .setMessage(getString(R.string.registro_descuento_exito))
-                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            Intent intent = new Intent(RegistrarDescuentoView.this, MainView.class);
-                            startActivity(intent);
-                        }
-                    })
-                    .show();
-
-        } catch (Exception e) {
-
-            new AlertDialog.Builder(RegistrarDescuentoView.this)
-                    .setTitle("Error")
-                    .setMessage(getString(R.string.error_acceso_bbdd))
-                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            // Puedes agregar alguna acción adicional si es necesario
-                            Intent intent = new Intent(RegistrarDescuentoView.this, MainView.class);
-                            startActivity(intent);
-                        }
-                    })
-                    .show();
-        }
-    }
-
-    /**
-     * @see IRegistrarDescuento.View#showBtnCancelar()
-     */
-    @Override
-    public void showBtnCancelar(){};
 
 }

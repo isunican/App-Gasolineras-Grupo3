@@ -1,6 +1,5 @@
 package es.unican.gasolineras.activities.RegistrarDescuentoEnMarca;
 
-import es.unican.gasolineras.activities.ConsultarRepostaje.IConsultar;
 
 public interface IRegistrarDescuento {
 
@@ -20,7 +19,7 @@ public interface IRegistrarDescuento {
          * Handles the process of validating and registering the discount
          * Called when the user clicks the save button.
          */
-        void onBtnGuardarClicked(String marca, int descuento);
+        void onBtnGuardarClicked(String marca, Integer descuento);
 
         /**
          * Llamado cuando se pulsa el boton de cancelar
@@ -36,14 +35,22 @@ public interface IRegistrarDescuento {
         public void init();
 
         /**
-         * Muestra si el descuento se ha realizado correctamente o si hay algun problema
+         * Muestra si hay algun problema o vuelve al main si se ha realizado correctamente
          * @param marca marca a la que aplica el descuento
          * @param descuento cantidad en % a descontar
          */
-        void showBtnGuardar(String marca, int descuento);
+        void showBtnGuardar(String marca, Integer descuento);
 
+        /**
+         * Vuelve al main cuando se pulsa cancelar
+         */
         void showBtnCancelar();
 
+        /**
+         * Shows an error message on the screen.
+         * @param mensajeError the error message to show
+         * @param errorDescuento a boolean which tells you if there is an error with that insert
+         */
         void mostrarError(String mensajeError, boolean errorDescuento);
     }
 
