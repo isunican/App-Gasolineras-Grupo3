@@ -50,7 +50,12 @@ public interface IMainContract {
          */
         public void onMenuConsultarClicked();
 
-        void onMenuDescuentoClicked();
+        /**
+         * The presenter is informed that the Info item in the menu has been clicked
+         * Only the View should call this method
+         */
+        public void onMenuDescuentoClicked();
+
         /**
          * Handles the process of filtered of the gas stations
          * Called when the user clicks the filter button.
@@ -140,9 +145,13 @@ public interface IMainContract {
          */
         public void showConsultarActivity();
 
-        void showDescuentoActivity();
+        /**
+         * The view is requested to open the registrar descuento activity.
+         * Only the Presenter should call this method
+         */
+        public void showDescuentoActivity();
 
-        public void mostrarErrorNoGaolinerasEnMunicipio(String s);
+        public void mostrarErrorNoGasolinerasEnMunicipio(String s);
 
         public void showBtnCancelarFiltro();
     }

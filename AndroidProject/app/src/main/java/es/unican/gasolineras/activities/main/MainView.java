@@ -28,6 +28,8 @@ import es.unican.gasolineras.activities.RegistrarRepostajeMenu.RegistrarView;
 import es.unican.gasolineras.activities.info.InfoView;
 import es.unican.gasolineras.activities.details.DetailsView;
 import es.unican.gasolineras.model.Gasolinera;
+import es.unican.gasolineras.repository.AppDatabase;
+import es.unican.gasolineras.repository.DatabaseFunction;
 import es.unican.gasolineras.repository.IGasolinerasRepository;
 
 
@@ -44,6 +46,8 @@ public class MainView extends AppCompatActivity implements IMainContract.View {
     @Inject
     IGasolinerasRepository repository;
 
+    public AppDatabase db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,8 +60,10 @@ public class MainView extends AppCompatActivity implements IMainContract.View {
         setSupportActionBar(toolbar);
 
         // instantiate presenter and launch initial business logic
+        db = DatabaseFunction.getDatabase(this);
         presenter = new MainPresenter();
         presenter.init(this);
+
     }
 
 
@@ -132,7 +138,7 @@ public class MainView extends AppCompatActivity implements IMainContract.View {
     @Override
     public void showStations(List<Gasolinera> stations) {
         ListView list = findViewById(R.id.lvStations);
-        GasolinerasArrayAdapter adapter = new GasolinerasArrayAdapter(this, stations);
+        GasolinerasArrayAdapter adapter = new GasolinerasArrayAdapter(this, stations, db.descuentoDao());
         list.setAdapter(adapter);
     }
 
@@ -202,7 +208,7 @@ public class MainView extends AppCompatActivity implements IMainContract.View {
     }
 
     @Override
-    public void mostrarErrorNoGaolinerasEnMunicipio(String s) {
+    public void mostrarErrorNoGasolinerasEnMunicipio(String s) {
         
     }
 

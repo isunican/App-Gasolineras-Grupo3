@@ -30,11 +30,11 @@ public class RegistrarDescuentoPresenter implements IRegistrarDescuento.Presente
     }
 
     /**
-     * @see IRegistrarDescuento.Presenter#onBtnGuardarClicked(String, Integer)
+     * @see IRegistrarDescuento.Presenter#onBtnGuardarClicked(String, double)
      * @param marca marca a la que aplicar el filtro
      * @param descuento descuento que se aplica
      */
-    public void onBtnGuardarClicked(String marca, Integer descuento) {
+    public void onBtnGuardarClicked(String marca, double descuento) {
         boolean errorDescuento;
 
         if (descuento == null){
@@ -46,24 +46,31 @@ public class RegistrarDescuentoPresenter implements IRegistrarDescuento.Presente
         //Validar que el valor sea positivo
         if(descuento < 0){
             errorDescuento = true;
-            view.mostrarError("Error: El valor debe ser positivo", errorDescuento);
+            view.mostrarError("Error: El valor debe estar entre 0 y 100", errorDescuento);
             return;
         }
 
         //Validar que el valor sea menor o igual a 0
         if(descuento > 100){
             errorDescuento = true;
-            view.mostrarError("Error: El valor debe ser menor que 100", errorDescuento);
+            view.mostrarError("Error: El valor debe estar entre 0 y 100", errorDescuento);
             return;
         }
 
-        //Crear el objeto descuento
-        Descuento desc = new Descuento();
-        desc.setMarca(marca);
-        desc.setDescuento(descuento);
-
         try {
-            descuentoDAO.registrarDescuento(desc);
+            Descuento d = descuentoDAO.descuentoPorMarca(marca.toUpperCase());
+            if (d == null){
+                //Crear el objeto descuento
+                Descuento desc = new Descuento();
+                desc.setMarca(marca);
+                desc.setDescuento(descuento);
+                descuentoDAO.registrarDescuento(desc);
+            } else{
+                d.setMarca(marca);
+                d.setDescuento(descuento);
+                descuentoDAO.actualizaDescuento(d);
+            }
+
             view.showBtnGuardar(marca, descuento);
         }catch (Exception e){
             view.mostrarError("Error al registrar el descuento en la base de datos", false);

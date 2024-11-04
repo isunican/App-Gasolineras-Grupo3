@@ -19,7 +19,7 @@ public interface IRegistrarDescuento {
          * Handles the process of validating and registering the discount
          * Called when the user clicks the save button.
          */
-        void onBtnGuardarClicked(String marca, Integer descuento);
+        void onBtnGuardarClicked(String marca, double descuento);
 
         /**
          * Llamado cuando se pulsa el boton de cancelar
@@ -39,7 +39,7 @@ public interface IRegistrarDescuento {
          * @param marca marca a la que aplica el descuento
          * @param descuento cantidad en % a descontar
          */
-        void showBtnGuardar(String marca, Integer descuento);
+        void showBtnGuardar(String marca, double descuento);
 
         /**
          * Vuelve al main cuando se pulsa cancelar

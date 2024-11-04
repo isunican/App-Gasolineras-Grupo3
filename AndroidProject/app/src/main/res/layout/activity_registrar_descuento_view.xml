@@ -59,7 +59,7 @@
         android:layout_width="149dp"
         android:layout_height="43dp"
         android:ems="10"
-        android:inputType="number"
+        android:inputType="number|numberDecimal|numberSigned"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView4"
         app:layout_constraintStart_toStartOf="@+id/spMarcas" />
 

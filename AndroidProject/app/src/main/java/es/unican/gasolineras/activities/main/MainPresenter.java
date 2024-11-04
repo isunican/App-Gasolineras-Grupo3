@@ -66,7 +66,6 @@ public class MainPresenter implements IMainContract.Presenter {
     }
 
     /**
-<<<<<<< HEAD
      * @see IMainContract.Presenter#onMenuDescuentoClicked()
      */
     @Override
@@ -86,7 +85,7 @@ public class MainPresenter implements IMainContract.Presenter {
         }
 
         if (listaFiltrada.isEmpty()) {
-            view.mostrarErrorNoGaolinerasEnMunicipio("Error: No exiten gasolineras con el filtro aplicado");
+            view.mostrarErrorNoGasolinerasEnMunicipio("Error: No exiten gasolineras con el filtro aplicado");
             return;
         }
 
