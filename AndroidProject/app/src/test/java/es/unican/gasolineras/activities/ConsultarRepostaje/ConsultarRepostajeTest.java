@@ -1,4 +1,4 @@
-package es.unican.gasolineras.ConsultarRepostaje;
+package es.unican.gasolineras.activities.ConsultarRepostaje;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;

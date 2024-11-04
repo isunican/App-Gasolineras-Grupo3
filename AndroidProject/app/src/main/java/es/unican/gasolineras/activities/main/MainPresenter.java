@@ -66,7 +66,6 @@ public class MainPresenter implements IMainContract.Presenter {
     }
 
     /**
-<<<<<<< HEAD
      * @see IMainContract.Presenter#onMenuDescuentoClicked()
      */
     @Override
