@@ -14,6 +14,7 @@
     <string name ="error_datos_incompletos">Error, los datos son incompletos </string>
     <string name ="registro_exito">Repostaje registrado correctamente</string>
     <string name ="registro_descuento_exito">Descuento registrado correctamente</string>
+    <string name="registrar_descuento">Registrar descuento</string>
     <string-array name="marcasArray">
         <item>Avia</item>
         <item>Carrefour</item>

@@ -7,7 +7,6 @@
     <!-- <item name="colorAccent">@color/colorAccent</item> -->
 
 </style>
-
 <style name="Theme.Gasolineras" parent="Base.Theme.Gasolineras" />
 
 <!--Custom theme for the toolbar, to have the text white-->
@@ -15,4 +14,7 @@
         <item name="android:textColorPrimary">@android:color/white</item>
     </style>
 
+    <style name="ThemeOverlay.Gasolineras.Menu" parent="@style/ThemeOverlay.AppCompat.Dark">
+        <item name="android:textColorPrimary">@android:color/white</item>
+    </style>
 </resources>
