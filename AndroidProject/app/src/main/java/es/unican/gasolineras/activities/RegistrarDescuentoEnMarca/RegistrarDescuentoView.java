@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -38,6 +39,16 @@ public class RegistrarDescuentoView extends AppCompatActivity implements IRegist
         Toolbar toolbar = findViewById(R.id.toolbar3);
         toolbar.setTitle("Registrar descuento");
         setSupportActionBar(toolbar);
+
+        Spinner spn = findViewById(R.id.spMarcas);
+        // Configuramos el Spinner
+        // Tomamos sus valores posibles del array de strings "marcasArray", definido
+        // en string.xml
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.marcasArray,
+                android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spn.setAdapter(adapter);
 
         AppDatabase db = DatabaseFunction.getDatabase(this);
 
