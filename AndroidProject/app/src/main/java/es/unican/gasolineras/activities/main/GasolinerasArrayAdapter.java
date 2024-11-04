@@ -77,9 +77,10 @@ public class GasolinerasArrayAdapter extends BaseAdapter {
         setName(convertView, gasolinera);
         setAddress(convertView, gasolinera);
 
-        //Usar query descuentoPorMarca
+        //se obtienen los descuentos que tenemos por cada marca y se ponen en mayuscula
+        //todas sus letras para mejorar la comparacion
         Descuento descuento = descuentoDAO.descuentoPorMarca(gasolinera.getRotulo().toUpperCase());
-        //Pasarle el descuento a los metodos set
+        //el calculo del descuento se realiza en cada método setPrice
         setGasolina95Price(convertView, gasolinera, descuento);
         setDieselAPrice(convertView, gasolinera, descuento);
 
@@ -120,15 +121,18 @@ public class GasolinerasArrayAdapter extends BaseAdapter {
         tvLabel.setText(String.format("%s:", label));
 
         TextView tv = convertView.findViewById(R.id.tv95);
+        // se comprueba que haya un porcentaje asignado
         if (descuento != null){
             descuentoPorcentaje = descuento.getDescuento();
         }else {
             descuentoPorcentaje = 0;
         }
+        //si el descuento es distinto de cero se calcula el nuevo precio y se cambia de color al texto
         if (descuentoPorcentaje != 0){
             precio = calcularPrecioConDescuento(gasolinera.getGasolina95E5(), descuentoPorcentaje);
             tv.setText(String.format(Locale.getDefault(), "%.2f", precio));
             tv.setTextColor(context.getResources().getColor(R.color.text_green));
+        // si el descuento es 0 entonces se deja el valor obtenido de la API y se pone con el color por defecto
         } else {
             tv.setText(String.valueOf(gasolinera.getGasolina95E5()));
             tv.setTextColor(context.getResources().getColor(R.color.text_default));
@@ -144,21 +148,30 @@ public class GasolinerasArrayAdapter extends BaseAdapter {
         tvLabel.setText(String.format("%s:", label));
 
         TextView tv = convertView.findViewById(R.id.tvDieselA);
+        // se comprueba que haya un porcentaje asignado
         if (descuento != null){
             descuentoPorcentaje = descuento.getDescuento();
         } else {
             descuentoPorcentaje = 0;
         }
+        //si el descuento es distinto de cero se calcula el nuevo precio y se cambia de color al texto
         if (descuentoPorcentaje != 0){
             precio = calcularPrecioConDescuento(gasolinera.getGasoleoA(), descuentoPorcentaje);
             tv.setText(String.format(Locale.getDefault(), "%.2f", precio));
             tv.setTextColor(context.getResources().getColor(R.color.text_green));
+        // si el descuento es 0 entonces se deja el valor obtenido de la API y se pone con el color por defecto
         } else {
             tv.setText(String.valueOf(gasolinera.getGasoleoA()));
             tv.setTextColor(context.getResources().getColor(R.color.text_default));
         }
     }
 
+    /**
+     * Calcula el precio con el descuento asignado a la marca
+     * @param precio precio obtenido de la API
+     * @param descuento porcentaje de descuento a aplicar
+     * @return el precio actualizado con el descuento
+     */
     public double calcularPrecioConDescuento(double precio, double descuento){
         double precioNuevo;
         precioNuevo = precio - ((precio * descuento) / 100);

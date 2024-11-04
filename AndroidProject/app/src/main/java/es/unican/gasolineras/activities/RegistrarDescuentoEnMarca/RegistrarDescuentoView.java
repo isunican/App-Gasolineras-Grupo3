@@ -67,6 +67,7 @@ public class RegistrarDescuentoView extends AppCompatActivity implements IRegist
             public void onClick(View v) {
                 String marca = spMarcas.getSelectedItem().toString().toUpperCase();
                 String descuentoStr = textDescuento.getText().toString().trim();
+                //Se comprueba que el campo del descuento no este vacio
                 if(descuentoStr.isEmpty()){
                     mostrarError("Los campos no deben estar vacios", true);
                     return;

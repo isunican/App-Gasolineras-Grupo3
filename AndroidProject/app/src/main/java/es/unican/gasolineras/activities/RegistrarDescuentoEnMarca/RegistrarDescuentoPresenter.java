@@ -37,20 +37,14 @@ public class RegistrarDescuentoPresenter implements IRegistrarDescuento.Presente
     public void onBtnGuardarClicked(String marca, double descuento) {
         boolean errorDescuento;
 
-        if (descuento == null){
-            errorDescuento = true;
-            view.mostrarError("Error: El campo no debe estar vacio", errorDescuento);
-            return;
-        }
-
         //Validar que el valor sea positivo
         if(descuento < 0){
             errorDescuento = true;
-            view.mostrarError("Error: El valor debe estar entre 0 y 100", errorDescuento);
+            view.mostrarError("Error: El valor debe ser positivo", errorDescuento);
             return;
         }
 
-        //Validar que el valor sea menor o igual a 0
+        //Validar que el valor sea menor o igual a 100
         if(descuento > 100){
             errorDescuento = true;
             view.mostrarError("Error: El valor debe estar entre 0 y 100", errorDescuento);
@@ -58,13 +52,16 @@ public class RegistrarDescuentoPresenter implements IRegistrarDescuento.Presente
         }
 
         try {
+            //Se busca si ya existe un descuento para esa marca
             Descuento d = descuentoDAO.descuentoPorMarca(marca.toUpperCase());
+            //Si no existe se crea y anhade
             if (d == null){
                 //Crear el objeto descuento
                 Descuento desc = new Descuento();
                 desc.setMarca(marca);
                 desc.setDescuento(descuento);
                 descuentoDAO.registrarDescuento(desc);
+            //Si existe se actualiza
             } else{
                 d.setMarca(marca);
                 d.setDescuento(descuento);

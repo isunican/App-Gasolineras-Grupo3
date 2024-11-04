@@ -46,6 +46,7 @@ public class MainView extends AppCompatActivity implements IMainContract.View {
     @Inject
     IGasolinerasRepository repository;
 
+    //Database which is used in the app
     public AppDatabase db;
 
     @Override
