@@ -37,7 +37,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
-
+        
         <TextView
             android:id="@+id/textView3"
             android:layout_width="0dp"
@@ -72,7 +72,7 @@
             android:layout_marginEnd="32dp"
             android:autoSizeTextType="uniform"
             android:ems="10"
-            android:inputType="number"
+            android:inputType="number|numberDecimal|numberSigned"
             app:layout_constraintBaseline_toBaselineOf="@+id/textView4"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textView4"

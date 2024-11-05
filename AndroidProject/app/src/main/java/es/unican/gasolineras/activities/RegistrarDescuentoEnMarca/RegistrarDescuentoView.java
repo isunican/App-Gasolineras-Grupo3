@@ -33,12 +33,19 @@ public class RegistrarDescuentoView extends AppCompatActivity implements IRegist
         super.onCreate(SavedInstanceState);
         setContentView(R.layout.activity_registrar_descuento_view);
 
-        // The default theme does not include a toolbar.
-        // In this app the toolbar is explicitly declared in the layout
-        // Set this toolbar as the activity ActionBar
         Toolbar toolbar = findViewById(R.id.toolbar3);
-        toolbar.setTitle("Registrar descuento");
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Registrar descuento");
+
+        Spinner spn = findViewById(R.id.spMarcas);
+        // Configuramos el Spinner
+        // Tomamos sus valores posibles del array de strings "marcasArray", definido
+        // en string.xml
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.marcasArray,
+                android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spn.setAdapter(adapter);
 
         Spinner spn = findViewById(R.id.spMarcas);
         // Configuramos el Spinner
@@ -67,15 +74,16 @@ public class RegistrarDescuentoView extends AppCompatActivity implements IRegist
         Button btnGuardar = findViewById(R.id.btnGuardar);
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
-                String marca = spMarcas.getSelectedItem().toString();
+            public void onClick(View v) {
+                String marca = spMarcas.getSelectedItem().toString().toUpperCase();
                 String descuentoStr = textDescuento.getText().toString().trim();
+                //Se comprueba que el campo del descuento no este vacio
                 if(descuentoStr.isEmpty()){
                     mostrarError("Los campos no deben estar vacios", true);
                     return;
                 }
                 try {
-                    Integer descuento = Integer.parseInt(descuentoStr);
+                    double descuento = Double.parseDouble(descuentoStr);
                     presenter.onBtnGuardarClicked(marca, descuento);
                 }catch(NumberFormatException e){
                     mostrarError("El valor del campo debe ser un número entero", true);
@@ -94,10 +102,10 @@ public class RegistrarDescuentoView extends AppCompatActivity implements IRegist
 
 
     /**
-     * @see IRegistrarDescuento.View#showBtnGuardar(String, Integer)
+     * @see IRegistrarDescuento.View#showBtnGuardar(String, double)
      */
     @Override
-    public void showBtnGuardar(String marca, Integer descuento) {
+    public void showBtnGuardar(String marca, double descuento) {
         try {
             new AlertDialog.Builder(RegistrarDescuentoView.this)
                     .setMessage(getString(R.string.registro_descuento_exito))

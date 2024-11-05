@@ -2,6 +2,7 @@ package es.unican.gasolineras.model;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 import lombok.Getter;
@@ -13,7 +14,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-@Entity
+@Entity(indices = @Index(value = "marca", unique = true))
 public class Descuento {
 
     @PrimaryKey(autoGenerate = true)
