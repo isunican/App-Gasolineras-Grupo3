@@ -47,16 +47,6 @@ public class RegistrarDescuentoView extends AppCompatActivity implements IRegist
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spn.setAdapter(adapter);
 
-        Spinner spn = findViewById(R.id.spMarcas);
-        // Configuramos el Spinner
-        // Tomamos sus valores posibles del array de strings "marcasArray", definido
-        // en string.xml
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.marcasArray,
-                android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spn.setAdapter(adapter);
-
         AppDatabase db = DatabaseFunction.getDatabase(this);
 
         presenter = new RegistrarDescuentoPresenter(db.descuentoDao());
