@@ -148,6 +148,7 @@ public interface IMainContract {
          */
         public void mostrarErrorNoGaolinerasEnMunicipio(String mensajeError);
 
+
         /**
          * Closes the filter pop-up
          */

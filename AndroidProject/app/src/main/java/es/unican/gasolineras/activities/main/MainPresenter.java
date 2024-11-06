@@ -1,6 +1,9 @@
 package es.unican.gasolineras.activities.main;
 
+import android.widget.Spinner;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import es.unican.gasolineras.activities.RegistrarRepostajeMenu.IRegistrar;
@@ -75,6 +78,7 @@ public class MainPresenter implements IMainContract.Presenter {
      * @param municipio el municipio a aplicar como filtro
      */
     public void onBtnFiltrarClicked(String municipio) {
+
 
         List<Gasolinera> listaFiltrada = new ArrayList<>();
 

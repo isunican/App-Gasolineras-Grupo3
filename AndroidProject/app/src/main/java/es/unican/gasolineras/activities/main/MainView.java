@@ -2,7 +2,6 @@ package es.unican.gasolineras.activities.main;
 
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -10,12 +9,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import android.view.View;
-import android.widget.ListView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -24,7 +21,6 @@ import androidx.appcompat.widget.Toolbar;
 
 import org.parceler.Parcels;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -112,95 +108,39 @@ public class MainView extends AppCompatActivity implements IMainContract.View {
         }
         if (itemId == R.id.FiltrarMunicipiosItem) {
 
-            // Acceder al array de municipios desde los recursos
-            final String[] municipios = getResources().getStringArray(R.array.municipiosArray);
+            View dialogView = getLayoutInflater().inflate(R.layout.activity_filtrar, null);
 
+            Spinner spinner = dialogView.findViewById(R.id.spMunicipios);
+            Button btnFiltrar = dialogView.findViewById(R.id.btnFiltrar);
+            Button btnCancelar = dialogView.findViewById(R.id.btnCancelar);
 
-            final Spinner spinner = new Spinner(this);
-
-
-            // Crear un TextView para mostrar el texto "Municipio:"
-            TextView txtMunicipio = new TextView(this);
-            txtMunicipio.setText("Municipio:");  // Texto que se mostrará antes del Spinner
-            txtMunicipio.setPadding(0, 0, 0, 10);  // Añadir un poco de padding debajo para espacio
-
-            // Crear el ArrayAdapter para el Spinner
+            String[] municipios = getResources().getStringArray(R.array.municipiosArray);
             ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, municipios);
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinner.setAdapter(adapter);
 
-            // Si ya hay un filtro activado
             String filtro = presenter.hayFiltroActivado();
             if (filtro != null) {
                 spinner.setSelection(Arrays.asList(municipios).indexOf(filtro));
-            }
-            else {
+            } else {
                 spinner.setSelection(Arrays.asList(municipios).indexOf("Mostrar todos"));
             }
 
+            AlertDialog dialog = new AlertDialog.Builder(this)
+                    .setTitle("Filtrar")
+                    .setView(dialogView) // Agrega el layout personalizado al diálogo
+                    .create();
 
 
-            // Crear el layout para el AlertDialog
-            LinearLayout layout = new LinearLayout(this);
-            layout.setOrientation(LinearLayout.VERTICAL);  // Colocar los elementos en columna (vertical)
-            layout.setPadding(40, 40, 40, 40);  // Añadir algo de padding alrededor
-
-            // Configurar márgenes para el spinner
-            LinearLayout.LayoutParams spinnerParams = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            spinnerParams.setMargins(0, 0, 0, 20);  // Márgenes en la parte inferior
-            spinner.setLayoutParams(spinnerParams);
-
-            // Configurar márgenes para el TextView (Municipio:)
-            LinearLayout.LayoutParams textParams = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            textParams.setMargins(0, 0, 0, 10);  // Márgenes en la parte inferior (espacio entre el texto y el spinner)
-            txtMunicipio.setLayoutParams(textParams);
-
-            // Botón Filtrar
-            Button btnFiltrar = new Button(this);
-            btnFiltrar.setText("Filtrar");
-            LinearLayout.LayoutParams filterBtnParams = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            filterBtnParams.setMargins(0, 20, 0, 0);  // Márgenes en la parte superior
-            btnFiltrar.setLayoutParams(filterBtnParams);
-
-
-
-            // Botón Cancelar
-            Button btnCancelar = new Button(this);
-            btnCancelar.setText("Cancelar");
-            LinearLayout.LayoutParams cancelBtnParams = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            cancelBtnParams.setMargins(0, 20, 0, 0);  // Márgenes en la parte superior
-            btnCancelar.setLayoutParams(cancelBtnParams);
-
-
-            // Añadir el TextView y el Spinner al layout
-            layout.addView(txtMunicipio);
-            layout.addView(spinner);
-            layout.addView(btnFiltrar);
-            layout.addView(btnCancelar);
-
-            // Crear el AlertDialog
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("Filtrar");
-            builder.setView(layout);  // Usamos el layout que contiene el TextView, Spinner y los botones
-
-
-            // Crear y mostrar el dialog
-            AlertDialog alertDialog = builder.create();
-
-            btnFiltrar.setOnClickListener(view -> {
-                presenter.onBtnFiltrarClicked(spinner.getSelectedItem().toString());
-                alertDialog.dismiss();
+            btnFiltrar.setOnClickListener(v -> {
+                String municipioSeleccionado = spinner.getSelectedItem().toString();
+                presenter.onBtnFiltrarClicked(municipioSeleccionado);
+                dialog.dismiss();
             });
 
-            btnCancelar.setOnClickListener(view -> {
-                alertDialog.dismiss();
-            });
+            btnCancelar.setOnClickListener(v -> dialog.dismiss());
 
-            alertDialog.show();
+            dialog.show();
             return true;
         }
 
