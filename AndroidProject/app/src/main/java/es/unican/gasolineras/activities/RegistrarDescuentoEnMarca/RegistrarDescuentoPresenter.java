@@ -1,5 +1,7 @@
 package es.unican.gasolineras.activities.RegistrarDescuentoEnMarca;
 
+import android.database.sqlite.SQLiteDatabaseLockedException;
+
 import es.unican.gasolineras.model.Descuento;
 import es.unican.gasolineras.repository.DescuentoDAO;
 
@@ -69,7 +71,7 @@ public class RegistrarDescuentoPresenter implements IRegistrarDescuento.Presente
             }
 
             view.showBtnGuardar(marca, descuento);
-        }catch (Exception e){
+        }catch (SQLiteDatabaseLockedException e){
             view.mostrarError("Error al registrar el descuento en la base de datos", false);
         }
 

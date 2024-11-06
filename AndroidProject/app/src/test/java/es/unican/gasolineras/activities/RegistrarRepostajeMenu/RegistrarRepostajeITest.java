@@ -1,27 +1,33 @@
-package es.unican.gasolineras.RegistrarRepostajeMenu;
+package es.unican.gasolineras.activities.RegistrarRepostajeMenu;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.verify;
+
+import android.content.Context;
+import android.os.Build;
+
+import androidx.test.core.app.ApplicationProvider;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
-import es.unican.gasolineras.activities.RegistrarRepostajeMenu.RegistrarPresenter;
-import es.unican.gasolineras.activities.RegistrarRepostajeMenu.RegistrarView;
-import es.unican.gasolineras.model.Repostaje;
-import es.unican.gasolineras.repository.RepostajeDAO;
+import es.unican.gasolineras.repository.AppDatabase;
+import es.unican.gasolineras.repository.DatabaseFunction;
 
-public class RegistrarRepostajeTest {
+
+@RunWith(RobolectricTestRunner.class)
+@Config(sdk = {Build.VERSION_CODES.P}) // P corresponds to API level 28
+public class RegistrarRepostajeITest {
 
     private static RegistrarPresenter sut;
+    //private static RepostajeDAO respostajeDAO;
+
     private String litros;
     private String precioTotal;
-
-    @Mock
-    private static RepostajeDAO mockRepostajeDAO;
 
     @Mock
     private static RegistrarView mockRegistrarView;
@@ -30,26 +36,27 @@ public class RegistrarRepostajeTest {
     public void inicializa(){
 
         MockitoAnnotations.openMocks(this);
+        Context context = ApplicationProvider.getApplicationContext();
 
-        sut = new RegistrarPresenter(mockRepostajeDAO);
+        AppDatabase db = DatabaseFunction.getDatabase(context);
+        sut = new RegistrarPresenter(db.repostajeDao());
         sut.init(mockRegistrarView);
     }
 
     @Test
-    public void testRegistrarRepostajeExito() {
+    public void itestRegistrarRepostajeExito() {
 
         litros = "20";
         precioTotal = "30";
 
         sut.onBtnGuardarClicked(litros, precioTotal);
 
-        verify(mockRepostajeDAO).registrarRepostaje(any(Repostaje.class));
         verify(mockRegistrarView).showBtnGuardar(litros, precioTotal);
 
     }
 
     @Test
-    public void testRegistrarRepostajeValoresFormatoIncorrecto() {
+    public void itestRegistrarRepostajeValoresFormatoIncorrecto() {
 
         litros = "Veinte";
         precioTotal = "50";
@@ -57,11 +64,11 @@ public class RegistrarRepostajeTest {
         sut.onBtnGuardarClicked(litros, precioTotal);
 
         verify(mockRegistrarView).mostrarError("Error: Los datos introducidos no son válidos", true, false);
-        verify(mockRepostajeDAO, never()).registrarRepostaje(any());
+
     }
 
     @Test
-    public void testRegistrarRepostajeValoresNegativos() {
+    public void itestRegistrarRepostajeValoresNegativos() {
 
         litros = "-50";
         precioTotal = "50";
@@ -69,11 +76,10 @@ public class RegistrarRepostajeTest {
         sut.onBtnGuardarClicked(litros, precioTotal);
 
         verify(mockRegistrarView).mostrarError("Error: Los valores deben ser positivos", true, false);
-        verify(mockRepostajeDAO, never()).registrarRepostaje(any());
     }
 
     @Test
-    public void testRegistrarRepostajeValoresVacios() {
+    public void itestRegistrarRepostajeValoresVacios() {
 
         litros = "";
         precioTotal = "";
@@ -81,8 +87,6 @@ public class RegistrarRepostajeTest {
         sut.onBtnGuardarClicked(litros, precioTotal);
 
         verify(mockRegistrarView).mostrarError("Error: Los campos no deben estar vacíos", true, true);
-        verify(mockRepostajeDAO, never()).registrarRepostaje(any());
     }
-
 
 }
