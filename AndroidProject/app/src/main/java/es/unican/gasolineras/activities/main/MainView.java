@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -110,8 +111,16 @@ public class MainView extends AppCompatActivity implements IMainContract.View {
             // Acceder al array de municipios desde los recursos
             final String[] municipios = getResources().getStringArray(R.array.municipiosArray);
 
-            // Crear el Spinner
+
             final Spinner spinner = new Spinner(this);
+
+
+            // Crear un TextView para mostrar el texto "Municipio:"
+            TextView txtMunicipio = new TextView(this);
+            txtMunicipio.setText("Municipio:");  // Texto que se mostrará antes del Spinner
+            txtMunicipio.setPadding(0, 0, 0, 10);  // Añadir un poco de padding debajo para espacio
+
+            // Crear el ArrayAdapter para el Spinner
             ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, municipios);
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinner.setAdapter(adapter);
@@ -126,6 +135,12 @@ public class MainView extends AppCompatActivity implements IMainContract.View {
                     LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             spinnerParams.setMargins(0, 0, 0, 20);  // Márgenes en la parte inferior
             spinner.setLayoutParams(spinnerParams);
+
+            // Configurar márgenes para el TextView (Municipio:)
+            LinearLayout.LayoutParams textParams = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            textParams.setMargins(0, 0, 0, 10);  // Márgenes en la parte inferior (espacio entre el texto y el spinner)
+            txtMunicipio.setLayoutParams(textParams);
 
             // Botón Filtrar
             Button btnFiltrar = new Button(this);
@@ -143,7 +158,8 @@ public class MainView extends AppCompatActivity implements IMainContract.View {
             cancelBtnParams.setMargins(0, 20, 0, 0);  // Márgenes en la parte superior
             btnCancelar.setLayoutParams(cancelBtnParams);
 
-            // Añadir los elementos al layout
+            // Añadir el TextView y el Spinner al layout
+            layout.addView(txtMunicipio);
             layout.addView(spinner);
             layout.addView(btnFiltrar);
             layout.addView(btnCancelar);
@@ -151,7 +167,7 @@ public class MainView extends AppCompatActivity implements IMainContract.View {
             // Crear el AlertDialog
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("Filtrar");
-            builder.setView(layout);  // Usamos el layout que contiene el Spinner y los botones
+            builder.setView(layout);  // Usamos el layout que contiene el TextView, Spinner y los botones
 
             // No se añade lógica a los botones (sin OnClickListener)
 
@@ -160,6 +176,7 @@ public class MainView extends AppCompatActivity implements IMainContract.View {
 
             return true;
         }
+
 
         return super.onOptionsItemSelected(item);
     }
