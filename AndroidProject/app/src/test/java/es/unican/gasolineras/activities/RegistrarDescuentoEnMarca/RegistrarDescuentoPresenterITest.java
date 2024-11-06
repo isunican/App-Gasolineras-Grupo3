@@ -4,43 +4,52 @@ package es.unican.gasolineras.activities.RegistrarDescuentoEnMarca;
 import static org.mockito.Mockito.verify;
 
 import android.content.Context;
-import android.os.Build;
+
 
 import androidx.test.core.app.ApplicationProvider;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
+
 
 
 import es.unican.gasolineras.repository.AppDatabase;
 import es.unican.gasolineras.repository.DatabaseFunction;
+import es.unican.gasolineras.repository.DescuentoDAO;
 
 
 @RunWith(RobolectricTestRunner.class)
 public class RegistrarDescuentoPresenterITest {
 
-    private static RegistrarDescuentoPresenter sut;
-
+    private RegistrarDescuentoPresenter sut;
+    AppDatabase db;
     private String marca;
     private double descuento;
 
     @Mock
-    private static RegistrarDescuentoView mockRegistrarDescuentoView;
+    private RegistrarDescuentoView mockRegistrarDescuentoView;
 
     @Before
     public void inicializa(){
 
         MockitoAnnotations.openMocks(this);
         Context context = ApplicationProvider.getApplicationContext();
+        db  = DatabaseFunction.getDatabase(context);;
+        DescuentoDAO descuentoDAO = db.descuentoDao();
 
-        AppDatabase db = DatabaseFunction.getDatabase(context);
-        sut = new RegistrarDescuentoPresenter(db.descuentoDao());
+        sut = new RegistrarDescuentoPresenter(descuentoDAO);
         sut.init(mockRegistrarDescuentoView);
+        db.descuentoDao().eliminarDescuentos();
+    }
+
+    @After
+    public void cerrar() {
+        db.close();
     }
 
     @Test
@@ -85,7 +94,7 @@ public class RegistrarDescuentoPresenterITest {
 
     @Test
     public void itestRegistrarDescuentoValorNegativo() {
-        
+
         marca = "Repsol";
         descuento = -30;
 
