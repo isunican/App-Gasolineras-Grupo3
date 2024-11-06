@@ -16,7 +16,6 @@ import static es.unican.gasolineras.utils.MockRepositories.getTestRepository;
 import android.content.Context;
 
 import androidx.test.core.app.ApplicationProvider;
-import androidx.test.espresso.Espresso;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;

@@ -77,7 +77,7 @@ public class RegistrarDescuentoPresenterTest {
     public void testRegistrarDescuentoCero() {
 
         // Definir los valores de marca y descuento
-        marca = "Carrefour";
+        marca = "Repsol";
         descuento = 0;
 
         // Llamar al método onBtnGuardarClicked con los valores de entrada
@@ -91,8 +91,8 @@ public class RegistrarDescuentoPresenterTest {
         Descuento capturedDescuento = captor.getValue();
 
         // Verificar que el descuento capturado tenga los valores correctos
-        assertEquals("Carrefour", capturedDescuento.getMarca());
-        assertEquals(0, capturedDescuento.getDescuento(), 0.0);  // El descuento es 0, por lo que no necesitamos precisión decimal
+        assertEquals("Repsol", capturedDescuento.getMarca());
+        assertEquals(0, capturedDescuento.getDescuento());  // El descuento es 0, por lo que no necesitamos precisión decimal
 
         // Verificar que la vista haya mostrado el botón de guardar con los valores correctos
         verify(mockRegistrarDescuentoView).showBtnGuardar(marca, descuento);
@@ -103,12 +103,12 @@ public class RegistrarDescuentoPresenterTest {
     public void testRegistrarDescuentoEnMarcaYaRegistrada() {
 
         marca = "Repsol";
-        descuento = 20;
+        descuento = 15;
 
-        // Simular que ya existe un descuento para la marca "Carrefour"
+        // Simular que ya existe un descuento para la marca.
         Descuento descuentoExistente = new Descuento();
         descuentoExistente.setMarca(marca);
-        descuentoExistente.setDescuento(10);  // Suponiendo que el descuento existente es 10
+        descuentoExistente.setDescuento(20);  // Suponiendo que el descuento existente es 20
 
         // Configurar el mock para devolver el descuento existente cuando se llame a descuentoPorMarca
         when(mockDescuentoDAO.descuentoPorMarca(marca.toUpperCase())).thenReturn(descuentoExistente);
@@ -122,7 +122,7 @@ public class RegistrarDescuentoPresenterTest {
 
         Descuento capturedDescuento = captor.getValue();
         assertEquals("Repsol", capturedDescuento.getMarca());
-        assertEquals(20, capturedDescuento.getDescuento());
+        assertEquals(15, capturedDescuento.getDescuento());
 
 
         verify(mockRegistrarDescuentoView).showBtnGuardar(marca, descuento);
@@ -161,7 +161,7 @@ public class RegistrarDescuentoPresenterTest {
     public void testRegistrarDescuentoErrorBD() {
 
         marca = "Repsol";
-        descuento = 30;
+        descuento = 15;
 
         // Se simula un error en la base de datos
         doThrow(new SQLiteException()).when(mockDescuentoDAO).registrarDescuento(any());

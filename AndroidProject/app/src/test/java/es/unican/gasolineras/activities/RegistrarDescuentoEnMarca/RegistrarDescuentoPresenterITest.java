@@ -84,7 +84,6 @@ public class RegistrarDescuentoPresenterITest {
 
         assertEquals(descuento, descuentoGuardado.getDescuento(), "El descuento guardado no coincide con el esperado.");
 
-
         verify(mockRegistrarDescuentoView).showBtnGuardar(marca, descuento);
 
     }
@@ -92,9 +91,8 @@ public class RegistrarDescuentoPresenterITest {
     @Test
     public void itestRegistrarDescuentoEnMarcaYaRegistrada() {
 
-
         marca = "Repsol";
-        descuento = 20;
+        descuento = 15;
 
         sut.onBtnGuardarClicked(marca, descuento);
 
@@ -102,7 +100,6 @@ public class RegistrarDescuentoPresenterITest {
         Descuento descuentoGuardado = db.descuentoDao().descuentoPorMarca(marca);
 
         assertEquals(descuento, descuentoGuardado.getDescuento(), "El descuento guardado no coincide con el esperado.");
-
 
         verify(mockRegistrarDescuentoView).showBtnGuardar(marca, descuento);
 
@@ -124,8 +121,6 @@ public class RegistrarDescuentoPresenterITest {
 
     @Test
     public void itestRegistrarDescuentoValorFormatoIncorrecto() {
-
-
 
         marca = "Repsol";
         descuento = 130;
