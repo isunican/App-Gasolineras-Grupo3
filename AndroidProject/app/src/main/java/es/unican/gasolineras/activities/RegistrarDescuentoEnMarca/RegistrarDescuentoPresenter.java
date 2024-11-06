@@ -72,8 +72,7 @@ public class RegistrarDescuentoPresenter implements IRegistrarDescuento.Presente
             }
 
             view.showBtnGuardar(marca, descuento);
-        }catch (SQLiteException e){
-            e.printStackTrace();
+        }catch (SQLiteException e) {
             view.mostrarError("Error al registrar el descuento en la base de datos", false);
         }
 

@@ -1,11 +1,13 @@
 package es.unican.gasolineras.activities.RegistrarDescuentoEnMarca;
 
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
 
 import android.content.Context;
 
 
+import androidx.room.Room;
 import androidx.test.core.app.ApplicationProvider;
 
 import org.junit.After;
@@ -17,7 +19,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 
 
-
+import es.unican.gasolineras.model.Descuento;
 import es.unican.gasolineras.repository.AppDatabase;
 import es.unican.gasolineras.repository.DatabaseFunction;
 import es.unican.gasolineras.repository.DescuentoDAO;
@@ -39,7 +41,11 @@ public class RegistrarDescuentoPresenterITest {
 
         MockitoAnnotations.openMocks(this);
         Context context = ApplicationProvider.getApplicationContext();
-        db  = DatabaseFunction.getDatabase(context);;
+        db = Room.databaseBuilder(context.getApplicationContext(),
+                            AppDatabase.class, "database-name")
+                    .allowMainThreadQueries()
+                    .fallbackToDestructiveMigration()
+                    .build();
         DescuentoDAO descuentoDAO = db.descuentoDao();
 
         sut = new RegistrarDescuentoPresenter(descuentoDAO);
@@ -47,10 +53,6 @@ public class RegistrarDescuentoPresenterITest {
         db.descuentoDao().eliminarDescuentos();
     }
 
-    @After
-    public void cerrar() {
-        db.close();
-    }
 
     @Test
     public void itestRegistrarDescuentoExito() {
@@ -60,6 +62,10 @@ public class RegistrarDescuentoPresenterITest {
 
         sut.onBtnGuardarClicked(marca, descuento);
 
+        //Se comprueba en la base de datos que el descuento se ha añadido
+        Descuento descuentoGuardado = db.descuentoDao().descuentoPorMarca(marca);
+
+        assertEquals(descuento, descuentoGuardado.getDescuento(), "El descuento guardado no coincide con el esperado.");
 
         verify(mockRegistrarDescuentoView).showBtnGuardar(marca, descuento);
     }
@@ -73,6 +79,12 @@ public class RegistrarDescuentoPresenterITest {
 
         sut.onBtnGuardarClicked(marca, descuento);
 
+        //Se comprueba en la base de datos que el descuento se ha añadido
+        Descuento descuentoGuardado = db.descuentoDao().descuentoPorMarca(marca);
+
+        assertEquals(descuento, descuentoGuardado.getDescuento(), "El descuento guardado no coincide con el esperado.");
+
+
         verify(mockRegistrarDescuentoView).showBtnGuardar(marca, descuento);
 
     }
@@ -85,6 +97,12 @@ public class RegistrarDescuentoPresenterITest {
         descuento = 20;
 
         sut.onBtnGuardarClicked(marca, descuento);
+
+        //Se comprueba en la base de datos que el descuento se ha añadido
+        Descuento descuentoGuardado = db.descuentoDao().descuentoPorMarca(marca);
+
+        assertEquals(descuento, descuentoGuardado.getDescuento(), "El descuento guardado no coincide con el esperado.");
+
 
         verify(mockRegistrarDescuentoView).showBtnGuardar(marca, descuento);
 

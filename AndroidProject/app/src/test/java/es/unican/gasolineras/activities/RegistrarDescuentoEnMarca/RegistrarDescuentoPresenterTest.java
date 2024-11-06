@@ -9,6 +9,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.database.sqlite.SQLiteDatabaseLockedException;
+import android.database.sqlite.SQLiteException;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -53,14 +54,17 @@ public class RegistrarDescuentoPresenterTest {
         marca = "Repsol";
         descuento = 20;
 
+        // Llamar al método onBtnGuardarClicked con los valores de entrada
         sut.onBtnGuardarClicked(marca, descuento);
 
-
+        // Capturar el objeto Descuento que se pasa al método actualizaDescuento
         ArgumentCaptor<Descuento> captor = ArgumentCaptor.forClass(Descuento.class);
         verify(mockDescuentoDAO).registrarDescuento(captor.capture());
 
-
+        // Obtener el valor capturado
         Descuento capturedDescuento = captor.getValue();
+
+        // Verificar que el descuento capturado tenga los valores correctos
         assertEquals("Repsol", capturedDescuento.getMarca());
         assertEquals(20, capturedDescuento.getDescuento());
 
@@ -159,7 +163,8 @@ public class RegistrarDescuentoPresenterTest {
         marca = "Repsol";
         descuento = 30;
 
-        doThrow(new SQLiteDatabaseLockedException()).when(mockDescuentoDAO).registrarDescuento(any());
+        // Se simula un error en la base de datos
+        doThrow(new SQLiteException()).when(mockDescuentoDAO).registrarDescuento(any());
 
         sut.onBtnGuardarClicked(marca, descuento);
 
