@@ -3,12 +3,10 @@ package es.unican.gasolineras.activities.RegistrarRepostajeMenu;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
 
 
@@ -17,12 +15,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 
-import org.w3c.dom.Text;
-
 import es.unican.gasolineras.R;
 import es.unican.gasolineras.activities.ConsultarRepostaje.ConsultarView;
 import es.unican.gasolineras.activities.main.MainView;
-import es.unican.gasolineras.model.Gasolinera;
 import es.unican.gasolineras.repository.AppDatabase;
 import es.unican.gasolineras.repository.DatabaseFunction;
 

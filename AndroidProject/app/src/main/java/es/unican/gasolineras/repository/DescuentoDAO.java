@@ -29,4 +29,7 @@ public interface DescuentoDAO {
     @Update
     void actualizaDescuento(Descuento d);
 
+    @Query("DELETE from Descuento")
+    void eliminarDescuentos();
+
 }
