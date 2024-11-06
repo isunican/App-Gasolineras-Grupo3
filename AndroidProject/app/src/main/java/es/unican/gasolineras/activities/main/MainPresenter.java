@@ -66,7 +66,6 @@ public class MainPresenter implements IMainContract.Presenter {
     }
 
     /**
-<<<<<<< HEAD
      * @see IMainContract.Presenter#onMenuDescuentoClicked()
      */
     @Override
@@ -91,7 +90,9 @@ public class MainPresenter implements IMainContract.Presenter {
         }
 
         view.showStations(listaFiltrada);
-        filtroActual = activarFiltro(municipio);
+        if (!municipio.equals("Mostrar todos")) {
+            filtroActual = activarFiltro(municipio);
+        }
 
 
     }

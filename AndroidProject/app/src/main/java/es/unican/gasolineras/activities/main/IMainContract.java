@@ -142,8 +142,15 @@ public interface IMainContract {
 
         void showDescuentoActivity();
 
-        public void mostrarErrorNoGaolinerasEnMunicipio(String s);
+        /**
+         * Shows an error message on the screen.
+         * @param mensajeError the error message to show
+         */
+        public void mostrarErrorNoGaolinerasEnMunicipio(String mensajeError);
 
+        /**
+         * Closes the filter pop-up
+         */
         public void showBtnCancelarFiltro();
     }
 }

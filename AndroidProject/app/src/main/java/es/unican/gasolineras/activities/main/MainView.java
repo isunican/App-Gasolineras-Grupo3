@@ -7,7 +7,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import android.view.View;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -201,12 +203,23 @@ public class MainView extends AppCompatActivity implements IMainContract.View {
         startActivity(intent);
     }
 
+    /**
+     * @see IMainContract.View#mostrarErrorNoGaolinerasEnMunicipio(String)
+     * @param mensajeError the error message to show
+     */
     @Override
-    public void mostrarErrorNoGaolinerasEnMunicipio(String s) {
-        
+    public void mostrarErrorNoGaolinerasEnMunicipio(String mensajeError) {
+        TextView tvError = findViewById(R.id.tvError);
+        tvError.setText(mensajeError);
+        tvError.setVisibility(View.VISIBLE);
     }
 
+    /**
+     * @see IMainContract.View#showBtnCancelarFiltro()
+     */
     @Override
     public void showBtnCancelarFiltro() {
+        Intent intent = new Intent(MainView.this, MainView.class);
+        startActivity(intent);
     }
 }
