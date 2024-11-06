@@ -90,6 +90,8 @@ public class MainPresenter implements IMainContract.Presenter {
         }
 
         view.showStations(listaFiltrada);
+        filtroActivado = false;
+
         if (!municipio.equals("Mostrar todos")) {
             filtroActual = activarFiltro(municipio);
         }

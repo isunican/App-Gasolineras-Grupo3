@@ -2,6 +2,7 @@ package es.unican.gasolineras.activities.main;
 
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -23,6 +24,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import org.parceler.Parcels;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -132,11 +134,10 @@ public class MainView extends AppCompatActivity implements IMainContract.View {
             if (filtro != null) {
                 spinner.setSelection(Arrays.asList(municipios).indexOf(filtro));
             }
-            /*
             else {
-                spinner.setSelection(0);
+                spinner.setSelection(Arrays.asList(municipios).indexOf("Mostrar todos"));
             }
-            */
+
 
 
             // Crear el layout para el AlertDialog
@@ -311,9 +312,22 @@ public class MainView extends AppCompatActivity implements IMainContract.View {
      */
     @Override
     public void mostrarErrorNoGaolinerasEnMunicipio(String mensajeError) {
-        TextView tvError = findViewById(R.id.tvError);
+        /*TextView tvError = findViewById(R.id.tvError);
         tvError.setText(mensajeError);
         tvError.setVisibility(View.VISIBLE);
+        showStations(new ArrayList<>());*/
+
+        /*
+        // Crear una lista temporal que contenga solo el mensaje de error
+        List<Gasolinera> emptyMessage = new ArrayList<>();
+        Gasolinera gasolinera = new Gasolinera();
+        gasolinera.setDireccion(mensajeError);
+        emptyMessage.add(gasolinera);  // Usa el mensaje que se pasa como argumento
+
+        ListView list = findViewById(R.id.lvStations);
+        GasolinerasArrayAdapter adapter = new GasolinerasArrayAdapter(this, emptyMessage);
+        list.setAdapter(adapter);*/
+
     }
 
     /**
