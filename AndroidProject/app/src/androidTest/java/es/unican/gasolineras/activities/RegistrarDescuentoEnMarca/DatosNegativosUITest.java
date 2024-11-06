@@ -16,6 +16,7 @@ import static es.unican.gasolineras.utils.MockRepositories.getTestRepository;
 import android.content.Context;
 
 import androidx.test.core.app.ApplicationProvider;
+import androidx.test.espresso.Espresso;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
@@ -64,8 +65,8 @@ public class DatosNegativosUITest {
         onView(withText("Repsol")).perform(click());
         onView(withId(R.id.etDescuento)).perform(click());
         onView(withId(R.id.etDescuento)).perform(typeText("-5"));
+        Espresso.pressBackUnconditionally();
         // Pulsar el botÃ³n guardar
-        onView(withId(R.id.btnGuardar)).check(matches(isDisplayed()));
         onView(withId(R.id.btnGuardar)).perform(click());
         onView(withId(R.id.tvError2)).check(matches(withText("Error: El valor debe ser positivo")));
         onView(withId(R.id.etDescuento)).check(matches(new Matchers.DrawableMatcher(R.drawable.border_red)));
