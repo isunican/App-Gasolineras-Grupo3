@@ -1,4 +1,4 @@
-package es.unican.gasolineras.activities.menu;
+package es.unican.gasolineras.activities.main;
 
 import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
@@ -25,7 +25,6 @@ import dagger.hilt.android.testing.HiltAndroidRule;
 import dagger.hilt.android.testing.HiltAndroidTest;
 import dagger.hilt.android.testing.UninstallModules;
 import es.unican.gasolineras.R;
-import es.unican.gasolineras.activities.main.MainView;
 import es.unican.gasolineras.injection.RepositoriesModule;
 import es.unican.gasolineras.repository.IGasolinerasRepository;
 
@@ -50,7 +49,7 @@ public class EliminacionFiltradoUITest {
     @Test
     public void EliminacionFiltradoContext() {
 
-        onView(withId(R.id.btnFiltrar)).perform(click());
+        onView(withId(R.id.FiltrarMunicipiosItem)).perform(click());
         onView(withId(R.id.spMunicipios)).perform(click());
         onData(hasToString(containsString("Mostrar todos"))).perform(click());
         onView(withId(R.id.btnGuardar)).perform(click());
