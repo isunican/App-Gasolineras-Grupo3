@@ -23,6 +23,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import org.parceler.Parcels;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -126,6 +127,18 @@ public class MainView extends AppCompatActivity implements IMainContract.View {
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinner.setAdapter(adapter);
 
+            // Si ya hay un filtro activado
+            String filtro = presenter.hayFiltroActivado();
+            if (filtro != null) {
+                spinner.setSelection(Arrays.asList(municipios).indexOf(filtro));
+            }
+            /*
+            else {
+                spinner.setSelection(0);
+            }
+            */
+
+
             // Crear el layout para el AlertDialog
             LinearLayout layout = new LinearLayout(this);
             layout.setOrientation(LinearLayout.VERTICAL);  // Colocar los elementos en columna (vertical)
@@ -151,6 +164,8 @@ public class MainView extends AppCompatActivity implements IMainContract.View {
             filterBtnParams.setMargins(0, 20, 0, 0);  // Márgenes en la parte superior
             btnFiltrar.setLayoutParams(filterBtnParams);
 
+
+
             // Botón Cancelar
             Button btnCancelar = new Button(this);
             btnCancelar.setText("Cancelar");
@@ -158,6 +173,7 @@ public class MainView extends AppCompatActivity implements IMainContract.View {
                     LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             cancelBtnParams.setMargins(0, 20, 0, 0);  // Márgenes en la parte superior
             btnCancelar.setLayoutParams(cancelBtnParams);
+
 
             // Añadir el TextView y el Spinner al layout
             layout.addView(txtMunicipio);
@@ -170,11 +186,20 @@ public class MainView extends AppCompatActivity implements IMainContract.View {
             builder.setTitle("Filtrar");
             builder.setView(layout);  // Usamos el layout que contiene el TextView, Spinner y los botones
 
-            // No se añade lógica a los botones (sin OnClickListener)
 
             // Crear y mostrar el dialog
-            builder.create().show();
+            AlertDialog alertDialog = builder.create();
 
+            btnFiltrar.setOnClickListener(view -> {
+                presenter.onBtnFiltrarClicked(spinner.getSelectedItem().toString());
+                alertDialog.dismiss();
+            });
+
+            btnCancelar.setOnClickListener(view -> {
+                alertDialog.dismiss();
+            });
+
+            alertDialog.show();
             return true;
         }
 
