@@ -1,13 +1,18 @@
 package es.unican.gasolineras.activities.main;
 
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -100,6 +105,62 @@ public class MainView extends AppCompatActivity implements IMainContract.View {
             presenter.onMenuDescuentoClicked();
             return true;
         }
+        if (itemId == R.id.FiltrarMunicipiosItem) {
+
+            // Acceder al array de municipios desde los recursos
+            final String[] municipios = getResources().getStringArray(R.array.municipiosArray);
+
+            // Crear el Spinner
+            final Spinner spinner = new Spinner(this);
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, municipios);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinner.setAdapter(adapter);
+
+            // Crear el layout para el AlertDialog
+            LinearLayout layout = new LinearLayout(this);
+            layout.setOrientation(LinearLayout.VERTICAL);  // Colocar los elementos en columna (vertical)
+            layout.setPadding(40, 40, 40, 40);  // Añadir algo de padding alrededor
+
+            // Configurar márgenes para el spinner
+            LinearLayout.LayoutParams spinnerParams = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            spinnerParams.setMargins(0, 0, 0, 20);  // Márgenes en la parte inferior
+            spinner.setLayoutParams(spinnerParams);
+
+            // Botón Filtrar
+            Button btnFiltrar = new Button(this);
+            btnFiltrar.setText("Filtrar");
+            LinearLayout.LayoutParams filterBtnParams = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            filterBtnParams.setMargins(0, 20, 0, 0);  // Márgenes en la parte superior
+            btnFiltrar.setLayoutParams(filterBtnParams);
+
+            // Botón Cancelar
+            Button btnCancelar = new Button(this);
+            btnCancelar.setText("Cancelar");
+            LinearLayout.LayoutParams cancelBtnParams = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            cancelBtnParams.setMargins(0, 20, 0, 0);  // Márgenes en la parte superior
+            btnCancelar.setLayoutParams(cancelBtnParams);
+
+            // Añadir los elementos al layout
+            layout.addView(spinner);
+            layout.addView(btnFiltrar);
+            layout.addView(btnCancelar);
+
+            // Crear el AlertDialog
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Filtrar");
+            builder.setView(layout);  // Usamos el layout que contiene el Spinner y los botones
+
+            // No se añade lógica a los botones (sin OnClickListener)
+
+            // Crear y mostrar el dialog
+            builder.create().show();
+
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
 

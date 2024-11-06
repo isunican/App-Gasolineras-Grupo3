@@ -24,4 +24,72 @@
         <item>Repsol</item>
         <item>Shell</item>
     </string-array>
+    <string-array name="municipiosArray">
+        <item>Mostrar todos</item>
+        <item>Alfoz de Lloredo</item>
+        <item>Alto de la Pasa</item>
+        <item>Ampuero</item>
+        <item>Anievas</item>
+        <item>Argoños</item>
+        <item>Arnuero</item>
+        <item>Bárcena de Cicero</item>
+        <item>Bárcena de Pie de Concha</item>
+        <item>Barros</item>
+        <item>Bareyo</item>
+        <item>Cartes</item>
+        <item>Castañeda</item>
+        <item>Cieza</item>
+        <item>Comillas</item>
+        <item>Corvera de Toranzo</item>
+        <item>Cotorredondo</item>
+        <item>Entrambasaguas</item>
+        <item>Escalante</item>
+        <item>Escobedo</item>
+        <item>Gajano</item>
+        <item>Hazas de Cesto</item>
+        <item>Hoznayo</item>
+        <item>Liérganes</item>
+        <item>Liendo</item>
+        <item>Limpias</item>
+        <item>Liendo</item>
+        <item>Mares</item>
+        <item>Miengo</item>
+        <item>Mazcuerras</item>
+        <item>Meruelo</item>
+        <item>Miera</item>
+        <item>Minería</item>
+        <item>Mogro</item>
+        <item>Molledo</item>
+        <item>Peñagos</item>
+        <item>Pesquera</item>
+        <item>Piélagos</item>
+        <item>Potes</item>
+        <item>Riaño</item>
+        <item>Ribamontán al Mar</item>
+        <item>Ribamontán al Monte</item>
+        <item>Riva de Coto</item>
+        <item>Ruesga</item>
+        <item>San Felices de Buelna</item>
+        <item>San Vicente de la Barquera</item>
+        <item>Santa María de Cayón</item>
+        <item>Santander</item>
+        <item>Santiurde de Toranzo</item>
+        <item>Selaya</item>
+        <item>Soba</item>
+        <item>Solórzano</item>
+        <item>Torrelavega</item>
+        <item>Val de San Vicente</item>
+        <item>Valdáliga</item>
+        <item>Valdeolea</item>
+        <item>Valdeprado del Río</item>
+        <item>Vega de Liébana</item>
+        <item>Voto</item>
+        <item>Valles Pasiegos</item>
+        <item>Villacarriedo</item>
+        <item>Villafufre</item>
+        <item>Villaverde de Pontones</item>
+        <item>Val de Villaverde</item>
+    </string-array>
+
+
 </resources>
