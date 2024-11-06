@@ -1,7 +1,5 @@
 package es.unican.gasolineras.activities.RegistrarRepostajeMenu;
 
-import android.graphics.Color;
-import android.util.Log;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -14,7 +12,6 @@ public class RegistrarPresenter implements IRegistrar.Presenter {
     /** The view that is controlled by this presenter */
     private IRegistrar.View view;
     private RepostajeDAO repostajeDAO;
-    //private int uid = 1;
 
     public RegistrarPresenter(RepostajeDAO repostajeDAO) {
         this.repostajeDAO = repostajeDAO;
@@ -65,10 +62,8 @@ public class RegistrarPresenter implements IRegistrar.Presenter {
 
             // Crear el objeto Repostaje
             Repostaje repostaje = new Repostaje();
-            //repostaje.setUid(uid);
             repostaje.setLitros(litrosNum);
             repostaje.setPrecioTotal(precioTotalNum);
-            //uid++;
 
 
             // Asignar la fecha actual al repostaje
@@ -76,13 +71,7 @@ public class RegistrarPresenter implements IRegistrar.Presenter {
             String fechaActual = sdf.format(Calendar.getInstance().getTime());
             repostaje.setFechaRepostaje(fechaActual);
 
-            try {
-                repostajeDAO.registrarRepostaje(repostaje);
-                view.showBtnGuardar(litros, precioTotal);
-
-            } catch (Exception e) {
-                view.mostrarError("Error al registrar el repostaje en la base de datos", false, false);
-            }
+            registrarRepostaje(repostaje, litros, precioTotal);
 
         } catch (NumberFormatException e) {
             // Manejo de excepciones si los valores ingresados no son válidos
@@ -111,5 +100,15 @@ public class RegistrarPresenter implements IRegistrar.Presenter {
     @Override
     public void onBtnCancelarClicked() {
         view.showBtnCancelar();
+    }
+
+    // Nuevo método extraído para manejar el registro en la base de datos
+    private void registrarRepostaje(Repostaje repostaje, String litros, String precioTotal) {
+        try {
+            repostajeDAO.registrarRepostaje(repostaje);
+            view.showBtnGuardar(litros, precioTotal);
+        } catch (Exception e) {
+            view.mostrarError("Error al registrar el repostaje en la base de datos", false, false);
+        }
     }
 }

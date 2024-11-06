@@ -1,7 +1,5 @@
 package es.unican.gasolineras.RegistrarRepostajeMenu;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
 import android.content.Context;
@@ -20,10 +18,8 @@ import org.robolectric.annotation.Config;
 
 import es.unican.gasolineras.activities.RegistrarRepostajeMenu.RegistrarPresenter;
 import es.unican.gasolineras.activities.RegistrarRepostajeMenu.RegistrarView;
-import es.unican.gasolineras.model.Repostaje;
 import es.unican.gasolineras.repository.AppDatabase;
 import es.unican.gasolineras.repository.DatabaseFunction;
-import es.unican.gasolineras.repository.RepostajeDAO;
 
 
 @RunWith(RobolectricTestRunner.class)

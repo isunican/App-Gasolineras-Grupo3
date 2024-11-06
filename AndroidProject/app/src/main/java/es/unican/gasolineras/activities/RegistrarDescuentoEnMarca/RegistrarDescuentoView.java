@@ -62,22 +62,19 @@ public class RegistrarDescuentoView extends AppCompatActivity implements IRegist
         EditText textDescuento = findViewById(R.id.etDescuento);
 
         Button btnGuardar = findViewById(R.id.btnGuardar);
-        btnGuardar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String marca = spMarcas.getSelectedItem().toString().toUpperCase();
-                String descuentoStr = textDescuento.getText().toString().trim();
-                //Se comprueba que el campo del descuento no este vacio
-                if(descuentoStr.isEmpty()){
-                    mostrarError("Los campos no deben estar vacios", true);
-                    return;
-                }
-                try {
-                    double descuento = Double.parseDouble(descuentoStr);
-                    presenter.onBtnGuardarClicked(marca, descuento);
-                }catch(NumberFormatException e){
-                    mostrarError("El valor del campo debe ser un número entero", true);
-                }
+        btnGuardar.setOnClickListener(v -> {
+            String marca = spMarcas.getSelectedItem().toString().toUpperCase();
+            String descuentoStr = textDescuento.getText().toString().trim();
+            //Se comprueba que el campo del descuento no este vacio
+            if(descuentoStr.isEmpty()){
+                mostrarError("Los campos no deben estar vacios", true);
+                return;
+            }
+            try {
+                double descuento = Double.parseDouble(descuentoStr);
+                presenter.onBtnGuardarClicked(marca, descuento);
+            }catch(NumberFormatException e){
+                mostrarError("El valor del campo debe ser un número entero", true);
             }
         });
 

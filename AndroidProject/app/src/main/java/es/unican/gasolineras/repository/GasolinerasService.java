@@ -25,7 +25,7 @@ public class GasolinerasService {
     }
 
     /** Open Charge Map API base URL*/
-    final static String BASE_URL = "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/";
+    static final String BASE_URL = "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/";
 
     /** Custom deserializer to support spanish format of float numbers (with comma separator) */
     public static final JsonDeserializer<Double> deserializer;

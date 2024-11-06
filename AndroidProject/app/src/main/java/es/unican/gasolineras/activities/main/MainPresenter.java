@@ -3,7 +3,6 @@ package es.unican.gasolineras.activities.main;
 import java.util.ArrayList;
 import java.util.List;
 
-import es.unican.gasolineras.activities.RegistrarRepostajeMenu.IRegistrar;
 import es.unican.gasolineras.model.Gasolinera;
 import es.unican.gasolineras.model.IDCCAAs;
 import es.unican.gasolineras.repository.ICallBack;

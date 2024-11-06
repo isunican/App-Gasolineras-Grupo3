@@ -11,7 +11,6 @@
     <color name="colorPrimaryDark">#303F9F</color>
 
     <!--   a secondary color for controls like checkboxes and text fields. -->
-    <!--<color name="colorAccent">#FF4081</color> -->
 
     <color name="text_green">#00CB00</color> <!-- verde -->
     <color name="text_default">#000000</color> <!-- color por defecto -->

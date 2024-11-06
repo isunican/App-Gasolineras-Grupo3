@@ -3,26 +3,18 @@ package es.unican.gasolineras.activities.RegistrarRepostajeMenu;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
-
-
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-
-import org.w3c.dom.Text;
-
 import es.unican.gasolineras.R;
 import es.unican.gasolineras.activities.ConsultarRepostaje.ConsultarView;
 import es.unican.gasolineras.activities.main.MainView;
-import es.unican.gasolineras.model.Gasolinera;
 import es.unican.gasolineras.repository.AppDatabase;
 import es.unican.gasolineras.repository.DatabaseFunction;
 
@@ -59,14 +51,11 @@ public class RegistrarView extends AppCompatActivity implements IRegistrar.View 
         EditText editTextPrecioTotal = findViewById(R.id.textPrecioTotal);
 
         Button buttonGuardar = findViewById(R.id.btnGuardar);
-        buttonGuardar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Lógica para obtener los valores de litros y precioTotal
-                String litros = editTextLitros.getText().toString() ;  // Obtén el valor de la forma adecuada
-                String precioTotal = editTextPrecioTotal.getText().toString(); // Obtén el valor de la forma adecuada
-                presenter.onBtnGuardarClicked(litros, precioTotal); // Llama al método con los parámetros
-            }
+        buttonGuardar.setOnClickListener(v -> {
+            // Lógica para obtener los valores de litros y precioTotal
+            String litros = editTextLitros.getText().toString() ;  // Obtén el valor de la forma adecuada
+            String precioTotal = editTextPrecioTotal.getText().toString(); // Obtén el valor de la forma adecuada
+            presenter.onBtnGuardarClicked(litros, precioTotal); // Llama al método con los parámetros
         });
 
         Button buttonCancelar = findViewById(R.id.btnCancelar);

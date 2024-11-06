@@ -1,14 +1,11 @@
 package es.unican.gasolineras.utils;
 
 import android.view.View;
-import android.widget.ListView;
 
 import org.hamcrest.Description;
-import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
 
-import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import androidx.annotation.DrawableRes;
 import androidx.core.content.res.ResourcesCompat;
