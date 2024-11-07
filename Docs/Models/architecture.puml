@@ -1,5 +1,4 @@
-@startuml clases
-
+@startuml
 hide empty members
 skinparam linetype polyline
 skinparam arrowLollipopColor #ADD1B2
@@ -9,16 +8,24 @@ MainView -right0)- MainPresenter : IMainContract.View
 MainView -up..-> InfoView : <<use>>
 MainView -down..-> ConsultarView : <<use>>
 MainView -down..->RegistrarView : <<use>>
+MainView -left..->RegistrarDescuentoView : <<use>>
 MainView -up..> DetailsView : <<use>>
 MainPresenter -right(0- GasolinerasRepository : IGasolinerasRepository
+RegistrarPresenter -down(0- RepostajeDAO : IRepostajeDAO
+ConsultarPresenter -down(0- RepostajeDAO : IRepostajeDAO
+RegistrarDescuentoPresenter -down(0- DescuentoDAO : IDescuentoDAO
 RegistrarView -right(0- RegistrarPresenter : IRegistrarContract.Presenter
 RegistrarView -right(0- RegistrarPresenter : IRegistrarContract.View
 ConsultarView -right(0- ConsultarPresenter : IConsultarContract.Presenter
 ConsultarView -right(0- ConsultarPresenter : IConsultarContract.View
+RegistrarDescuentoView -left(0- RegistrarDescuentoPresenter : IRegistrarDescuentoContract.View
+RegistrarDescuentoView -left(0- RegistrarDescuentoPresenter : IRegistrarDescuentoContract.Pressenter
 
 
 class MainPresenter {
-    -load()
+    - load()
+    + activarFiltro(String municipio) : String
+    + hayFiltroActivado() : String 
 }
 
 class RegistrarPresenter {
@@ -32,6 +39,10 @@ class ConsultarPresenter {
     + calcularAcumuladoMes(): double
 }
 
+class RegistrarDescuentoPresenter {
+    
+}
+
 
 interface IMainContract#View {
     + init()
@@ -43,6 +54,9 @@ interface IMainContract#View {
     + showInfoActivity()
     + showConsultarActivity()
     + showRegistrarActivity()
+    + showDescuentoActivity()
+    + mostrarErrorNoGasolinerasEnMunicipio(String s)
+    + showBtnCancelarFiltro()
 
 }
 
@@ -52,6 +66,9 @@ interface IMainContract#Presenter {
     + onMenuInfoClicked()
     + onMenuRegistrarClicked()
     + onMenuConsultarClicked()
+    + onMenuDescuentoClicked()
+    + onBtnFiltrarClicked()
+    + onBtnCancelarFiltroClicked()
 }
 
 interface IGasolinerasRepository {
@@ -85,6 +102,19 @@ interface IConsultar#Presenter {
     + init()
 }
 
+interface IRegistrarDescuento#Presenter {
+    + init(View view)
+    + onBtnGuardarClicked(String marca, double descuento)
+    + onBtnCancelarClicled()
+}
+
+interface IRegistrarDescuento#View {
+    + init()
+    + showBtnGuardar(String marca, double descuento)
+    + showBtnCancelar()
+    + mostrarError(String mensajeError, boolean errorDescuento)
+}
+
 
 
 interface ICallBack {
@@ -92,5 +122,9 @@ interface ICallBack {
     + onFailure(Throwable e)
 }
 
+interface RepostajeDAO {
+}
 
+interface DescuentoDAO {
+}
 @enduml
