@@ -1,14 +1,14 @@
 package es.unican.gasolineras.activities.RegistrarRepostajeMenu;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import es.unican.gasolineras.activities.RegistrarRepostajeMenu.RegistrarPresenter;
-import es.unican.gasolineras.activities.RegistrarRepostajeMenu.RegistrarView;
 import es.unican.gasolineras.model.Repostaje;
 import es.unican.gasolineras.repository.RepostajeDAO;
 

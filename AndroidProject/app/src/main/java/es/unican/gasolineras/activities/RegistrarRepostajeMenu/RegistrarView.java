@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
 import es.unican.gasolineras.R;
 import es.unican.gasolineras.activities.ConsultarRepostaje.ConsultarView;
 import es.unican.gasolineras.activities.main.MainView;

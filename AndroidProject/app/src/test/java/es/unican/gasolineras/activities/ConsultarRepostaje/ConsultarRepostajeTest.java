@@ -1,6 +1,6 @@
 package es.unican.gasolineras.activities.ConsultarRepostaje;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
@@ -9,17 +9,16 @@ import androidx.test.core.app.ApplicationProvider;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.*;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
-
-import java.util.List;
 
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
-import es.unican.gasolineras.activities.ConsultarRepostaje.ConsultarPresenter;
 import es.unican.gasolineras.model.Repostaje;
 import es.unican.gasolineras.repository.RepostajeDAO;
 
