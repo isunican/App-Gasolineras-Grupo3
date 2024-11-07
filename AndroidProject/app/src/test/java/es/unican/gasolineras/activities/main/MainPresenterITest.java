@@ -1,8 +1,12 @@
 package es.unican.gasolineras.activities.main;
 
+<<<<<<< HEAD
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+=======
+import static org.junit.Assert.assertFalse;
+>>>>>>> c3c8a45766e2cad9e5cbb1e15d9dc239aea427dd
 import static org.mockito.Mockito.verify;
 
 import static es.unican.gasolineras.activities.utils.MockRepositories.getTestRepository;
@@ -106,6 +110,7 @@ public class MainPresenterITest {
         verify(mockMainView).showStations(listaGasolineras);
         assertEquals(sut.activarFiltro("Reinosa"), "Reinosa");
         assertTrue(sut.filtroActivado);
+
 
     }
 

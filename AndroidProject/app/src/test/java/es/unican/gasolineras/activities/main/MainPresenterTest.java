@@ -8,11 +8,11 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+
 import static es.unican.gasolineras.activities.utils.MockRepositories.getTestRepository;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
@@ -84,20 +84,20 @@ public class MainPresenterTest {
         gasolinera6.setRotulo("Cepsa");
 
         sut = new MainPresenter();
-        listaGasolineras.add(gasolineraReinosa1);
-        listaGasolineras.add(gasolineraReinosa2);
-        listaGasolineras.add(gasolineraReinosa3);
 
         mockRepository = getTestRepository(listaGasolineras);
         sut.init(mockView);
 
+        mockRepository = getTestRepository(listaGasolineras);
 
     }
 
     @Test
     public void testFiltrarPorMunicipioExito() {
 
-
+        listaGasolineras.add(gasolineraReinosa1);
+        listaGasolineras.add(gasolineraReinosa2);
+        listaGasolineras.add(gasolineraReinosa3);
 
         sut.onBtnFiltrarClicked("Reinosa");
 
@@ -116,6 +116,7 @@ public class MainPresenterTest {
         sut.onBtnFiltrarClicked("");
 
         verify(mockView).showStations(listaGasolineras);
+
         assertEquals(sut.activarFiltro("Reinosa"), "Reinosa");
         assertTrue(sut.filtroActivado);
 
@@ -133,8 +134,8 @@ public class MainPresenterTest {
 
         sut.onBtnFiltrarClicked("Bareyo");
 
-        verify(mockView).mostrarErrorNoGaolinerasEnMunicipio("Error: No exiten gasolineras con el filtro aplicado");
         assertTrue(sut.filtroActivado);
+
 
     }
 

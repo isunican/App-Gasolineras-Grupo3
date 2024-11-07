@@ -2,21 +2,18 @@ package es.unican.gasolineras.activities.main;
 
 import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.hasChildCount;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static androidx.test.espresso.matcher.ViewMatchers.withText;
+
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.hasToString;
 import static es.unican.gasolineras.utils.MockRepositories.getTestRepository;
 
 
 import android.content.Context;
-
-import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
@@ -56,12 +53,14 @@ public class EliminacionFiltradoUITest {
 
         onView(withId(R.id.FiltrarMunicipiosItem)).perform(click());
 
+
         onView(withId(R.id.spMunicipios)).perform(click());
 
         onData(hasToString(containsString("Mostrar todos"))).perform(click());
 
 
         onView(withId(R.id.btnGuardar)).check(matches(isDisplayed()));
+
         onView(withId(R.id.btnGuardar)).perform(click());
         onView(withId(R.id.lvRepostajes)).check(matches(hasChildCount(164)));
 
