@@ -4,6 +4,7 @@ import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.RootMatchers.isPlatformPopup;
 import static androidx.test.espresso.matcher.ViewMatchers.hasChildCount;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
@@ -14,6 +15,7 @@ import static es.unican.gasolineras.utils.MockRepositories.getTestRepository;
 
 
 import android.content.Context;
+
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
@@ -21,6 +23,7 @@ import androidx.test.platform.app.InstrumentationRegistry;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
 
 import dagger.hilt.android.testing.BindValue;
 import dagger.hilt.android.testing.HiltAndroidRule;
@@ -33,7 +36,7 @@ import es.unican.gasolineras.repository.IGasolinerasRepository;
 @UninstallModules(RepositoriesModule.class)
 @HiltAndroidTest
 @RunWith(AndroidJUnit4.class)
-public class EliminacionFiltradoUITest {
+public class CasoExitoUITest {
 
     @Rule(order = 0)  // the Hilt rule must execute first
     public HiltAndroidRule hiltRule = new HiltAndroidRule(this);
@@ -49,20 +52,20 @@ public class EliminacionFiltradoUITest {
     final IGasolinerasRepository repository = getTestRepository(context, R.raw.gasolineras_ccaa_06);
 
     @Test
-    public void EliminacionFiltradoContext() {
+    public void CasoExitoContext() {
 
         onView(withId(R.id.FiltrarMunicipiosItem)).perform(click());
 
-
         onView(withId(R.id.spMunicipios)).perform(click());
 
-        onData(hasToString(containsString("Mostrar todos"))).perform(click());
+        onData(hasToString(containsString("Alfoz de Lloredo")))
+                .inRoot(isPlatformPopup())  // Esto indica que debe buscar en la raíz del popup
+                .perform(click());
 
+        onView(withId(R.id.btnFiltrar))
+                .check(matches(isDisplayed()))
+                .perform(click());
 
-        onView(withId(R.id.btnGuardar)).check(matches(isDisplayed()));
-
-        onView(withId(R.id.btnGuardar)).perform(click());
-        onView(withId(R.id.lvRepostajes)).check(matches(hasChildCount(164)));
-
+        onView(withId(R.id.lvStations)).check(matches(hasChildCount(1)));
     }
 }
