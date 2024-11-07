@@ -2,7 +2,9 @@ package es.unican.gasolineras.activities.main;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,12 +68,34 @@ public class GasolinerasArrayAdapter extends BaseAdapter {
                     .inflate(R.layout.activity_main_list_item, parent, false);
         }
 
+        if (gasolinera.isError()) {
 
-        setLogo(convertView, gasolinera);
-        setName(convertView, gasolinera);
-        setAddress(convertView, gasolinera);
-        setGasolina95Price(convertView, gasolinera);
-        setDieselAPrice(convertView, gasolinera);
+            // Mostrar solo el mensaje de error en el TextView de la dirección
+            setLogo(convertView, gasolinera);
+            setAddress(convertView, gasolinera);
+            TextView addressTextView = convertView.findViewById(R.id.tvAddress);
+            addressTextView.setTextColor(Color.RED);               // Cambiar color a rojo
+            addressTextView.setGravity(Gravity.CENTER);            // Centrar el texto
+            addressTextView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            addressTextView.setTextSize(20);
+            addressTextView.setMaxLines(2);                         // Limitar a dos líneas
+            addressTextView.setEllipsize(TextUtils.TruncateAt.END); // Elipsis si el texto es muy largo
+            addressTextView.setLineSpacing(0, 1.2f);
+
+        }
+
+        else {
+
+            setLogo(convertView, gasolinera);
+            setName(convertView, gasolinera);
+            setAddress(convertView, gasolinera);
+            setGasolina95Price(convertView, gasolinera);
+            setDieselAPrice(convertView, gasolinera);
+
+        }
+
+
+
 
         return convertView;
     }

@@ -258,6 +258,7 @@ public class MainView extends AppCompatActivity implements IMainContract.View {
         List<Gasolinera> emptyMessage = new ArrayList<>();
         Gasolinera gasolinera = new Gasolinera();
         gasolinera.setDireccion(mensajeError);
+        gasolinera.setError(true);
         emptyMessage.add(gasolinera);  // Usa el mensaje que se pasa como argumento
 
         ListView list = findViewById(R.id.lvStations);
