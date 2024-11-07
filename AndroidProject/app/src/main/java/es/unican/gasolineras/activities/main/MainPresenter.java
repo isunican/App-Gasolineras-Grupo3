@@ -1,6 +1,9 @@
 package es.unican.gasolineras.activities.main;
 
+import android.widget.Spinner;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import es.unican.gasolineras.model.Gasolinera;
@@ -16,7 +19,7 @@ public class MainPresenter implements IMainContract.Presenter {
     /** The view that is controlled by this presenter */
     private IMainContract.View view;
 
-    private List<Gasolinera> gasolineras;
+    List<Gasolinera> gasolineras;
     List<Gasolinera> listaGasolineras = new ArrayList<>();
 
     public Boolean filtroActivado = false;
@@ -75,6 +78,7 @@ public class MainPresenter implements IMainContract.Presenter {
      */
     public void onBtnFiltrarClicked(String municipio) {
 
+
         List<Gasolinera> listaFiltrada = new ArrayList<>();
 
         for (Gasolinera gasolinera : listaGasolineras) {
@@ -84,12 +88,17 @@ public class MainPresenter implements IMainContract.Presenter {
         }
 
         if (listaFiltrada.isEmpty()) {
-            view.mostrarErrorNoGasolinerasEnMunicipio("Error: No exiten gasolineras con el filtro aplicado");
+
+            view.mostrarErrorNoGasolinerasEnMunicipio("Error: No exiten gasolineras con \n el filtro aplicado");
             return;
         }
 
         view.showStations(listaFiltrada);
-        filtroActual = activarFiltro(municipio);
+        filtroActivado = false;
+
+        if (!municipio.equals("Mostrar todos")) {
+            filtroActual = activarFiltro(municipio);
+        }
 
 
     }

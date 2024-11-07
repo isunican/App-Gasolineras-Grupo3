@@ -1,4 +1,4 @@
-package es.unican.gasolineras.ConsultarRepostaje;
+package es.unican.gasolineras.activities.ConsultarRepostaje;
 
 import static androidx.test.espresso.Espresso.*;
 import static androidx.test.espresso.action.ViewActions.click;

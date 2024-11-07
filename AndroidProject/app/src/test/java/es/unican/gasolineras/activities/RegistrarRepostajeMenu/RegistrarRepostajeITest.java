@@ -1,4 +1,4 @@
-package es.unican.gasolineras.RegistrarRepostajeMenu;
+package es.unican.gasolineras.activities.RegistrarRepostajeMenu;
 
 import static org.mockito.Mockito.verify;
 

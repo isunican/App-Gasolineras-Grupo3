@@ -1,4 +1,4 @@
-package es.unican.gasolineras.RegistrarRepostajeMenu;
+package es.unican.gasolineras.activities.RegistrarRepostajeMenu;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;

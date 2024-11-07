@@ -1,13 +1,18 @@
 package es.unican.gasolineras.activities.main;
 
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,6 +21,8 @@ import androidx.appcompat.widget.Toolbar;
 
 import org.parceler.Parcels;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -27,9 +34,11 @@ import es.unican.gasolineras.activities.RegistrarDescuentoEnMarca.RegistrarDescu
 import es.unican.gasolineras.activities.RegistrarRepostajeMenu.RegistrarView;
 import es.unican.gasolineras.activities.info.InfoView;
 import es.unican.gasolineras.activities.details.DetailsView;
+import es.unican.gasolineras.model.Descuento;
 import es.unican.gasolineras.model.Gasolinera;
 import es.unican.gasolineras.repository.AppDatabase;
 import es.unican.gasolineras.repository.DatabaseFunction;
+import es.unican.gasolineras.repository.DescuentoDAO;
 import es.unican.gasolineras.repository.IGasolinerasRepository;
 
 
@@ -107,6 +116,45 @@ public class MainView extends AppCompatActivity implements IMainContract.View {
             presenter.onMenuDescuentoClicked();
             return true;
         }
+        if (itemId == R.id.FiltrarMunicipiosItem) {
+
+            View dialogView = getLayoutInflater().inflate(R.layout.activity_filtrar, null);
+
+            Spinner spinner = dialogView.findViewById(R.id.spMunicipios);
+            Button btnFiltrar = dialogView.findViewById(R.id.btnFiltrar);
+            Button btnCancelar = dialogView.findViewById(R.id.btnCancelar);
+
+            String[] municipios = getResources().getStringArray(R.array.municipiosArray);
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, municipios);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinner.setAdapter(adapter);
+
+            String filtro = presenter.hayFiltroActivado();
+            if (filtro != null) {
+                spinner.setSelection(Arrays.asList(municipios).indexOf(filtro));
+            } else {
+                spinner.setSelection(Arrays.asList(municipios).indexOf("Mostrar todos"));
+            }
+
+            AlertDialog dialog = new AlertDialog.Builder(this)
+                    .setTitle("Filtrar")
+                    .setView(dialogView) // Agrega el layout personalizado al diálogo
+                    .create();
+
+
+            btnFiltrar.setOnClickListener(v -> {
+                String municipioSeleccionado = spinner.getSelectedItem().toString();
+                presenter.onBtnFiltrarClicked(municipioSeleccionado);
+                dialog.dismiss();
+            });
+
+            btnCancelar.setOnClickListener(v -> dialog.dismiss());
+
+            dialog.show();
+            return true;
+        }
+
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -208,12 +256,31 @@ public class MainView extends AppCompatActivity implements IMainContract.View {
         startActivity(intent);
     }
 
+    /**
+     * @see IMainContract.View#mostrarErrorNoGasolinerasEnMunicipio(String)
+     * @param mensajeError the error message to show
+     */
     @Override
-    public void mostrarErrorNoGasolinerasEnMunicipio(String s) {
-        
+    public void mostrarErrorNoGasolinerasEnMunicipio(String mensajeError) {
+        DescuentoDAO descuentoDAO = null;
+        // Crear una lista temporal que contenga solo el mensaje de error
+        List<Gasolinera> emptyMessage = new ArrayList<>();
+        Gasolinera gasolinera = new Gasolinera();
+        gasolinera.setDireccion(mensajeError);
+        gasolinera.setError(true);
+        emptyMessage.add(gasolinera);  // Usa el mensaje que se pasa como argumento
+
+        ListView list = findViewById(R.id.lvStations);
+        GasolinerasArrayAdapter adapter = new GasolinerasArrayAdapter(this, emptyMessage, descuentoDAO);
+        list.setAdapter(adapter);
     }
 
+    /**
+     * @see IMainContract.View#showBtnCancelarFiltro()
+     */
     @Override
     public void showBtnCancelarFiltro() {
+        Intent intent = new Intent(MainView.this, MainView.class);
+        startActivity(intent);
     }
 }

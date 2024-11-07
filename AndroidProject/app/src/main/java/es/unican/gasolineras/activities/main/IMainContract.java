@@ -151,8 +151,16 @@ public interface IMainContract {
          */
         public void showDescuentoActivity();
 
-        public void mostrarErrorNoGasolinerasEnMunicipio(String s);
+        /**
+         * Shows an error message on the screen.
+         * @param mensajeError the error message to show
+         */
+        public void mostrarErrorNoGasolinerasEnMunicipio(String mensajeError);
 
+
+        /**
+         * Closes the filter pop-up
+         */
         public void showBtnCancelarFiltro();
     }
 }
