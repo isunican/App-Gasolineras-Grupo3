@@ -1,4 +1,4 @@
-US506087-ConsultarRepostaje:https://youtube.com/shorts/gm77nCdB8VU
-US506089-FiltrarGasolinerasPorMunicipios:
-US500328-RegistrarRepostaje:https://youtu.be/oDDEXSGb4bA
-US506090-RegistrarDescuentoEnMarca:https://youtu.be/EQoj4NDOVlM
+US506087-ConsultarRepostaje: https://youtube.com/shorts/gm77nCdB8VU
+US506089-FiltrarGasolinerasPorMunicipios: https://youtu.be/RIOAfk5DvLc
+US500328-RegistrarRepostaje: https://youtu.be/oDDEXSGb4bA
+US506090-RegistrarDescuentoEnMarca: https://youtu.be/EQoj4NDOVlM
