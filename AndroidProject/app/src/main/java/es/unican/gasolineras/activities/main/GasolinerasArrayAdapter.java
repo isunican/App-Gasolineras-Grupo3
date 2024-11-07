@@ -84,7 +84,7 @@ public class GasolinerasArrayAdapter extends BaseAdapter {
             addressTextView.setTextColor(Color.RED);               // Cambiar color a rojo
             addressTextView.setGravity(Gravity.CENTER);            // Centrar el texto
             addressTextView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-            addressTextView.setTextSize(20);
+            addressTextView.setTextSize(18);
             addressTextView.setMaxLines(2);                         // Limitar a dos líneas
             addressTextView.setEllipsize(TextUtils.TruncateAt.END); // Elipsis si el texto es muy largo
             addressTextView.setLineSpacing(0, 1.2f);

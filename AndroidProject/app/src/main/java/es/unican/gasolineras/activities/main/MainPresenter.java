@@ -72,10 +72,12 @@ public class MainPresenter implements IMainContract.Presenter {
      */
     @Override
     public void onMenuDescuentoClicked()  { view.showDescuentoActivity();}
+
     /**
      * @see IMainContract.Presenter#onBtnFiltrarClicked(String)
      * @param municipio el municipio a aplicar como filtro
      */
+    @Override
     public void onBtnFiltrarClicked(String municipio) {
 
 
@@ -89,7 +91,7 @@ public class MainPresenter implements IMainContract.Presenter {
 
         if (listaFiltrada.isEmpty()) {
 
-            view.mostrarErrorNoGasolinerasEnMunicipio("Error: No exiten gasolineras con \n el filtro aplicado");
+            view.mostrarErrorNoGasolinerasEnMunicipio("Error: No exiten gasolineras \n con el filtro aplicado");
             return;
         }
 
@@ -139,12 +141,20 @@ public class MainPresenter implements IMainContract.Presenter {
         repository.requestGasolineras(callBack, IDCCAAs.CANTABRIA.id);
     }
 
+    /**
+     * Activa el filtro sobre un municipio dado
+     * @param municipio municipio sobre el que activar el filtro
+     * @return el municipio sobre el que se ha filtrado
+     */
     public String activarFiltro(String municipio) {
-
         filtroActivado = true;
         return municipio;
     }
 
+    /**
+     * Comprueba si hay un filtro activado
+     * @return el filtro que hay activado o null si no hay ninguno
+     */
     public String hayFiltroActivado() {
         if (filtroActivado) {
             return filtroActual;
