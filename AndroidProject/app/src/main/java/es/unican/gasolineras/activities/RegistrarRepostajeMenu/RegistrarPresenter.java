@@ -102,7 +102,12 @@ public class RegistrarPresenter implements IRegistrar.Presenter {
         view.showBtnCancelar();
     }
 
-    // Nuevo método extraído para manejar el registro en la base de datos
+    /**
+     * Registra un repostaje
+     * @param repostaje el repostaje a registrar
+     * @param litros litros del repostaje
+     * @param precioTotal precio del repostaje
+     */
     private void registrarRepostaje(Repostaje repostaje, String litros, String precioTotal) {
         try {
             repostajeDAO.registrarRepostaje(repostaje);

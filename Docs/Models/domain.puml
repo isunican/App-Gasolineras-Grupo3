@@ -24,6 +24,14 @@ class Repostaje {
       - double litros
 }
 
+class Descuento {
+      - int uid
+      - String marca
+      - double descuento
+}
+
+
+
 GasolinerasResponse *-- "*" Gasolinera : gasolineras
 
 @enduml

@@ -53,7 +53,6 @@ public class DatosNegativosUITest {
     @BindValue
     final IGasolinerasRepository repository = getTestRepository(context, R.raw.gasolineras_ccaa_06);
 
-
     @Test
     public void DatosNegativosContext(){
         // Abrir el menÃº de opciones y pulsar la opcion correspondiente a registrar un descuento
