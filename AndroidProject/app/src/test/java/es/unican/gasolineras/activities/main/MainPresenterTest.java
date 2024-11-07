@@ -131,7 +131,7 @@ public class MainPresenterTest {
 
         verify(mockRepository).requestGasolineras(any(), any());
         assertFalse(sut.filtroActivado);
-        verify(mockView).mostrarErrorNoGaolinerasEnMunicipio("Error: No exiten gasolineras con el filtro aplicado");
+        verify(mockView).mostrarErrorNoGasolinerasEnMunicipio("Error: No exiten gasolineras con \n el filtro aplicado");
 
     }
 

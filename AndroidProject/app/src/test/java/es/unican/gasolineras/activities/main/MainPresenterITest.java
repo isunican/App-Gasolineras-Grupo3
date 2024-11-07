@@ -158,7 +158,7 @@ public class MainPresenterITest {
         sut.onBtnFiltrarClicked("Bareyo");
 
         verify(mockMainView).getGasolinerasRepository();
-        verify(mockMainView).mostrarErrorNoGaolinerasEnMunicipio("Error: No exiten gasolineras con el filtro aplicado");
+        verify(mockMainView).mostrarErrorNoGasolinerasEnMunicipio("Error: No exiten gasolineras con \n el filtro aplicado");
         assertFalse(sut.filtroActivado);
     }
 
