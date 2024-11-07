@@ -91,7 +91,7 @@ public class MainPresenter implements IMainContract.Presenter {
 
         if (listaFiltrada.isEmpty()) {
 
-            view.mostrarErrorNoGasolinerasEnMunicipio("Error: No exiten gasolineras \n con el filtro aplicado");
+            view.mostrarErrorNoGasolinerasEnMunicipio("Error: No existen gasolineras \n con el filtro aplicado");
             return;
         }
 
