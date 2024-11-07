@@ -22,28 +22,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        tools:text="Nombre"
         app:layout_constraintStart_toEndOf="@+id/ivLogo"
-        app:layout_constraintTop_toTopOf="@+id/ivLogo" />
+        app:layout_constraintTop_toTopOf="@+id/ivLogo"
+        tools:text="Nombre" />
 
     <TextView
         android:id="@+id/tvAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        tools:text="Direccion"
         app:layout_constraintBottom_toTopOf="@+id/tv95"
         app:layout_constraintStart_toEndOf="@+id/ivLogo"
-        app:layout_constraintTop_toBottomOf="@+id/tvFecha" />
+        app:layout_constraintTop_toBottomOf="@+id/tvFecha"
+        tools:text="Direccion" />
 
     <TextView
         android:id="@+id/tv95Label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        tools:text="Label 95"
         app:layout_constraintBottom_toBottomOf="@+id/ivLogo"
-        app:layout_constraintStart_toEndOf="@+id/ivLogo" />
+        app:layout_constraintStart_toEndOf="@+id/ivLogo"
+        tools:text="Label 95" />
 
     <TextView
         android:id="@+id/tv95"
@@ -59,9 +59,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        tools:text="Label Diesel"
         app:layout_constraintBottom_toBottomOf="@+id/tv95"
-        app:layout_constraintStart_toEndOf="@+id/tv95" />
+        app:layout_constraintStart_toEndOf="@+id/tv95"
+        tools:text="Label Diesel" />
 
     <TextView
         android:id="@+id/tvDieselA"

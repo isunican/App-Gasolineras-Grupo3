@@ -33,6 +33,7 @@ public class Gasolinera {
 
     @SerializedName("Precio Gasoleo A")             protected double gasoleoA;
     @SerializedName("Precio Gasolina 95 E5")        protected double gasolina95E5;
+                                                    protected boolean error;
 
 
     public String getRotulo() {

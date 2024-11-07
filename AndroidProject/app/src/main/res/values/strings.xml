@@ -13,4 +13,123 @@
     <string name ="error_acceso_bbdd">Ocurrió un error en el acceso a la base de datos. Inténtalo de nuevo más tarde.</string>
     <string name ="error_datos_incompletos">Error, los datos son incompletos </string>
     <string name ="registro_exito">Repostaje registrado correctamente</string>
+    <string name ="registro_descuento_exito">Descuento registrado correctamente</string>
+    <string name="registrar_descuento">Registrar descuento</string>
+    <string-array name="marcasArray">
+        <item>Avia</item>
+        <item>Carrefour</item>
+        <item>Cepsa</item>
+        <item>Easygas</item>
+        <item>Galp</item>
+        <item>Petroprix</item>
+        <item>Repsol</item>
+        <item>Shell</item>
+    </string-array>
+    <string-array name="municipiosArray">
+        <item>Mostrar todos</item>
+        <item>Alfoz de Lloredo</item>
+        <item>Ampuero</item>
+        <item>Anievas</item>
+        <item>Arenas de Iguña</item>
+        <item>Argoños</item>
+        <item>Arnuero</item>
+        <item>Arredondo</item>
+        <item>Bárcena de Cicero</item>
+        <item>Bárcena de Pie de Concha</item>
+        <item>Bareyo</item>
+        <item>Cabezon de la Sal</item>
+        <item>Cabezón de Liebana</item>
+        <item>Cabuerniga</item>
+        <item>Camaleño</item>
+        <item>Camargo</item>
+        <item>Campoo de Enmedio</item>
+        <item>Campoo de Yuso</item>
+        <item>Cartes</item>
+        <item>Castañeda</item>
+        <item>Castro Urdiales</item>
+        <item>Cieza</item>
+        <item>Cillorigo de Liebana</item>
+        <item>Colindres</item>
+        <item>Comillas</item>
+        <item>Corvera de Toranzo</item>
+        <item>El Astillero</item>
+        <item>Entrambasaguas</item>
+        <item>Escalante</item>
+        <item>Guriezo</item>
+        <item>Hazas de Cesto</item>
+        <item>Hermandad de Campoo de Suso</item>
+        <item>Herrerias</item>
+        <item>Lamason</item>
+        <item>Laredo</item>
+        <item>Las Rozas de Valdearroyo</item>
+        <item>Liendo</item>
+        <item>Lierganes</item>
+        <item>Limpias</item>
+        <item>Los Corrales de Buelna</item>
+        <item>Los Tojos</item>
+        <item>Luena</item>
+        <item>Marina de Cudeyo</item>
+        <item>Mazcuerras</item>
+        <item>Medio Cudeyo</item>
+        <item>Meruelo</item>
+        <item>Miengo</item>
+        <item>Miera</item>
+        <item>Molledo</item>
+        <item>Noja</item>
+        <item>Peñarubia</item>
+        <item>Penagos</item>
+        <item>Pesaguero</item>
+        <item>Pesquera</item>
+        <item>Piélagos</item>
+        <item>Polaciones</item>
+        <item>Polanco</item>
+        <item>Potes</item>
+        <item>Puente Viesgo</item>
+        <item>Ramales de la Victoria</item>
+        <item>Rasines</item>
+        <item>Reinosa</item>
+        <item>Reocin</item>
+        <item>Ribamontán al Mar</item>
+        <item>Ribamontán al Monte</item>
+        <item>Rionansa</item>
+        <item>Riotuerto</item>
+        <item>Ruente</item>
+        <item>Ruesga</item>
+        <item>Ruiloba</item>
+        <item>San Felices de Buelna</item>
+        <item>San Miguel de Aguayo</item>
+        <item>San Pedro del Romeral</item>
+        <item>San Roque de Riomiera</item>
+        <item>San Vicente de la Barquera</item>
+        <item>Santa Cruz de Bezana</item>
+        <item>Santa María de Cayón</item>
+        <item>Santander</item>
+        <item>Santillana del Mar</item>
+        <item>Santiurde de Reinosa</item>
+        <item>Santiurde de Toranzo</item>
+        <item>Santoña</item>
+        <item>Saro</item>
+        <item>Selaya</item>
+        <item>Soba</item>
+        <item>Solórzano</item>
+        <item>Suances</item>
+        <item>Torrelavega</item>
+        <item>Tresviso</item>
+        <item>Tudanca</item>
+        <item>Udias</item>
+        <item>Val de San Vicente</item>
+        <item>Valdáliga</item>
+        <item>Valdeolea</item>
+        <item>Valdeprado del Río</item>
+        <item>Valderredible</item>
+        <item>Valle de Villaverde</item>
+        <item>Vega de Liébana</item>
+        <item>Vega de Pas</item>
+        <item>Villacarriedo</item>
+        <item>Villaescusa</item>
+        <item>Villafufre</item>
+        <item>Voto</item>
+    </string-array>
+
+
 </resources>

@@ -1,5 +1,9 @@
 package es.unican.gasolineras.activities.main;
 
+import android.widget.Spinner;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import es.unican.gasolineras.model.Gasolinera;
@@ -14,6 +18,12 @@ public class MainPresenter implements IMainContract.Presenter {
 
     /** The view that is controlled by this presenter */
     private IMainContract.View view;
+
+    List<Gasolinera> gasolineras;
+    List<Gasolinera> listaGasolineras = new ArrayList<>();
+
+    public Boolean filtroActivado = false;
+    public String filtroActual;
 
     /**
      * @see IMainContract.Presenter#init(IMainContract.View)
@@ -57,6 +67,52 @@ public class MainPresenter implements IMainContract.Presenter {
         view.showConsultarActivity();
     }
 
+    /**
+     * @see IMainContract.Presenter#onMenuDescuentoClicked()
+     */
+    @Override
+    public void onMenuDescuentoClicked()  { view.showDescuentoActivity();}
+
+    /**
+     * @see IMainContract.Presenter#onBtnFiltrarClicked(String)
+     * @param municipio el municipio a aplicar como filtro
+     */
+    @Override
+    public void onBtnFiltrarClicked(String municipio) {
+
+
+        List<Gasolinera> listaFiltrada = new ArrayList<>();
+
+        for (Gasolinera gasolinera : listaGasolineras) {
+            if (gasolinera.getMunicipio().equals(municipio) || municipio.equals("Mostrar todos")) {
+                listaFiltrada.add(gasolinera);
+            }
+        }
+
+        if (listaFiltrada.isEmpty()) {
+
+            view.mostrarErrorNoGasolinerasEnMunicipio("Error: No exiten gasolineras \n con el filtro aplicado");
+            return;
+        }
+
+        view.showStations(listaFiltrada);
+        filtroActivado = false;
+
+        if (!municipio.equals("Mostrar todos")) {
+            filtroActual = activarFiltro(municipio);
+        }
+
+
+    }
+
+    /**
+     * @see IMainContract.Presenter#onBtnCancelarFiltroClicked()
+     */
+    @Override
+    public void onBtnCancelarFiltroClicked() {
+        view.showBtnCancelarFiltro();
+    }
+
 
 
     /**
@@ -69,8 +125,10 @@ public class MainPresenter implements IMainContract.Presenter {
 
             @Override
             public void onSuccess(List<Gasolinera> stations) {
+                gasolineras = stations;
                 view.showStations(stations);
                 view.showLoadCorrect(stations.size());
+                listaGasolineras.addAll(stations);
             }
 
             @Override
@@ -81,5 +139,29 @@ public class MainPresenter implements IMainContract.Presenter {
         };
 
         repository.requestGasolineras(callBack, IDCCAAs.CANTABRIA.id);
+    }
+
+    /**
+     * Activa el filtro sobre un municipio dado
+     * @param municipio municipio sobre el que activar el filtro
+     * @return el municipio sobre el que se ha filtrado
+     */
+    public String activarFiltro(String municipio) {
+
+        filtroActivado = true;
+        return municipio;
+    }
+
+    /**
+     * Comprueba si hay un filtro activado
+     * @return el filtro que hay activado o null si no hay ninguno
+     */
+    public String hayFiltroActivado() {
+        if (filtroActivado) {
+            return filtroActual;
+        }
+        else {
+            return null;
+        }
     }
 }
