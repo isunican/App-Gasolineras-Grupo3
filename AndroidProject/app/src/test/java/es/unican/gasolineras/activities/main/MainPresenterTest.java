@@ -1,14 +1,18 @@
 package es.unican.gasolineras.activities.main;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import static es.unican.gasolineras.activities.utils.MockRepositories.getTestRepository;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
@@ -43,8 +47,6 @@ public class MainPresenterTest {
 
         MockitoAnnotations.openMocks(this);
 
-        sut = new MainPresenter();
-        sut.init(mockView);
         gasolineraReinosa1 = new Gasolinera();
         gasolineraReinosa1.setCp("39200");
         gasolineraReinosa1.setDireccion("Avenida Cantabria 77");
@@ -81,23 +83,27 @@ public class MainPresenterTest {
         gasolinera6.setMunicipio("Santander");
         gasolinera6.setRotulo("Cepsa");
 
+        sut = new MainPresenter();
+        listaGasolineras.add(gasolineraReinosa1);
+        listaGasolineras.add(gasolineraReinosa2);
+        listaGasolineras.add(gasolineraReinosa3);
+
         mockRepository = getTestRepository(listaGasolineras);
+        sut.init(mockView);
+
 
     }
 
     @Test
     public void testFiltrarPorMunicipioExito() {
 
-        listaGasolineras.add(gasolineraReinosa1);
-        listaGasolineras.add(gasolineraReinosa2);
-        listaGasolineras.add(gasolineraReinosa3);
+
 
         sut.onBtnFiltrarClicked("Reinosa");
 
         verify(mockView).showStations(listaGasolineras);
-        verify(sut).activarFiltro("Reinosa");
-        verify(sut).hayFiltroActivado();
-
+        assertEquals(sut.activarFiltro("Reinosa"), "Reinosa");
+        assertTrue(sut.filtroActivado);
     }
 
     @Test
@@ -110,8 +116,8 @@ public class MainPresenterTest {
         sut.onBtnFiltrarClicked("");
 
         verify(mockView).showStations(listaGasolineras);
-        verify(sut).activarFiltro("Reinosa");
-        verify(sut).hayFiltroActivado();
+        assertEquals(sut.activarFiltro("Reinosa"), "Reinosa");
+        assertTrue(sut.filtroActivado);
 
     }
 
@@ -128,7 +134,7 @@ public class MainPresenterTest {
         sut.onBtnFiltrarClicked("Bareyo");
 
         verify(mockView).mostrarErrorNoGaolinerasEnMunicipio("Error: No exiten gasolineras con el filtro aplicado");
-        verify(sut).hayFiltroActivado();
+        assertTrue(sut.filtroActivado);
 
     }
 

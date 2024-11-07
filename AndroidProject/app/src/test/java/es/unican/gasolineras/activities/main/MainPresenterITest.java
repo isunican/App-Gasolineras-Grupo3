@@ -1,6 +1,8 @@
 package es.unican.gasolineras.activities.main;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.verify;
 
 import static es.unican.gasolineras.activities.utils.MockRepositories.getTestRepository;
@@ -88,8 +90,8 @@ public class MainPresenterITest {
 
         sut.onBtnFiltrarClicked(municipio);
         verify(mockMainView).showStations(listaGasolineras);
-        verify(sut).activarFiltro("Reinosa");
-        verify(sut).hayFiltroActivado();
+        assertEquals(sut.activarFiltro("Reinosa"), "Reinosa");
+        assertTrue(sut.filtroActivado);
     }
 
     @Test
@@ -102,8 +104,8 @@ public class MainPresenterITest {
         sut.onBtnFiltrarClicked("");
 
         verify(mockMainView).showStations(listaGasolineras);
-        verify(sut).activarFiltro("Reinosa");
-        verify(sut).hayFiltroActivado();
+        assertEquals(sut.activarFiltro("Reinosa"), "Reinosa");
+        assertTrue(sut.filtroActivado);
 
     }
 
@@ -139,7 +141,7 @@ public class MainPresenterITest {
         sut.onBtnFiltrarClicked("Bareyo");
 
         verify(mockMainView).mostrarErrorNoGaolinerasEnMunicipio("Error: No exiten gasolineras con el filtro aplicado");
-        verify(sut).hayFiltroActivado();
+        assertFalse(sut.filtroActivado);
     }
 
 }
