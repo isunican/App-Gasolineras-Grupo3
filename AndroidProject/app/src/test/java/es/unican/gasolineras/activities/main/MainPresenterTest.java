@@ -4,12 +4,12 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 
 import static es.unican.gasolineras.activities.utils.MockRepositories.getTestRepository;
+
 
 import org.junit.Before;
 import org.junit.Test;
@@ -17,16 +17,14 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
-import es.unican.gasolineras.R;
 import es.unican.gasolineras.model.Gasolinera;
 import es.unican.gasolineras.repository.IGasolinerasRepository;
 
 public class MainPresenterTest {
 
-    private List<Gasolinera> listaGasolineras = new LinkedList<Gasolinera>();
+    private List<Gasolinera> listaGasolineras = new ArrayList<>();
     private static MainPresenter sut;
     private Gasolinera gasolineraReinosa1;
     private Gasolinera gasolineraReinosa2;
@@ -83,47 +81,44 @@ public class MainPresenterTest {
         gasolinera6.setMunicipio("Santander");
         gasolinera6.setRotulo("Cepsa");
 
+        mockRepository = getTestRepository(listaGasolineras);
+
         sut = new MainPresenter();
-
-        mockRepository = getTestRepository(listaGasolineras);
+        when(mockView.getGasolinerasRepository()).thenReturn(mockRepository);
         sut.init(mockView);
-
-        mockRepository = getTestRepository(listaGasolineras);
 
     }
 
     @Test
     public void testFiltrarPorMunicipioExito() {
-
         listaGasolineras.add(gasolineraReinosa1);
         listaGasolineras.add(gasolineraReinosa2);
         listaGasolineras.add(gasolineraReinosa3);
 
         sut.onBtnFiltrarClicked("Reinosa");
 
+        verify(mockRepository).requestGasolineras(any(), any());
         verify(mockView).showStations(listaGasolineras);
         assertEquals(sut.activarFiltro("Reinosa"), "Reinosa");
         assertTrue(sut.filtroActivado);
     }
 
     @Test
-    public void testFiltrarPorMunicipioSinMunicipio() {
+    public void testFiltrarPorMunicipioCancelacionFiltrado() {
 
         listaGasolineras.add(gasolineraReinosa1);
         listaGasolineras.add(gasolineraReinosa2);
         listaGasolineras.add(gasolineraReinosa3);
 
-        sut.onBtnFiltrarClicked("");
-
+        verify(mockRepository).requestGasolineras(any(), any());
         verify(mockView).showStations(listaGasolineras);
-
         assertEquals(sut.activarFiltro("Reinosa"), "Reinosa");
         assertTrue(sut.filtroActivado);
 
     }
 
     @Test
-    public void testFiltrarPorMunicipioCancelacionFiltrado() {
+    public void testFiltrarPorMunicipioSinGasolineras() {
 
         listaGasolineras.add(gasolineraReinosa1);
         listaGasolineras.add(gasolineraReinosa2);
@@ -134,8 +129,9 @@ public class MainPresenterTest {
 
         sut.onBtnFiltrarClicked("Bareyo");
 
-        assertTrue(sut.filtroActivado);
-
+        verify(mockRepository).requestGasolineras(any(), any());
+        assertFalse(sut.filtroActivado);
+        verify(mockView).mostrarErrorNoGaolinerasEnMunicipio("Error: No exiten gasolineras con el filtro aplicado");
 
     }
 
@@ -151,6 +147,8 @@ public class MainPresenterTest {
 
         sut.onBtnFiltrarClicked("Mostrar todos");
 
+        verify(mockRepository).requestGasolineras(any(), any());
+        assertEquals(6, listaGasolineras.size());
         assertFalse(sut.filtroActivado);
         verify(mockView).showStations(listaGasolineras);
 

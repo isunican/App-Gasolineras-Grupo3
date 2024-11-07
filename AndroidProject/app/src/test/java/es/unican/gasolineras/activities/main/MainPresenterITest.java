@@ -3,6 +3,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import static es.unican.gasolineras.activities.utils.MockRepositories.getTestRepository;
 
@@ -16,16 +17,19 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import es.unican.gasolineras.model.Gasolinera;
+import es.unican.gasolineras.repository.IGasolinerasRepository;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(sdk = {Build.VERSION_CODES.P})
 public class MainPresenterITest {
     private static MainPresenter sut;
+    private static IGasolinerasRepository repository;
 
-    private List<Gasolinera> listaGasolineras;
+    private List<Gasolinera> listaGasolineras = new ArrayList<>();
     private String municipio;
     private Gasolinera gasolineraReinosa1;
     private Gasolinera gasolineraReinosa2;
@@ -42,8 +46,6 @@ public class MainPresenterITest {
     public void init() {
         MockitoAnnotations.openMocks(this);
 
-        sut = new MainPresenter();
-        sut.init(mockMainView);
         gasolineraReinosa1 = new Gasolinera();
         gasolineraReinosa1.setCp("39200");
         gasolineraReinosa1.setDireccion("Avenida Cantabria 77");
@@ -80,7 +82,18 @@ public class MainPresenterITest {
         gasolinera6.setMunicipio("Santander");
         gasolinera6.setRotulo("Cepsa");
 
-        sut.listaGasolineras = listaGasolineras;
+        listaGasolineras.add(gasolineraReinosa1);
+        listaGasolineras.add(gasolineraReinosa2);
+        listaGasolineras.add(gasolineraReinosa3);
+        listaGasolineras.add(gasolinera4);
+        listaGasolineras.add(gasolinera5);
+        listaGasolineras.add(gasolinera6);
+
+        repository = getTestRepository(listaGasolineras);
+
+        sut = new MainPresenter();
+        when(mockMainView.getGasolinerasRepository()).thenReturn(repository);
+        sut.init(mockMainView);
     }
 
     @Test
@@ -88,8 +101,10 @@ public class MainPresenterITest {
         municipio = "Reinosa";
 
         sut.onBtnFiltrarClicked(municipio);
+
+        verify(mockMainView).getGasolinerasRepository();
         verify(mockMainView).showStations(listaGasolineras);
-        assertEquals(sut.activarFiltro("Reinosa"), "Reinosa");
+        assertEquals("Reinosa", sut.activarFiltro("Reinosa"), "Reinosa");
         assertTrue(sut.filtroActivado);
     }
 
@@ -102,8 +117,9 @@ public class MainPresenterITest {
 
         sut.onBtnFiltrarClicked("");
 
+        verify(mockMainView).getGasolinerasRepository();
         verify(mockMainView).showStations(listaGasolineras);
-        assertEquals(sut.activarFiltro("Reinosa"), "Reinosa");
+        assertEquals("Reinosa", sut.activarFiltro("Reinosa"));
         assertTrue(sut.filtroActivado);
 
 
@@ -122,6 +138,7 @@ public class MainPresenterITest {
 
         sut.onBtnFiltrarClicked("Mostrar todos");
 
+        verify(mockMainView).getGasolinerasRepository();
         assertFalse(sut.filtroActivado);
         verify(mockMainView).showStations(listaGasolineras);
 
@@ -140,6 +157,7 @@ public class MainPresenterITest {
 
         sut.onBtnFiltrarClicked("Bareyo");
 
+        verify(mockMainView).getGasolinerasRepository();
         verify(mockMainView).mostrarErrorNoGaolinerasEnMunicipio("Error: No exiten gasolineras con el filtro aplicado");
         assertFalse(sut.filtroActivado);
     }

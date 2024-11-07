@@ -20,7 +20,7 @@ public class MainPresenter implements IMainContract.Presenter {
     /** The view that is controlled by this presenter */
     private IMainContract.View view;
 
-    private List<Gasolinera> gasolineras;
+    List<Gasolinera> gasolineras;
     List<Gasolinera> listaGasolineras = new ArrayList<>();
 
     public Boolean filtroActivado = false;
