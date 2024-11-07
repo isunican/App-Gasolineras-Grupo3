@@ -21,6 +21,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import org.parceler.Parcels;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -247,17 +248,12 @@ public class MainView extends AppCompatActivity implements IMainContract.View {
     }
 
     /**
-     * @see IMainContract.View#mostrarErrorNoGaolinerasEnMunicipio(String)
+     * @see IMainContract.View#mostrarErrorNoGasolinerasEnMunicipio(String)
      * @param mensajeError the error message to show
      */
     @Override
-    public void mostrarErrorNoGaolinerasEnMunicipio(String mensajeError) {
-        /*TextView tvError = findViewById(R.id.tvError);
-        tvError.setText(mensajeError);
-        tvError.setVisibility(View.VISIBLE);
-        showStations(new ArrayList<>());*/
+    public void mostrarErrorNoGasolinerasEnMunicipio(String mensajeError) {
 
-        /*
         // Crear una lista temporal que contenga solo el mensaje de error
         List<Gasolinera> emptyMessage = new ArrayList<>();
         Gasolinera gasolinera = new Gasolinera();
@@ -266,7 +262,7 @@ public class MainView extends AppCompatActivity implements IMainContract.View {
 
         ListView list = findViewById(R.id.lvStations);
         GasolinerasArrayAdapter adapter = new GasolinerasArrayAdapter(this, emptyMessage);
-        list.setAdapter(adapter);*/
+        list.setAdapter(adapter);
 
     }
 

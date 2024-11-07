@@ -146,7 +146,7 @@ public interface IMainContract {
          * Shows an error message on the screen.
          * @param mensajeError the error message to show
          */
-        public void mostrarErrorNoGaolinerasEnMunicipio(String mensajeError);
+        public void mostrarErrorNoGasolinerasEnMunicipio(String mensajeError);
 
 
         /**
