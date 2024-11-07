@@ -1,19 +1,21 @@
-package es.unican.gasolineras.RegistrarRepostajeMenu;
+package es.unican.gasolineras.activities.main;
 
+import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.RootMatchers.isPlatformPopup;
+import static androidx.test.espresso.matcher.ViewMatchers.hasChildCount;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static androidx.test.espresso.matcher.ViewMatchers.withText;
-import static es.unican.gasolineras.utils.Matchers.DrawableMatcher;
+
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.hasToString;
 import static es.unican.gasolineras.utils.MockRepositories.getTestRepository;
 
-import android.content.Context;
-import android.graphics.Color;
 
-import androidx.test.espresso.Espresso;
-import androidx.test.espresso.matcher.HasBackgroundMatcher;
+import android.content.Context;
+
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
@@ -22,26 +24,25 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+
 import dagger.hilt.android.testing.BindValue;
 import dagger.hilt.android.testing.HiltAndroidRule;
 import dagger.hilt.android.testing.HiltAndroidTest;
 import dagger.hilt.android.testing.UninstallModules;
 import es.unican.gasolineras.R;
-import es.unican.gasolineras.activities.RegistrarRepostajeMenu.RegistrarView;
 import es.unican.gasolineras.injection.RepositoriesModule;
 import es.unican.gasolineras.repository.IGasolinerasRepository;
-import es.unican.gasolineras.utils.Matchers;
 
 @UninstallModules(RepositoriesModule.class)
 @HiltAndroidTest
 @RunWith(AndroidJUnit4.class)
-public class RegistrarRepostajeDatosFormatoIncorrectoTest {
+public class CasoExitoUITest {
 
     @Rule(order = 0)  // the Hilt rule must execute first
     public HiltAndroidRule hiltRule = new HiltAndroidRule(this);
 
     @Rule(order = 1)
-    public ActivityScenarioRule<RegistrarView> activityRule = new ActivityScenarioRule<>(RegistrarView.class);
+    public ActivityScenarioRule<MainView> activityRule = new ActivityScenarioRule<>(MainView.class);
 
     // I need the context to access resources, such as the json with test gas stations
     final Context context = InstrumentationRegistry.getInstrumentation().getTargetContext();
@@ -51,22 +52,20 @@ public class RegistrarRepostajeDatosFormatoIncorrectoTest {
     final IGasolinerasRepository repository = getTestRepository(context, R.raw.gasolineras_ccaa_06);
 
     @Test
-    public void datosFormatoIncorrectoContext() {
-        onView(withId(R.id.textLitros)).perform(click());
-        onView(withId(R.id.textLitros)).perform(typeText("Veinte"));
-        Espresso.pressBackUnconditionally();
-        onView(withId(R.id.textPrecioTotal)).perform(click());
-        onView(withId(R.id.textPrecioTotal)).perform(typeText("20"));
-        Espresso.pressBackUnconditionally();
+    public void CasoExitoContext() {
 
+        onView(withId(R.id.FiltrarMunicipiosItem)).perform(click());
 
-        onView(withId(R.id.btnGuardar)).perform(click());
+        onView(withId(R.id.spMunicipios)).perform(click());
 
-        onView(withId(R.id.tvError)).check(matches(withText("Error: Los datos introducidos no son válidos")));
+        onData(hasToString(containsString("Alfoz de Lloredo")))
+                .inRoot(isPlatformPopup())  // Esto indica que debe buscar en la raíz del popup
+                .perform(click());
 
-        onView(withId(R.id.textLitros)).check(matches(new DrawableMatcher(R.drawable.border_red)));
+        onView(withId(R.id.btnFiltrar))
+                .check(matches(isDisplayed()))
+                .perform(click());
 
-
+        onView(withId(R.id.lvStations)).check(matches(hasChildCount(1)));
     }
-
 }
