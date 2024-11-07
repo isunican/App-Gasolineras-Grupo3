@@ -262,7 +262,7 @@ public class MainView extends AppCompatActivity implements IMainContract.View {
      */
     @Override
     public void mostrarErrorNoGasolinerasEnMunicipio(String mensajeError) {
-        DescuentoDAO descuentoDAO = null;
+        DescuentoDAO descuentoDAO = db.descuentoDao();
         // Crear una lista temporal que contenga solo el mensaje de error
         List<Gasolinera> emptyMessage = new ArrayList<>();
         Gasolinera gasolinera = new Gasolinera();
