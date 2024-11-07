@@ -147,7 +147,6 @@ public class MainPresenter implements IMainContract.Presenter {
      * @return el municipio sobre el que se ha filtrado
      */
     public String activarFiltro(String municipio) {
-
         filtroActivado = true;
         return municipio;
     }
