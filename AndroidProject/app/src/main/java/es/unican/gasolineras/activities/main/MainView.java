@@ -77,7 +77,15 @@ public class MainView extends AppCompatActivity implements IMainContract.View {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        String ordenamiento = presenter.hayOrdenamientoActivado();
+        if (ordenamiento != null) {
+            presenter.onBtnFiltrarClicked(ordenamiento);
+        }
 
+    }
 
     /**
      * This creates the menu that is shown in the action bar (the upper toolbar)
@@ -160,34 +168,45 @@ public class MainView extends AppCompatActivity implements IMainContract.View {
 
             View dialogView = getLayoutInflater().inflate(R.layout.activity_ordenar, null);
 
-            Button btnOrdenar = dialogView.findViewById(R.id.btnOrdenar);
-            Button btnCancelar = dialogView.findViewById(R.id.btnCancelar);
-            RadioGroup radioCombustible = dialogView.findViewById(R.id.radioTipoCombustible);
-            RadioButton gasolina = dialogView.findViewById(R.id.radioGasolina);
-            RadioButton diesel = dialogView.findViewById(R.id.radioDiesel);
-
-            String ordenamiento = presenter.hayOrdenamientoActivado();
-
-            if (ordenamiento.equals("Gasolina")) {
-                gasolina.setChecked(true);
-            } else {
-                diesel.setChecked(true);
-            }
-
             AlertDialog dialog = new AlertDialog.Builder(this)
                     .setTitle("Ordenar")
                     .setView(dialogView)
                     .create();
 
+            dialog.show();
+
+            Button btnOrdenar = dialogView.findViewById(R.id.btnOrdenar);
+            Button btnCancelar = dialogView.findViewById(R.id.btnCancelar);
+            RadioGroup radioCombustible = dialogView.findViewById(R.id.btnRadioGroup);
+            RadioButton gasolina = dialogView.findViewById(R.id.btnGasolina);
+            RadioButton diesel = dialogView.findViewById(R.id.btnDiesel);
+
+            String ordenamiento = presenter.hayOrdenamientoActivado();
+            if (ordenamiento == null) {
+                gasolina.setChecked(true);
+            } else if (ordenamiento.equals("Gasolina")) {
+                gasolina.setChecked(true);
+            } else {
+                diesel.setChecked(true);
+            }
+
+
             btnOrdenar.setOnClickListener(v -> {
-                String combustibleSeleccionado = R.id.radioCombustible.toString();
+                int selectedId = radioCombustible.getCheckedRadioButtonId();
+                String combustibleSeleccionado;
+
+                if (selectedId == R.id.btnGasolina) {
+                    combustibleSeleccionado = "Gasolina";
+                } else if (selectedId == R.id.btnDiesel) {
+                    combustibleSeleccionado = "Diesel";
+                } else {
+                    combustibleSeleccionado = "Gasolina";
+                }
                 presenter.onBtnOrdenarClicked(combustibleSeleccionado);
                 dialog.dismiss();
             });
 
             btnCancelar.setOnClickListener(v -> dialog.dismiss());
-
-            dialog.show();
 
             return true;
 

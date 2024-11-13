@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import es.unican.gasolineras.R;
+import es.unican.gasolineras.activities.main.MainPresenter;
 import es.unican.gasolineras.activities.main.MainView;
 import es.unican.gasolineras.repository.AppDatabase;
 import es.unican.gasolineras.repository.DatabaseFunction;
@@ -99,8 +100,8 @@ public class RegistrarDescuentoView extends AppCompatActivity implements IRegist
                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            Intent intent = new Intent(RegistrarDescuentoView.this, MainView.class);
-                            startActivity(intent);
+
+                            finish();
                         }
                     })
                     .show();
@@ -112,8 +113,7 @@ public class RegistrarDescuentoView extends AppCompatActivity implements IRegist
                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            Intent intent = new Intent(RegistrarDescuentoView.this, MainView.class);
-                            startActivity(intent);
+                            finish();
                         }
                     })
                     .show();
@@ -125,8 +125,7 @@ public class RegistrarDescuentoView extends AppCompatActivity implements IRegist
      */
     @Override
     public void showBtnCancelar(){
-        Intent intent = new Intent(RegistrarDescuentoView.this, MainView.class);
-        startActivity(intent);
+        finish();
     }
 
     /**

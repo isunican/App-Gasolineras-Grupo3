@@ -123,15 +123,24 @@ public class MainPresenter implements IMainContract.Presenter {
     @Override
     public void onBtnOrdenarClicked(String tipoCombustible) {
 
-        Collections.sort(listaGasolineras,(g1, g2) -> {
+        List<Gasolinera> copiaGasolineras = new ArrayList<>(listaGasolineras);
+
+        copiaGasolineras.removeIf(gasolinera -> {
+            if (tipoCombustible.equals("Gasolina")) {
+                return gasolinera.getGasolina95E5() == 0; // Eliminar si el precio de gasolina es 0
+            } else {
+                return gasolinera.getGasoleoA() == 0; // Eliminar si el precio de diésel es 0
+            }
+        });
+        Collections.sort(copiaGasolineras,(g1, g2) -> {
             double preciog1 = calcularPrecioConDescuento(g1, tipoCombustible);
             double preciog2 = calcularPrecioConDescuento(g2, tipoCombustible);
             return Double.compare(preciog1, preciog2);
         });
 
         ordenamientoActual = tipoCombustible;
-        activarOrdenamiento(tipoCombustible);
-        view.showStations(listaGasolineras);
+        activarOrdenamiento();
+        view.showStations(copiaGasolineras);
 
     }
 
@@ -139,7 +148,10 @@ public class MainPresenter implements IMainContract.Presenter {
     public double calcularPrecioConDescuento(Gasolinera g1, String tipoCombustible) {
         double precio;
         Descuento descuento = view.getDescuentoDatabase().descuentoPorMarca(g1.getRotulo());
-        double descuentoPorcentaje = descuento.descuento;
+        double descuentoPorcentaje = 0.0;
+        if (descuento != null) {
+            descuentoPorcentaje = descuento.descuento;
+        }
 
         if (tipoCombustible.equals("Gasolina")) {
             precio = g1.getGasolina95E5();
@@ -219,7 +231,7 @@ public class MainPresenter implements IMainContract.Presenter {
         }
     }
 
-    public void activarOrdenamiento(String tipoCombustible) {
+    public void activarOrdenamiento() {
         ordenamientoActivado = true;
     }
 }
