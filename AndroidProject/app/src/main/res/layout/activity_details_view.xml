@@ -7,6 +7,37 @@
     android:layout_height="match_parent"
     tools:context=".activities.details.DetailsView">
 
+    <TextView
+        android:id="@+id/tvDiesel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Diesel"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/tvGasolina95"
+        app:layout_constraintTop_toBottomOf="@+id/tvDiaSemanaPasada" />
+
+    <TextView
+        android:id="@+id/tvHoy2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Hoy: "
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/tvDiesel"
+        app:layout_constraintTop_toBottomOf="@+id/tvDiesel" />
+
+    <TextView
+        android:id="@+id/tvDiaSemanaPasada2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/tvHoy2"
+        app:layout_constraintTop_toBottomOf="@+id/tvHoy2"
+        tools:text="Miercoles pasado:" />
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -23,7 +54,7 @@
         android:id="@+id/ivRotulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
@@ -33,19 +64,19 @@
         android:id="@+id/tvRotulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        tools:text="Rotulo"
-        android:textColor="@android:color/black"
+        android:layout_marginTop="35dp"
         android:textAlignment="center"
+        android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivRotulo" />
+        app:layout_constraintTop_toBottomOf="@+id/ivRotulo"
+        tools:text="Rotulo" />
 
     <TextView
         android:id="@+id/tvMunicipio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="26dp"
         android:textAlignment="center"
         android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="@+id/tvRotulo"
@@ -57,7 +88,7 @@
     <TextView
         android:id="@+id/tvHorario"
         android:layout_width="101dp"
-        android:layout_height="64dp"
+        android:layout_height="81dp"
         android:layout_marginTop="32dp"
         android:text="Horario"
         android:textAlignment="center"
@@ -71,7 +102,7 @@
         android:id="@+id/tvDireccion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="24dp"
         android:text="Direccion"
         android:textAlignment="center"
         android:textColor="@android:color/black"
@@ -84,41 +115,120 @@
         android:id="@+id/tvGasolina95"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="Precio Gasoleo A"
-        android:textAlignment="center"
-        android:textColor="@android:color/black"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@+id/tvHorario"
-        app:layout_constraintStart_toStartOf="@+id/tvHorario"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="18dp"
+        android:text="Gasolina 95"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvHorario" />
 
     <TextView
-        android:id="@+id/tvGasoleoA"
+        android:id="@+id/tvHoy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="Precio Gasolina 95 E5"
-        android:textAlignment="center"
-        android:textColor="@android:color/black"
+        android:layout_marginTop="20dp"
+        android:text="Hoy: "
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/tvGasolina95"
-        app:layout_constraintHorizontal_bias="0.529"
-        app:layout_constraintStart_toStartOf="@+id/tvGasolina95"
         app:layout_constraintTop_toBottomOf="@+id/tvGasolina95" />
 
     <TextView
-        android:id="@+id/tvPrecioSumario"
+        android:id="@+id/tvDiaSemanaPasada"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="Precio sumario"
-        android:textColor="@android:color/black"
-        android:textAlignment="center"
+        android:layout_marginTop="20dp"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@+id/tvGasoleoA"
-        app:layout_constraintHorizontal_bias="0.367"
-        app:layout_constraintStart_toStartOf="@+id/tvGasoleoA"
-        app:layout_constraintTop_toBottomOf="@+id/tvGasoleoA" />
+        app:layout_constraintEnd_toEndOf="@+id/tvHoy"
+        app:layout_constraintTop_toBottomOf="@+id/tvHoy"
+        tools:text="Miercoles pasado:" />
+
+    <TextView
+        android:id="@+id/tvPrecioGasolina95Hoy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/tvHoy"
+        app:layout_constraintTop_toBottomOf="@+id/tvGasolina95"
+        tools:text="1.39" />
+
+    <TextView
+        android:id="@+id/tvPrecioGasolina95SemanaPasada"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/tvDiaSemanaPasada"
+        app:layout_constraintTop_toBottomOf="@+id/tvPrecioGasolina95Hoy"
+        tools:text="1.36" />
+
+    <TextView
+        android:id="@+id/tvPrecioDieselHoy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/tvHoy2"
+        app:layout_constraintTop_toBottomOf="@+id/tvDiesel"
+        tools:text="1.28" />
+
+    <TextView
+        android:id="@+id/tvPrecioDieselSemanaPasada"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/tvDiaSemanaPasada2"
+        app:layout_constraintTop_toBottomOf="@+id/tvPrecioDieselHoy"
+        tools:text="1.26" />
+
+    <TextView
+        android:id="@+id/tvDiferenciaGasolina95"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/tvPrecioGasolina95SemanaPasada"
+        app:layout_constraintTop_toBottomOf="@+id/tvPrecioGasolina95Hoy"
+        tools:text="(-0.03)" />
+
+    <TextView
+        android:id="@+id/tvDiferenciaDiesel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/tvPrecioDieselSemanaPasada"
+        app:layout_constraintTop_toBottomOf="@+id/tvPrecioDieselHoy"
+        tools:text="(-0.02)" />
+
+    <TextView
+        android:id="@+id/tvNoDisponibleGasolina95"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvGasolina95"
+        tools:text="(no disponible)" />
+
+    <TextView
+        android:id="@+id/tvNoDisponibleDiesel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDiesel"
+        tools:text="(no disponible)" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
