@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -34,7 +36,6 @@ import es.unican.gasolineras.activities.RegistrarDescuentoEnMarca.RegistrarDescu
 import es.unican.gasolineras.activities.RegistrarRepostajeMenu.RegistrarView;
 import es.unican.gasolineras.activities.info.InfoView;
 import es.unican.gasolineras.activities.details.DetailsView;
-import es.unican.gasolineras.model.Descuento;
 import es.unican.gasolineras.model.Gasolinera;
 import es.unican.gasolineras.repository.AppDatabase;
 import es.unican.gasolineras.repository.DatabaseFunction;
@@ -76,7 +77,15 @@ public class MainView extends AppCompatActivity implements IMainContract.View {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        String ordenamiento = presenter.hayOrdenamientoActivado();
+        if (ordenamiento != null) {
+            presenter.onBtnOrdenarClicked(ordenamiento);
+        }
 
+    }
 
     /**
      * This creates the menu that is shown in the action bar (the upper toolbar)
@@ -121,7 +130,7 @@ public class MainView extends AppCompatActivity implements IMainContract.View {
             View dialogView = getLayoutInflater().inflate(R.layout.activity_filtrar, null);
 
             Spinner spinner = dialogView.findViewById(R.id.spMunicipios);
-            Button btnFiltrar = dialogView.findViewById(R.id.btnFiltrar);
+            Button btnFiltrar = dialogView.findViewById(R.id.btnOrdenar);
             Button btnCancelar = dialogView.findViewById(R.id.btnCancelar);
 
             String[] municipios = getResources().getStringArray(R.array.municipiosArray);
@@ -152,6 +161,55 @@ public class MainView extends AppCompatActivity implements IMainContract.View {
 
             dialog.show();
             return true;
+
+        }
+
+        if (itemId == R.id.OrdenarItem) {
+
+            View dialogView = getLayoutInflater().inflate(R.layout.activity_ordenar, null);
+
+            AlertDialog dialog = new AlertDialog.Builder(this)
+                    .setTitle("Ordenar")
+                    .setView(dialogView)
+                    .create();
+
+            dialog.show();
+
+            Button btnOrdenar = dialogView.findViewById(R.id.btnOrdenar);
+            Button btnCancelar = dialogView.findViewById(R.id.btnCancelar);
+            RadioGroup radioCombustible = dialogView.findViewById(R.id.btnRadioGroup);
+            RadioButton gasolina = dialogView.findViewById(R.id.btnGasolina);
+            RadioButton diesel = dialogView.findViewById(R.id.btnDiesel);
+
+            String ordenamiento = presenter.hayOrdenamientoActivado();
+            if (ordenamiento == null) {
+                gasolina.setChecked(true);
+            } else if (ordenamiento.equals("Gasolina")) {
+                gasolina.setChecked(true);
+            } else {
+                diesel.setChecked(true);
+            }
+
+
+            btnOrdenar.setOnClickListener(v -> {
+                int selectedId = radioCombustible.getCheckedRadioButtonId();
+                String combustibleSeleccionado;
+
+                if (selectedId == R.id.btnGasolina) {
+                    combustibleSeleccionado = "Gasolina";
+                } else if (selectedId == R.id.btnDiesel) {
+                    combustibleSeleccionado = "Diesel";
+                } else {
+                    combustibleSeleccionado = "Gasolina";
+                }
+                presenter.onBtnOrdenarClicked(combustibleSeleccionado);
+                dialog.dismiss();
+            });
+
+            btnCancelar.setOnClickListener(v -> dialog.dismiss());
+
+            return true;
+
         }
 
 
@@ -179,6 +237,9 @@ public class MainView extends AppCompatActivity implements IMainContract.View {
     public IGasolinerasRepository getGasolinerasRepository() {
         return repository;
     }
+
+    @Override
+    public DescuentoDAO getDescuentoDatabase() { return db.descuentoDao(); }
 
     /**
      * @see IMainContract.View#showStations(List) 
