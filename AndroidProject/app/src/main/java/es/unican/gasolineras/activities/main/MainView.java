@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -34,7 +36,6 @@ import es.unican.gasolineras.activities.RegistrarDescuentoEnMarca.RegistrarDescu
 import es.unican.gasolineras.activities.RegistrarRepostajeMenu.RegistrarView;
 import es.unican.gasolineras.activities.info.InfoView;
 import es.unican.gasolineras.activities.details.DetailsView;
-import es.unican.gasolineras.model.Descuento;
 import es.unican.gasolineras.model.Gasolinera;
 import es.unican.gasolineras.repository.AppDatabase;
 import es.unican.gasolineras.repository.DatabaseFunction;
@@ -152,6 +153,44 @@ public class MainView extends AppCompatActivity implements IMainContract.View {
 
             dialog.show();
             return true;
+
+        }
+
+        if (itemId == R.id.OrdenarItem) {
+
+            View dialogView = getLayoutInflater().inflate(R.layout.activity_ordenar, null);
+
+            Button btnOrdenar = dialogView.findViewById(R.id.btnOrdenar);
+            Button btnCancelar = dialogView.findViewById(R.id.btnCancelar);
+            RadioGroup radioCombustible = dialogView.findViewById(R.id.radioTipoCombustible);
+            RadioButton gasolina = dialogView.findViewById(R.id.radioGasolina);
+            RadioButton diesel = dialogView.findViewById(R.id.radioDiesel);
+
+            String ordenamiento = presenter.hayOrdenamientoActivado();
+
+            if (ordenamiento.equals("Gasolina")) {
+                gasolina.setChecked(true);
+            } else {
+                diesel.setChecked(true);
+            }
+
+            AlertDialog dialog = new AlertDialog.Builder(this)
+                    .setTitle("Ordenar")
+                    .setView(dialogView)
+                    .create();
+
+            btnOrdenar.setOnClickListener(v -> {
+                String combustibleSeleccionado = R.id.radioCombustible.toString();
+                presenter.onBtnOrdenarClicked(combustibleSeleccionado);
+                dialog.dismiss();
+            });
+
+            btnCancelar.setOnClickListener(v -> dialog.dismiss());
+
+            dialog.show();
+
+            return true;
+
         }
 
 
@@ -179,6 +218,9 @@ public class MainView extends AppCompatActivity implements IMainContract.View {
     public IGasolinerasRepository getGasolinerasRepository() {
         return repository;
     }
+
+    @Override
+    public DescuentoDAO getDescuentoDatabase() { return db.descuentoDao(); }
 
     /**
      * @see IMainContract.View#showStations(List) 

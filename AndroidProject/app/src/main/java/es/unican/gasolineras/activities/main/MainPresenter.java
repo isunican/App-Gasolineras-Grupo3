@@ -1,13 +1,15 @@
 package es.unican.gasolineras.activities.main;
 
-import android.widget.Spinner;
-
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
+import es.unican.gasolineras.model.Descuento;
 import es.unican.gasolineras.model.Gasolinera;
 import es.unican.gasolineras.model.IDCCAAs;
+import es.unican.gasolineras.repository.AppDatabase;
+import es.unican.gasolineras.repository.DatabaseFunction;
+import es.unican.gasolineras.repository.DescuentoDAO;
 import es.unican.gasolineras.repository.ICallBack;
 import es.unican.gasolineras.repository.IGasolinerasRepository;
 
@@ -24,6 +26,9 @@ public class MainPresenter implements IMainContract.Presenter {
 
     public Boolean filtroActivado = false;
     public String filtroActual;
+
+    public Boolean ordenamientoActivado = false;
+    public String ordenamientoActual;
 
     /**
      * @see IMainContract.Presenter#init(IMainContract.View)
@@ -102,7 +107,6 @@ public class MainPresenter implements IMainContract.Presenter {
             filtroActual = activarFiltro(municipio);
         }
 
-
     }
 
     /**
@@ -111,6 +115,44 @@ public class MainPresenter implements IMainContract.Presenter {
     @Override
     public void onBtnCancelarFiltroClicked() {
         view.showBtnCancelarFiltro();
+    }
+
+    /**
+     * @see IMainContract.Presenter#onBtnOrdenarClicked(String)
+     */
+    @Override
+    public void onBtnOrdenarClicked(String tipoCombustible) {
+
+        Collections.sort(listaGasolineras,(g1, g2) -> {
+            double preciog1 = calcularPrecioConDescuento(g1, tipoCombustible);
+            double preciog2 = calcularPrecioConDescuento(g2, tipoCombustible);
+            return Double.compare(preciog1, preciog2);
+        });
+
+        ordenamientoActual = tipoCombustible;
+        activarOrdenamiento(tipoCombustible);
+        view.showStations(listaGasolineras);
+
+    }
+
+
+    public double calcularPrecioConDescuento(Gasolinera g1, String tipoCombustible) {
+        double precio;
+        Descuento descuento = view.getDescuentoDatabase().descuentoPorMarca(g1.getRotulo());
+        double descuentoPorcentaje = descuento.descuento;
+
+        if (tipoCombustible.equals("Gasolina")) {
+            precio = g1.getGasolina95E5();
+
+        } else {
+            precio = g1.getGasoleoA();
+        }
+
+        if (descuentoPorcentaje > 0) {
+            precio = precio - ((precio * descuentoPorcentaje) / 100);
+        }
+
+        return precio;
     }
 
 
@@ -162,5 +204,22 @@ public class MainPresenter implements IMainContract.Presenter {
         else {
             return null;
         }
+    }
+
+    /**
+     *
+     * @return
+     */
+    public String hayOrdenamientoActivado() {
+        if (ordenamientoActivado) {
+            return ordenamientoActual;
+        }
+        else {
+            return null;
+        }
+    }
+
+    public void activarOrdenamiento(String tipoCombustible) {
+        ordenamientoActivado = true;
     }
 }

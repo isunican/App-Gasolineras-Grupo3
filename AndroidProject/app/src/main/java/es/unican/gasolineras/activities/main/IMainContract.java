@@ -3,6 +3,7 @@ package es.unican.gasolineras.activities.main;
 import java.util.List;
 
 import es.unican.gasolineras.model.Gasolinera;
+import es.unican.gasolineras.repository.DescuentoDAO;
 import es.unican.gasolineras.repository.IGasolinerasRepository;
 
 /**
@@ -72,6 +73,8 @@ public interface IMainContract {
          * Only the View should call this method
          */
         public void onBtnCancelarFiltroClicked();
+
+        public void onBtnOrdenarClicked(String tipoCompustible);
     }
 
     /**
@@ -97,6 +100,13 @@ public interface IMainContract {
          * @return
          */
         public IGasolinerasRepository getGasolinerasRepository();
+
+        /**
+         * Retorna la dao que almacena los descuentos, sera llamado por el presenter
+         * para acceder a los descuentos a la hora de ordenar las gasolineras.
+         * @return
+         */
+        public DescuentoDAO getDescuentoDatabase();
 
         /**
          * The view is requested to display the given list of gas stations.
