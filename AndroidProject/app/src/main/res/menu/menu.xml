@@ -3,6 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
+        android:id="@+id/OrdenarItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="Ordenar item"
+        android:icon="@drawable/ordenar"
+        app:showAsAction="ifRoom" />
+    <item
         android:id="@+id/menuItemInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

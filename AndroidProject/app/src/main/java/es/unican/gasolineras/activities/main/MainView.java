@@ -34,7 +34,6 @@ import es.unican.gasolineras.activities.RegistrarDescuentoEnMarca.RegistrarDescu
 import es.unican.gasolineras.activities.RegistrarRepostajeMenu.RegistrarView;
 import es.unican.gasolineras.activities.info.InfoView;
 import es.unican.gasolineras.activities.details.DetailsView;
-import es.unican.gasolineras.model.Descuento;
 import es.unican.gasolineras.model.Gasolinera;
 import es.unican.gasolineras.repository.AppDatabase;
 import es.unican.gasolineras.repository.DatabaseFunction;
@@ -121,7 +120,7 @@ public class MainView extends AppCompatActivity implements IMainContract.View {
             View dialogView = getLayoutInflater().inflate(R.layout.activity_filtrar, null);
 
             Spinner spinner = dialogView.findViewById(R.id.spMunicipios);
-            Button btnFiltrar = dialogView.findViewById(R.id.btnFiltrar);
+            Button btnFiltrar = dialogView.findViewById(R.id.btnOrdenar);
             Button btnCancelar = dialogView.findViewById(R.id.btnCancelar);
 
             String[] municipios = getResources().getStringArray(R.array.municipiosArray);
