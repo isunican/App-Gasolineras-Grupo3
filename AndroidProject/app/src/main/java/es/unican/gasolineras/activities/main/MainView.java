@@ -82,7 +82,7 @@ public class MainView extends AppCompatActivity implements IMainContract.View {
         super.onResume();
         String ordenamiento = presenter.hayOrdenamientoActivado();
         if (ordenamiento != null) {
-            presenter.onBtnFiltrarClicked(ordenamiento);
+            presenter.onBtnOrdenarClicked(ordenamiento);
         }
 
     }
