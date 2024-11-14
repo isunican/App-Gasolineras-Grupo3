@@ -7,9 +7,6 @@ import java.util.List;
 import es.unican.gasolineras.model.Descuento;
 import es.unican.gasolineras.model.Gasolinera;
 import es.unican.gasolineras.model.IDCCAAs;
-import es.unican.gasolineras.repository.AppDatabase;
-import es.unican.gasolineras.repository.DatabaseFunction;
-import es.unican.gasolineras.repository.DescuentoDAO;
 import es.unican.gasolineras.repository.ICallBack;
 import es.unican.gasolineras.repository.IGasolinerasRepository;
 
@@ -23,6 +20,7 @@ public class MainPresenter implements IMainContract.Presenter {
 
     List<Gasolinera> gasolineras;
     List<Gasolinera> listaGasolineras = new ArrayList<>();
+    List<Gasolinera> listaFiltrada;
 
     public Boolean filtroActivado = false;
     public String filtroActual;
@@ -85,8 +83,7 @@ public class MainPresenter implements IMainContract.Presenter {
     @Override
     public void onBtnFiltrarClicked(String municipio) {
 
-
-        List<Gasolinera> listaFiltrada = new ArrayList<>();
+        listaFiltrada = new ArrayList<>();
 
         for (Gasolinera gasolinera : listaGasolineras) {
             if (gasolinera.getMunicipio().equals(municipio) || municipio.equals("Mostrar todos")) {
@@ -100,12 +97,20 @@ public class MainPresenter implements IMainContract.Presenter {
             return;
         }
 
-        view.showStations(listaFiltrada);
         filtroActivado = false;
 
         if (!municipio.equals("Mostrar todos")) {
             filtroActual = activarFiltro(municipio);
         }
+
+        String tipoCombustible = hayOrdenamientoActivado();
+        if(tipoCombustible == null) {
+            view.showStations(listaFiltrada);
+
+        }
+
+        onBtnOrdenarClicked(tipoCombustible);
+
 
     }
 
@@ -123,7 +128,14 @@ public class MainPresenter implements IMainContract.Presenter {
     @Override
     public void onBtnOrdenarClicked(String tipoCombustible) {
 
-        List<Gasolinera> copiaGasolineras = new ArrayList<>(listaGasolineras);
+        List<Gasolinera> copiaGasolineras;
+
+        if(hayFiltroActivado() != null) {
+            copiaGasolineras = new ArrayList<>(listaFiltrada);
+        } else {
+            copiaGasolineras = new ArrayList<>(listaGasolineras);
+        }
+
 
         copiaGasolineras.removeIf(gasolinera -> {
             if (tipoCombustible.equals("Gasolina")) {
@@ -145,6 +157,13 @@ public class MainPresenter implements IMainContract.Presenter {
     }
 
 
+    /**
+     * Calcula el precio de un tipo de combustible de una gasolinera
+     * teniendo en cuenta si tiene un descuento aplicado
+     * @param g1 la gasolinera de la que calcular el precio
+     * @param tipoCombustible tipo de combustible del que se quiere el precio
+     * @return el precio con el descuento aplicado si le hubiera
+     */
     public double calcularPrecioConDescuento(Gasolinera g1, String tipoCombustible) {
         double precio;
         Descuento descuento = view.getDescuentoDatabase().descuentoPorMarca(g1.getRotulo());
@@ -219,8 +238,9 @@ public class MainPresenter implements IMainContract.Presenter {
     }
 
     /**
-     *
-     * @return
+     * Comprueba si hay ordenamiento
+     * @return null si no esta activado o
+     * el tipo de combustible por el que se esta ordenando
      */
     public String hayOrdenamientoActivado() {
         if (ordenamientoActivado) {
@@ -231,6 +251,9 @@ public class MainPresenter implements IMainContract.Presenter {
         }
     }
 
+    /**
+     * Activa el ordenamiento
+     */
     public void activarOrdenamiento() {
         ordenamientoActivado = true;
     }
