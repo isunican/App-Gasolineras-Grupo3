@@ -74,6 +74,14 @@ public interface IMainContract {
          */
         public void onBtnCancelarFiltroClicked();
 
+        /**
+         * Handles the process of ordered of the gas stations
+         * Called when the user clicks the order button.
+         * Give the View the list already ordered
+         * Only the View should call this method
+         *
+         * @param tipoCompustible el tipo de combustible sobre el que ordenar
+         */
         public void onBtnOrdenarClicked(String tipoCompustible);
     }
 
