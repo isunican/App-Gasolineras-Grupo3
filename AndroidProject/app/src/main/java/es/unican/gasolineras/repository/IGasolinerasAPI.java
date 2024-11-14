@@ -33,6 +33,6 @@ public interface IGasolinerasAPI {
      * @return retrofit call object
      */
     @GET("EstacionesTerrestresHist/FiltroCCAA/{FECHA}/{IDCCAA}")
-    Call<GasolinerasResponse> gasolinerasHistorico(@Path("FECHA") LocalDate fecha , @Path("IDCCAA") String ccaa);
+    Call<GasolinerasResponse> gasolinerasHistorico(@Path("FECHA")  String fecha , @Path("IDCCAA") String ccaa);
 
 }

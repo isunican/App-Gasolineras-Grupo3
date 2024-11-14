@@ -1,7 +1,9 @@
 package es.unican.gasolineras.activities.details;
 
 import java.time.LocalDate;
+import java.time.format.TextStyle;
 import java.util.List;
+import java.util.Locale;
 
 
 import es.unican.gasolineras.model.Descuento;
@@ -17,8 +19,14 @@ public class DetailsPresenter implements  IDetails.Presenter {
 
     private IDetails.View view;
     private DescuentoDAO descuentoDAO;
-    IGasolinerasRepository repository = view.getGasolinerasRepository();
+    IGasolinerasRepository repository;
+    Gasolinera gasolinera;
 
+
+    public DetailsPresenter(Gasolinera gas,DescuentoDAO descuentoDAO) {
+        this.gasolinera = gas;
+        this.descuentoDAO = descuentoDAO;
+    }
 
     /**
      * @see IDetails.Presenter#init(IDetails.View)
@@ -26,11 +34,10 @@ public class DetailsPresenter implements  IDetails.Presenter {
      */
     @Override
     public void init(IDetails.View view) {
-
         this.view = view;
+        this.repository = view.getGasolinerasRepository();
         this.view.init();
         load();
-
     }
 
     /**
@@ -41,32 +48,32 @@ public class DetailsPresenter implements  IDetails.Presenter {
         LocalDate fechaActual = LocalDate.now();
         LocalDate fechaSemanaPasada = fechaActual.minusWeeks(1);
 
+
         // Obtener precios de la semana pasada
         requestGasolineras(fechaSemanaPasada, new ICallBack() {
             @Override
             public void onSuccess(List<Gasolinera> estacionesSemanaPasada) {
-                double precioSemanaAnteriorGasoleoA = obtenerPrecioConDescuento("GasoleoA", estacionesSemanaPasada);
-                double precioSemanaAnteriorGasolina95 = obtenerPrecioConDescuento("Gasolina95", estacionesSemanaPasada);
+                // Filtrar la gasolinera seleccionada en la respuesta
+                Gasolinera gasolineraSemanaPasada = estacionesSemanaPasada.stream()
+                        .filter(g -> g.getId().equals(gasolinera.getId()))
+                        .findFirst()
+                        .orElse(null);
 
-                // Mostrar precios de la semana pasada
-                mostrarPreciosSemanaPasada(precioSemanaAnteriorGasoleoA, precioSemanaAnteriorGasolina95);
+                if (gasolineraSemanaPasada != null) {
+                    double precioSemanaAnteriorGasoleoA = gasolineraSemanaPasada.getGasoleoA();
+                    double precioSemanaAnteriorGasolina95 = gasolineraSemanaPasada.getGasolina95E5();
 
-                // Luego cargar los precios de la fecha actual
-                requestGasolineras(fechaActual, new ICallBack() {
-                    @Override
-                    public void onSuccess(List<Gasolinera> estacionesActuales) {
-                        double precioActualGasoleoA = obtenerPrecioConDescuento("GasoleoA", estacionesActuales);
-                        double precioActualGasolina95 = obtenerPrecioConDescuento("Gasolina95", estacionesActuales);
+                    Descuento d = descuentoDAO.descuentoPorMarca(gasolinera.getRotulo());
+                    view.mostrarPreciosActuales(d);
 
-                        mostrarPreciosActuales(precioActualGasoleoA, precioActualGasolina95,
-                                precioSemanaAnteriorGasoleoA, precioSemanaAnteriorGasolina95);
-                    }
-
-                    @Override
-                    public void onFailure(Throwable e) {
-                        view.mostrarError("Error al cargar datos de la fecha actual");
-                    }
-                });
+                    // Mostrar los precios de la semana pasada en la vista
+                    view.mostrarPrecioDieselSemanaPasada(precioSemanaAnteriorGasoleoA ,d);
+                    view.mostrarPrecioGasolina95SemanaPasada(precioSemanaAnteriorGasolina95 ,d);
+                    // Mostrar el día de la semana correspondiente a la semana pasada
+                    view.mostrarDiaDeLaSemana(obtenerNombreDelDia(fechaActual));
+                } else {
+                    view.mostrarError("No se encontraron datos para la semana pasada.");
+                }
             }
 
             @Override
@@ -76,50 +83,13 @@ public class DetailsPresenter implements  IDetails.Presenter {
         });
     }
 
+    public String obtenerNombreDelDia(LocalDate fechaActual) {
+        String dia = fechaActual.getDayOfWeek().getDisplayName(TextStyle.FULL, new Locale("es", "ES"));
+        return dia.substring(0, 1).toUpperCase() + dia.substring(1).toLowerCase();
+    }
+
     private void requestGasolineras(LocalDate fecha, ICallBack callBack) {
         repository.requestGasolinerasHistoricoFechas(callBack, IDCCAAs.CANTABRIA.id, fecha);
-    }
-
-    private void mostrarPreciosSemanaPasada(double precioSemanaAnteriorGasoleoA, double precioSemanaAnteriorGasolina95) {
-        view.mostrarPrecioDieselSemanaPasada(String.format("%.2f", precioSemanaAnteriorGasoleoA));
-        view.mostrarPrecioGasolina95SemanaPasada(String.format("%.2f", precioSemanaAnteriorGasolina95));
-    }
-
-    private void mostrarPreciosActuales(double precioActualGasoleoA, double precioActualGasolina95,
-                                        double precioSemanaAnteriorGasoleoA, double precioSemanaAnteriorGasolina95) {
-        String textoGasoleoA = calcularTextoComparacion(precioActualGasoleoA, precioSemanaAnteriorGasoleoA);
-        String textoGasolina95 = calcularTextoComparacion(precioActualGasolina95, precioSemanaAnteriorGasolina95);
-
-        view.mostrarPrecioDieselHoy(String.format("%.2f", precioActualGasoleoA));
-        view.mostrarPrecioGasolina95Hoy(String.format("%.2f", precioActualGasolina95));
-        view.mostrarTextoComparacionDiesel(textoGasoleoA);
-        view.mostrarTextoComparacionGasolina95(textoGasolina95);
-    }
-
-    /**
-     * Calcula el texto de comparación entre el precio actual y el de la semana pasada.
-     *
-     * @param precioActual Precio actual.
-     * @param precioSemanaAnterior Precio de la semana pasada.
-     * @return Texto de comparación.
-     */
-    public String calcularTextoComparacion(double precioActual, double precioSemanaAnterior) {
-        if (precioActual == precioSemanaAnterior) {
-            return String.format("%.2f €", precioActual);
-        } else {
-            double diferencia = precioActual - precioSemanaAnterior;
-            String simbolo = (diferencia > 0) ? "+" : "-";
-            return String.format("%.2f € (%s%.2f)", precioActual, simbolo, Math.abs(diferencia));
-        }
-    }
-
-
-
-    private double obtenerPrecioConDescuento(String tipoCombustible, List<Gasolinera> estaciones) {
-        double precio = 0.0;
-        // Aquí calculas o extraes el precio del tipo de combustible (e.g., "GasoleoA" o "Gasolina95") de las estaciones
-        // Implementación detallada depende de la estructura de Gasolinera
-        return precio;
     }
 
 

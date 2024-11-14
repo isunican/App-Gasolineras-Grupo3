@@ -32,4 +32,6 @@ public interface DescuentoDAO {
     @Query("DELETE from Descuento")
     void eliminarDescuentos();
 
+
+
 }

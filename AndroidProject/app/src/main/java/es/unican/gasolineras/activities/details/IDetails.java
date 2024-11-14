@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import es.unican.gasolineras.activities.ConsultarRepostaje.IConsultar;
+import es.unican.gasolineras.model.Descuento;
 import es.unican.gasolineras.repository.IGasolinerasRepository;
 
 public interface IDetails {
@@ -33,21 +34,20 @@ public interface IDetails {
         boolean onOptionsItemSelected(MenuItem item);
 
 
-        public IGasolinerasRepository getGasolinerasRepository();
+        IGasolinerasRepository getGasolinerasRepository();
 
-        void mostrarPrecioGasolina95Hoy(String precioHoy);
 
-        void mostrarPrecioGasolina95SemanaPasada(String precioSemanaPasada);
+        void mostrarPrecioGasolina95SemanaPasada(double precioSemanaPasada, Descuento descuento);
 
-        void mostrarPrecioDieselHoy(String precioHoy);
 
-        void mostrarPrecioDieselSemanaPasada(String precioSemanaPasada);
+        void mostrarPrecioDieselSemanaPasada(double precioSemanaPasada, Descuento descuento);
 
-        void mostrarTextoComparacionDiesel(String textoGasoleoA);
+        void mostrarDiaDeLaSemana(String texto);
 
-        void mostrarTextoComparacionGasolina95(String textoGasolina95);
 
         void mostrarError(String mensaje);
+
+        void mostrarPreciosActuales(Descuento descuento);
 
     }
 }

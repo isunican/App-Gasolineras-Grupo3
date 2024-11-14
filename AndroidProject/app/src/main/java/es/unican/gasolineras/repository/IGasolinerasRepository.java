@@ -20,6 +20,6 @@ public interface IGasolinerasRepository {
          * @param ccaa id of the "comunidad autonoma", as defined in IDCCAAs
          * @param fecha
          */
-        public void requestGasolinerasHistoricoFechas(ICallBack cb, String ccaa, LocalDate fecha);
+        public void requestGasolinerasHistoricoFechas(ICallBack cb, String ccaa,LocalDate fecha);
 
 }

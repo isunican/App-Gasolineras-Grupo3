@@ -1,6 +1,9 @@
 package es.unican.gasolineras.repository;
 
+import android.util.Log;
+
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import javax.annotation.Nonnull;
 
@@ -54,7 +57,9 @@ public class GasolinerasRepository implements IGasolinerasRepository {
      */
     @Override
     public void requestGasolinerasHistoricoFechas(ICallBack cb, String ccaa, LocalDate fecha) {
-        Call<GasolinerasResponse> call = GasolinerasService.api.gasolinerasHistorico(fecha,ccaa);
+        String fechaFormatoAPI = fecha.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        Log.d("Fecha API", "Fecha enviada: " + fechaFormatoAPI);
+        Call<GasolinerasResponse> call = GasolinerasService.api.gasolinerasHistorico(fechaFormatoAPI,ccaa);
         call.enqueue(new Callback<GasolinerasResponse>() {
             @Override
             public void onResponse(@Nonnull Call<GasolinerasResponse> call, @Nonnull Response<GasolinerasResponse> response) {
