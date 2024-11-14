@@ -106,6 +106,7 @@ public class MainPresenter implements IMainContract.Presenter {
         String tipoCombustible = hayOrdenamientoActivado();
         if(tipoCombustible == null) {
             view.showStations(listaFiltrada);
+            return;
 
         }
 
