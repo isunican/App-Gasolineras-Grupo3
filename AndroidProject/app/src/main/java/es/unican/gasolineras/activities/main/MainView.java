@@ -130,7 +130,7 @@ public class MainView extends AppCompatActivity implements IMainContract.View {
             View dialogView = getLayoutInflater().inflate(R.layout.activity_filtrar, null);
 
             Spinner spinner = dialogView.findViewById(R.id.spMunicipios);
-            Button btnFiltrar = dialogView.findViewById(R.id.btnOrdenar);
+            Button btnFiltrar = dialogView.findViewById(R.id.btnFiltrar);
             Button btnCancelar = dialogView.findViewById(R.id.btnCancelar);
 
             String[] municipios = getResources().getStringArray(R.array.municipiosArray);
