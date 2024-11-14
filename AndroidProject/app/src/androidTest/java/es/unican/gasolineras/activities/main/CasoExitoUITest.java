@@ -62,7 +62,7 @@ public class CasoExitoUITest {
                 .inRoot(isPlatformPopup())  // Esto indica que debe buscar en la raíz del popup
                 .perform(click());
 
-        onView(withId(R.id.btnOrdenar))
+        onView(withId(R.id.btnFiltrar))
                 .check(matches(isDisplayed()))
                 .perform(click());
 
