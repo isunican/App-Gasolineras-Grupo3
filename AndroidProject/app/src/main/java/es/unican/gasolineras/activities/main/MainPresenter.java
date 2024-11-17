@@ -91,17 +91,20 @@ public class MainPresenter implements IMainContract.Presenter {
             }
         }
 
+        if (!municipio.equals("Mostrar todos")) {
+            filtroActual = activarFiltro(municipio);
+        }
+        else {
+            filtroActivado = false;
+        }
+
         if (listaFiltrada.isEmpty()) {
 
             view.mostrarErrorNoGasolinerasEnMunicipio("Error: No existen gasolineras \n con el filtro aplicado");
             return;
         }
 
-        filtroActivado = false;
-
-        if (!municipio.equals("Mostrar todos")) {
-            filtroActual = activarFiltro(municipio);
-        }
+        view.showStations(listaFiltrada);
 
         String tipoCombustible = hayOrdenamientoActivado();
         if(tipoCombustible == null) {
