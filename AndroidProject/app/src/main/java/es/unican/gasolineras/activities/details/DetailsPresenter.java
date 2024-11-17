@@ -36,7 +36,6 @@ public class DetailsPresenter implements  IDetails.Presenter {
     public void init(IDetails.View view) {
         this.view = view;
         this.repository = view.getGasolinerasRepository();
-        this.view.init();
         load();
     }
 
@@ -58,21 +57,20 @@ public class DetailsPresenter implements  IDetails.Presenter {
                         .filter(g -> g.getId().equals(gasolinera.getId()))
                         .findFirst()
                         .orElse(null);
-
+                Descuento d = descuentoDAO.descuentoPorMarca(gasolinera.getRotulo());
                 if (gasolineraSemanaPasada != null) {
                     double precioSemanaAnteriorGasoleoA = gasolineraSemanaPasada.getGasoleoA();
                     double precioSemanaAnteriorGasolina95 = gasolineraSemanaPasada.getGasolina95E5();
 
-                    Descuento d = descuentoDAO.descuentoPorMarca(gasolinera.getRotulo());
                     view.mostrarPreciosActuales(d);
-
+                    String dia = obtenerNombreDelDia(fechaActual);
                     // Mostrar los precios de la semana pasada en la vista
-                    view.mostrarPrecioDieselSemanaPasada(precioSemanaAnteriorGasoleoA ,d);
-                    view.mostrarPrecioGasolina95SemanaPasada(precioSemanaAnteriorGasolina95 ,d);
-                    // Mostrar el día de la semana correspondiente a la semana pasada
-                    view.mostrarDiaDeLaSemana(obtenerNombreDelDia(fechaActual));
-                } else {
-                    view.mostrarError("No se encontraron datos para la semana pasada.");
+                    view.mostrarPrecioDieselSemanaPasada(precioSemanaAnteriorGasoleoA ,d,dia);
+                    view.mostrarPrecioGasolina95SemanaPasada(precioSemanaAnteriorGasolina95 ,d,dia);
+
+                }
+                else {
+                    view.mostrarPreciosActuales(d);
                 }
             }
 

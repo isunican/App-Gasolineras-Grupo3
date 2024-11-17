@@ -2,7 +2,9 @@ package es.unican.gasolineras.activities.details;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.util.Log;
+
+
+import android.util.TypedValue;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -23,7 +25,6 @@ import es.unican.gasolineras.model.Descuento;
 import es.unican.gasolineras.model.Gasolinera;
 import es.unican.gasolineras.repository.AppDatabase;
 import es.unican.gasolineras.repository.DatabaseFunction;
-import es.unican.gasolineras.repository.GasolinerasRepository;
 import es.unican.gasolineras.repository.IGasolinerasRepository;
 
 
@@ -56,7 +57,6 @@ public class DetailsView extends AppCompatActivity implements IDetails.View {
     Gasolinera gasolinera;
 
 
-
     @Override
     public void init() {
 
@@ -68,8 +68,16 @@ public class DetailsView extends AppCompatActivity implements IDetails.View {
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_view);
+
+        // Get Gas Station from the intent that triggered this activity
+        gasolinera = Parcels.unwrap(getIntent().getExtras().getParcelable(INTENT_STATION));
+
+        AppDatabase db = DatabaseFunction.getDatabase(this);
+        presenter = new DetailsPresenter(gasolinera,db.descuentoDao());
+        presenter.init(this);
 
         // The default theme does not include a toolbar.
         // In this app the toolbar is explicitly declared in the layout
@@ -99,9 +107,6 @@ public class DetailsView extends AppCompatActivity implements IDetails.View {
         tvNoDisponibleDiesel = findViewById(R.id.tvNoDisponibleDiesel);
 
 
-        // Get Gas Station from the intent that triggered this activity
-        gasolinera = Parcels.unwrap(getIntent().getExtras().getParcelable(INTENT_STATION));
-
         // Set logo
         @SuppressLint("DiscouragedApi") int imageID =
                 getResources().getIdentifier("generic", "drawable", getPackageName());
@@ -113,10 +118,6 @@ public class DetailsView extends AppCompatActivity implements IDetails.View {
         tvMunicipio.setText(gasolinera.getMunicipio());
         tvDireccion.setText(gasolinera.getCp());
         tvHorario.setText(gasolinera.getHorario());
-
-        AppDatabase db = DatabaseFunction.getDatabase(this);
-        presenter = new DetailsPresenter(gasolinera,db.descuentoDao());
-        presenter.init(this);
 
     }
 
@@ -141,39 +142,54 @@ public class DetailsView extends AppCompatActivity implements IDetails.View {
     }
 
     public void mostrarPreciosActuales(Descuento descuento) {
-
-        if (descuento == null ) {
-            tvPrecioGasolina95Hoy.setText(String.format("%.2f",gasolinera.getGasolina95E5()));
-            tvPrecioDieselHoy.setText(String.format("%.2f",gasolinera.getGasoleoA()));
+        // Verificar si el precio de la gasolina 95 es 0.0
+        if (gasolinera.getGasolina95E5() != 0.0) {
+            // Si hay descuento, aplicar el descuento
+            if (descuento == null) {
+                tvPrecioGasolina95Hoy.setText(String.format("%.2f", gasolinera.getGasolina95E5()));
+            } else {
+                double precioGasolina = gasolinera.getGasolina95E5() * (1 - descuento.getDescuento() / 100);
+                tvPrecioGasolina95Hoy.setText(String.format("%.2f", precioGasolina));
+            }
+            tvPrecioGasolina95Hoy.setVisibility(View.VISIBLE);  // Mostrar el precio
+        } else {
+            tvNoDisponibleGasolina95.setText("(No disponible)");
+            tvNoDisponibleGasolina95.setVisibility(View.VISIBLE);
         }
-        else {
-            double precioGasolina = gasolinera.getGasolina95E5() * (1 - descuento.getDescuento() / 100);
-            tvPrecioGasolina95Hoy.setText(String.format("%.2f",precioGasolina));
-            double precioDiesel = gasolinera.getGasoleoA() * (1 - descuento.getDescuento() / 100);
-            tvPrecioDieselHoy.setText(String.format("%.2f",precioDiesel));
-        }
 
+        // Verificar si el precio de diésel es 0.0
+        if (gasolinera.getGasoleoA() != 0.0) {
+            // Si hay descuento, aplicar el descuento
+            if (descuento == null) {
+                tvPrecioDieselHoy.setText(String.format("%.2f", gasolinera.getGasoleoA()));
+            } else {
+                double precioDiesel = gasolinera.getGasoleoA() * (1 - descuento.getDescuento() / 100);
+                tvPrecioDieselHoy.setText(String.format("%.2f", precioDiesel));
+            }
+            tvPrecioDieselHoy.setVisibility(View.VISIBLE);  // Mostrar el precio
+        } else {
+            tvNoDisponibleDiesel.setText("(No disponible)");
+            tvNoDisponibleDiesel.setVisibility(View.VISIBLE);
+
+        }
+  
     }
 
 
     @Override
-    public void mostrarPrecioGasolina95SemanaPasada(double precioSemanaPasada,Descuento descuento) {
+    public void mostrarPrecioGasolina95SemanaPasada(double precioSemanaPasada,Descuento descuento, String dia) {
+        if (precioSemanaPasada != 0.0) {
+            double precioConDescuento = gasolinera.getGasolina95E5();
+            if (descuento != null) {
+                precioConDescuento = precioConDescuento * (1 - descuento.getDescuento() / 100); // Precio con descuento
+            }
 
-        double precioConDescuento = gasolinera.getGasolina95E5();
-        if (descuento != null) {
-            precioConDescuento = precioConDescuento * (1 - descuento.getDescuento() / 100); // Precio con descuento
-        }
+            tvPrecioGasolina95SemanaPasada.setText(String.format("%.2f", precioSemanaPasada));
+            tvPrecioGasolina95SemanaPasada.setVisibility(View.VISIBLE);
 
-        tvPrecioGasolina95SemanaPasada.setText(String.format("%.2f", precioSemanaPasada));
-        tvPrecioGasolina95SemanaPasada.setVisibility(View.VISIBLE);
+            // Si hay descuento, calculamos la diferencia con el precio con descuento
+            double diferenciaGasolina = precioSemanaPasada - precioConDescuento;
 
-        // Si hay descuento, calculamos la diferencia con el precio con descuento
-        double diferenciaGasolina = precioSemanaPasada - precioConDescuento;
-
-        if (gasolinera.getGasolina95E5() == 0) {
-            tvNoDisponibleGasolina95.setText("No disponible");
-            tvNoDisponibleGasolina95.setVisibility(View.VISIBLE);
-        } else {
             // Formateamos la diferencia con el signo adecuado y entre paréntesis
             String diferenciaTexto = String.format("%.2f", diferenciaGasolina);
             if (diferenciaGasolina > 0) {
@@ -183,34 +199,34 @@ public class DetailsView extends AppCompatActivity implements IDetails.View {
                 // Si la diferencia es negativa, solo mostrar el valor con el signo negativo
                 tvDiferenciaGasolina95.setText("(- " + diferenciaTexto.substring(1) + ")");
             } else {
-                // Si la diferencia es cero, mostrar simplemente "0"
+                // Si la diferencia es cero, no se muestra nada
                 tvDiferenciaGasolina95.setText("");
             }
-
             tvDiferenciaGasolina95.setVisibility(View.VISIBLE);
+            tvDiaSemanaPasada.setText(dia + " pasado:") ;
+            tvDiaSemanaPasada.setVisibility(View.VISIBLE);
+        } else {
+            tvPrecioGasolina95SemanaPasada.setVisibility(View.GONE);
         }
+
     }
 
 
     @Override
-    public void mostrarPrecioDieselSemanaPasada(double precioSemanaPasada,Descuento descuento) {
+    public void mostrarPrecioDieselSemanaPasada(double precioSemanaPasada,Descuento descuento,String dia) {
+        if (precioSemanaPasada != 0.0) {
+            double precioConDescuento = gasolinera.getGasoleoA();
+            if (descuento != null) {
+                precioConDescuento = precioConDescuento * (1 - descuento.getDescuento() / 100); // Precio con descuento
+            }
 
-        double precioConDescuento = gasolinera.getGasoleoA();
-        if (descuento != null) {
-            precioConDescuento = precioConDescuento * (1 - descuento.getDescuento() / 100); // Precio con descuento
-        }
+            tvPrecioDieselSemanaPasada.setText(String.format("%.2f", precioSemanaPasada));
+            tvPrecioDieselSemanaPasada.setVisibility(View.VISIBLE);
 
-        tvPrecioDieselSemanaPasada.setText(String.format("%.2f", precioSemanaPasada));
-        tvPrecioDieselSemanaPasada.setVisibility(View.VISIBLE);
+            // Si hay descuento, calculamos la diferencia con el precio con descuento
+            double diferenciaDiesel = precioSemanaPasada - precioConDescuento;
 
-        // Si hay descuento, calculamos la diferencia con el precio con descuento
-        double diferenciaDiesel = precioSemanaPasada - precioConDescuento;
 
-        // Verificamos si el precio es 0, en ese caso mostramos "(No disponible)"
-        if (gasolinera.getGasoleoA() == 0) {
-            tvNoDisponibleDiesel.setText("No disponible");
-            tvNoDisponibleDiesel.setVisibility(View.VISIBLE);
-        } else {
             // Si la diferencia es mayor a 0, mostramos la diferencia con "+" y entre paréntesis
             String diferenciaTexto = String.format("%.2f", diferenciaDiesel);
             if (diferenciaDiesel > 0) {
@@ -219,22 +235,19 @@ public class DetailsView extends AppCompatActivity implements IDetails.View {
                 // Si la diferencia es negativa, mostramos el valor con el signo negativo
                 tvDiferenciaDiesel.setText("(- " + diferenciaTexto.substring(1) + ")");
             } else {
-                // Si la diferencia es cero, mostramos "(0.00)"
-                tvDiferenciaDiesel.setText("(0.00)");
+                // Si la diferencia es cero, mostramos ""
+                tvDiferenciaDiesel.setText("");
             }
+            tvDiferenciaDiesel.setVisibility(View.VISIBLE);
+            tvDiaSemanaPasada2.setText(dia + " pasado:") ;
+            tvDiaSemanaPasada2.setVisibility(View.VISIBLE);
+        }
+        else {
+            tvPrecioDieselSemanaPasada.setVisibility(View.GONE);
         }
 
-        tvDiferenciaDiesel.setVisibility(View.VISIBLE);
     }
 
-
-    @Override
-    public void mostrarDiaDeLaSemana(String texto) {
-        tvDiaSemanaPasada.setText(texto + " pasado:") ;
-        tvDiaSemanaPasada.setVisibility(View.VISIBLE);
-        tvDiaSemanaPasada2.setText(texto + " pasado:") ;
-        tvDiaSemanaPasada2.setVisibility(View.VISIBLE);
-    }
 
     @Override
     public void mostrarError(String mensaje) {

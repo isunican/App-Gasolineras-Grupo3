@@ -24,26 +24,16 @@ public interface IDetails {
 
 
     public interface View {
-        /**
-         * Initialize the view. Typically this should initialize all the listeners in the view.
-         * Only the Presenter should call this method
-         */
-        public void init();
 
+        public void init();
 
         boolean onOptionsItemSelected(MenuItem item);
 
-
         IGasolinerasRepository getGasolinerasRepository();
 
+        void mostrarPrecioGasolina95SemanaPasada(double precioSemanaPasada, Descuento descuento,String dia);
 
-        void mostrarPrecioGasolina95SemanaPasada(double precioSemanaPasada, Descuento descuento);
-
-
-        void mostrarPrecioDieselSemanaPasada(double precioSemanaPasada, Descuento descuento);
-
-        void mostrarDiaDeLaSemana(String texto);
-
+        void mostrarPrecioDieselSemanaPasada(double precioSemanaPasada, Descuento descuento,String dia);
 
         void mostrarError(String mensaje);
 
