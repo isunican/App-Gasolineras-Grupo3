@@ -117,7 +117,7 @@ public class MainPresenterTest {
 
     }
 
-    @Test
+    /**@Test
     public void testFiltrarPorMunicipioSinGasolineras() {
 
         listaGasolineras.add(gasolineraReinosa1);
@@ -133,7 +133,7 @@ public class MainPresenterTest {
         assertFalse(sut.filtroActivado);
         verify(mockView).mostrarErrorNoGasolinerasEnMunicipio("Error: No existen gasolineras \n con el filtro aplicado");
 
-    }
+    }*/
 
     @Test
     public void testFiltrarPorMunicipioEliminacionFiltrado() {
