@@ -3,8 +3,6 @@ package es.unican.gasolineras.activities.details;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 
-
-import android.util.TypedValue;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -57,10 +55,6 @@ public class DetailsView extends AppCompatActivity implements IDetails.View {
     Gasolinera gasolinera;
 
 
-    @Override
-    public void init() {
-
-    }
 
     /**
      * @see AppCompatActivity#onCreate(Bundle)
@@ -75,6 +69,7 @@ public class DetailsView extends AppCompatActivity implements IDetails.View {
         // Get Gas Station from the intent that triggered this activity
         gasolinera = Parcels.unwrap(getIntent().getExtras().getParcelable(INTENT_STATION));
 
+        // Instantiate presenter and initialize the view
         AppDatabase db = DatabaseFunction.getDatabase(this);
         presenter = new DetailsPresenter(gasolinera,db.descuentoDao());
         presenter.init(this);
@@ -136,11 +131,22 @@ public class DetailsView extends AppCompatActivity implements IDetails.View {
         return super.onOptionsItemSelected(item);
     }
 
+
+    /**
+     * @see IDetails.View#getGasolinerasRepository()
+     */
     @Override
     public IGasolinerasRepository getGasolinerasRepository() {
         return repository;
     }
 
+
+    /**
+     * @see IDetails.View#mostrarPreciosActuales(Descuento)
+     *
+     * @param descuento descuento de la gasolinera seleccionada
+     */
+    @Override
     public void mostrarPreciosActuales(Descuento descuento) {
         // Verificar si el precio de la gasolina 95 es 0.0
         if (gasolinera.getGasolina95E5() != 0.0) {
@@ -153,6 +159,8 @@ public class DetailsView extends AppCompatActivity implements IDetails.View {
             }
             tvPrecioGasolina95Hoy.setVisibility(View.VISIBLE);  // Mostrar el precio
         } else {
+            // En el caso de que el precio de la gasolina sea 0.0 significa
+            // que no hay datos registrados y por tanto no esta disponible.
             tvNoDisponibleGasolina95.setText("(No disponible)");
             tvNoDisponibleGasolina95.setVisibility(View.VISIBLE);
         }
@@ -168,6 +176,8 @@ public class DetailsView extends AppCompatActivity implements IDetails.View {
             }
             tvPrecioDieselHoy.setVisibility(View.VISIBLE);  // Mostrar el precio
         } else {
+            // En el caso de que el precio del diesel sea 0.0 significa
+            // que no hay datos registrados y por tanto no esta disponible.
             tvNoDisponibleDiesel.setText("(No disponible)");
             tvNoDisponibleDiesel.setVisibility(View.VISIBLE);
 
@@ -175,7 +185,13 @@ public class DetailsView extends AppCompatActivity implements IDetails.View {
   
     }
 
-
+    /**
+     * @see IDetails.View#mostrarPrecioGasolina95SemanaPasada
+     *
+     * @param precioSemanaPasada precio de gasolina de la semana pasada
+     * @param descuento  descuento registrado de la gasolinera seleccionada
+     * @param dia  dia concreto de la semana en el que se realiza la consulta a la gasolinera
+     */
     @Override
     public void mostrarPrecioGasolina95SemanaPasada(double precioSemanaPasada,Descuento descuento, String dia) {
         if (precioSemanaPasada != 0.0) {
@@ -202,6 +218,7 @@ public class DetailsView extends AppCompatActivity implements IDetails.View {
                 // Si la diferencia es cero, no se muestra nada
                 tvDiferenciaGasolina95.setText("");
             }
+            // Se muestra el dia de la semana
             tvDiferenciaGasolina95.setVisibility(View.VISIBLE);
             tvDiaSemanaPasada.setText(dia + " pasado:") ;
             tvDiaSemanaPasada.setVisibility(View.VISIBLE);
@@ -212,6 +229,13 @@ public class DetailsView extends AppCompatActivity implements IDetails.View {
     }
 
 
+    /**
+     * @see IDetails.View#mostrarPrecioDieselSemanaPasada(double, Descuento, String)
+     *
+     * @param precioSemanaPasada precio de gasolina de la semana pasada
+     * @param descuento  descuento registrado de la gasolinera seleccionada
+     * @param dia  dia concreto de la semana en el que se realiza la consulta a la gasolinera
+     */
     @Override
     public void mostrarPrecioDieselSemanaPasada(double precioSemanaPasada,Descuento descuento,String dia) {
         if (precioSemanaPasada != 0.0) {
@@ -238,6 +262,7 @@ public class DetailsView extends AppCompatActivity implements IDetails.View {
                 // Si la diferencia es cero, mostramos ""
                 tvDiferenciaDiesel.setText("");
             }
+            // Se muestra el dia de la semana
             tvDiferenciaDiesel.setVisibility(View.VISIBLE);
             tvDiaSemanaPasada2.setText(dia + " pasado:") ;
             tvDiaSemanaPasada2.setVisibility(View.VISIBLE);
@@ -248,7 +273,11 @@ public class DetailsView extends AppCompatActivity implements IDetails.View {
 
     }
 
-
+    /**
+     * @see IDetails.View#mostrarError
+     *
+     * @param mensaje the error message to show
+     */
     @Override
     public void mostrarError(String mensaje) {
         // Show error message (implement appropriate error handling for your app, like a Toast or Snackbar)

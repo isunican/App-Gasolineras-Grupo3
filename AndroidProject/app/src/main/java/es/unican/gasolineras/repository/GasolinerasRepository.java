@@ -54,6 +54,7 @@ public class GasolinerasRepository implements IGasolinerasRepository {
      * @see IGasolinerasRepository#requestGasolineras(ICallBack, String)
      * @param cb the callback that will asynchronously process the returned gas stations
      * @param ccaa id of the "comunidad autonoma"
+     * @param fecha fecha para la que realizar la consulta
      */
     @Override
     public void requestGasolinerasHistoricoFechas(ICallBack cb, String ccaa, LocalDate fecha) {
