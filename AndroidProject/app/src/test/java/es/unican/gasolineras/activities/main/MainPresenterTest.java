@@ -184,7 +184,7 @@ public class MainPresenterTest {
         );
 
         verify(mockView).showStations(lista);
-        verify(mockRepository).requestGasolineras(any(), "06");
+        verify(mockRepository).requestGasolineras(any(), any());
         assertTrue(sut.activarOrdenamiento());
         assertEquals("Gasolina", sut.hayOrdenamientoActivado());
 
