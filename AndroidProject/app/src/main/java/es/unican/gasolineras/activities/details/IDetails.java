@@ -1,9 +1,7 @@
 package es.unican.gasolineras.activities.details;
 
-import android.os.Bundle;
 import android.view.MenuItem;
 
-import es.unican.gasolineras.activities.ConsultarRepostaje.IConsultar;
 import es.unican.gasolineras.model.Descuento;
 import es.unican.gasolineras.repository.IGasolinerasRepository;
 

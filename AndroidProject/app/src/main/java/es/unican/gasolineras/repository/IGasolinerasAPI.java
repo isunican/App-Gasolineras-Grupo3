@@ -1,6 +1,5 @@
 package es.unican.gasolineras.repository;
 
-import java.time.LocalDate;
 
 import es.unican.gasolineras.model.GasolinerasResponse;
 import retrofit2.Call;

@@ -49,6 +49,8 @@ import es.unican.gasolineras.repository.IGasolinerasRepository;
 @AndroidEntryPoint
 public class MainView extends AppCompatActivity implements IMainContract.View {
 
+    public static final String GASOLINA = "Gasolina";
+
     /** The presenter of this view */
     private MainPresenter presenter;
 
@@ -184,7 +186,7 @@ public class MainView extends AppCompatActivity implements IMainContract.View {
             String ordenamiento = presenter.hayOrdenamientoActivado();
             if (ordenamiento == null) {
                 gasolina.setChecked(true);
-            } else if (ordenamiento.equals("Gasolina")) {
+            } else if (ordenamiento.equals(GASOLINA)) {
                 gasolina.setChecked(true);
             } else {
                 diesel.setChecked(true);
@@ -196,11 +198,11 @@ public class MainView extends AppCompatActivity implements IMainContract.View {
                 String combustibleSeleccionado;
 
                 if (selectedId == R.id.btnGasolina) {
-                    combustibleSeleccionado = "Gasolina";
+                    combustibleSeleccionado = GASOLINA;
                 } else if (selectedId == R.id.btnDiesel) {
                     combustibleSeleccionado = "Diesel";
                 } else {
-                    combustibleSeleccionado = "Gasolina";
+                    combustibleSeleccionado = GASOLINA;
                 }
                 presenter.onBtnOrdenarClicked(combustibleSeleccionado);
                 dialog.dismiss();

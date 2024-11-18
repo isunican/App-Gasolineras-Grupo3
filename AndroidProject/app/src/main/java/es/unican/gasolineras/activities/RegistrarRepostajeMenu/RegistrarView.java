@@ -1,7 +1,6 @@
 package es.unican.gasolineras.activities.RegistrarRepostajeMenu;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -106,13 +105,9 @@ public class RegistrarView extends AppCompatActivity implements IRegistrar.View 
             new AlertDialog.Builder(RegistrarView.this)
                     .setTitle("Confirmación")
                     .setMessage(getString(R.string.registro_exito))
-                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            // Puedes agregar alguna acción adicional si es necesario
-                            Intent intent = new Intent(RegistrarView.this, ConsultarView.class);
-                            startActivity(intent);
-                        }
+                    .setPositiveButton("OK", (dialog, which) -> {
+                        Intent intent = new Intent(this, ConsultarView.class);
+                        startActivity(intent);
                     })
                     .show();
 
@@ -121,13 +116,9 @@ public class RegistrarView extends AppCompatActivity implements IRegistrar.View 
             new AlertDialog.Builder(RegistrarView.this)
                     .setTitle("Error")
                     .setMessage(getString(R.string.error_acceso_bbdd))
-                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            // Puedes agregar alguna acción adicional si es necesario
-                            Intent intent = new Intent(RegistrarView.this, MainView.class);
-                            startActivity(intent);
-                        }
+                    .setPositiveButton("OK", (dialog, which) -> {
+                        Intent intent = new Intent(this, MainView.class);
+                        startActivity(intent);
                     })
                     .show();
         }

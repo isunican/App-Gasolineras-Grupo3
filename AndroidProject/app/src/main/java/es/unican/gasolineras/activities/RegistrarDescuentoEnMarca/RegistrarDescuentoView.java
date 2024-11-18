@@ -77,12 +77,7 @@ public class RegistrarDescuentoView extends AppCompatActivity implements IRegist
         });
 
         Button btnCancelar = findViewById(R.id.btnCancelar);
-        btnCancelar.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                presenter.onBtnCancelarClicked();
-            }
-        });
+        btnCancelar.setOnClickListener(v -> presenter.onBtnCancelarClicked());
     }
 
 
@@ -94,25 +89,14 @@ public class RegistrarDescuentoView extends AppCompatActivity implements IRegist
         try {
             new AlertDialog.Builder(RegistrarDescuentoView.this)
                     .setMessage(getString(R.string.registro_descuento_exito))
-                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-
-                            finish();
-                        }
-                    })
+                    .setPositiveButton("OK", (dialog, which) -> finish())
                     .show();
 
         } catch (Exception e) {
             new AlertDialog.Builder(RegistrarDescuentoView.this)
                     .setTitle("Error")
                     .setMessage(getString(R.string.error_acceso_bbdd))
-                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            finish();
-                        }
-                    })
+                    .setPositiveButton("OK", (dialog, which) -> finish())
                     .show();
         }
     }
