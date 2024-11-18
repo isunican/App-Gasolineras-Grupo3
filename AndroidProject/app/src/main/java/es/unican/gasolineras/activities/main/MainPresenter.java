@@ -25,6 +25,7 @@ public class MainPresenter implements IMainContract.Presenter {
     public Boolean filtroActivado = false;
     public String filtroActual;
 
+
     public Boolean ordenamientoActivado = false;
     public String ordenamientoActual;
 
@@ -91,16 +92,16 @@ public class MainPresenter implements IMainContract.Presenter {
             }
         }
 
-        if (listaFiltrada.isEmpty()) {
-
-            view.mostrarErrorNoGasolinerasEnMunicipio("Error: No existen gasolineras \n con el filtro aplicado");
-            return;
-        }
-
-        filtroActivado = false;
-
         if (!municipio.equals("Mostrar todos")) {
             filtroActual = activarFiltro(municipio);
+        }
+        else {
+            filtroActivado = false;
+        }
+
+        if (listaFiltrada.isEmpty()) {
+            view.mostrarErrorNoGasolinerasEnMunicipio("Error: No existen gasolineras \n con el filtro aplicado");
+            return;
         }
 
         String tipoCombustible = hayOrdenamientoActivado();
@@ -131,12 +132,17 @@ public class MainPresenter implements IMainContract.Presenter {
 
         List<Gasolinera> copiaGasolineras;
 
+
         if(hayFiltroActivado() != null) {
             copiaGasolineras = new ArrayList<>(listaFiltrada);
         } else {
             copiaGasolineras = new ArrayList<>(listaGasolineras);
         }
 
+        if (copiaGasolineras.isEmpty()) {
+            view.mostrarErrorNoGasolinerasEnMunicipio("Error: No existen gasolineras \n con el filtro aplicado");
+            return;
+        }
 
         copiaGasolineras.removeIf(gasolinera -> {
             if (tipoCombustible.equals("Gasolina")) {
@@ -255,7 +261,8 @@ public class MainPresenter implements IMainContract.Presenter {
     /**
      * Activa el ordenamiento
      */
-    public void activarOrdenamiento() {
-        ordenamientoActivado = true;
+    public boolean activarOrdenamiento() {
+
+        return ordenamientoActivado = true;
     }
 }

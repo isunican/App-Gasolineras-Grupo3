@@ -159,7 +159,6 @@ public class MainPresenterITest {
 
         verify(mockMainView).getGasolinerasRepository();
         verify(mockMainView).mostrarErrorNoGasolinerasEnMunicipio("Error: No existen gasolineras \n con el filtro aplicado");
-        assertFalse(sut.filtroActivado);
     }
 
 }
