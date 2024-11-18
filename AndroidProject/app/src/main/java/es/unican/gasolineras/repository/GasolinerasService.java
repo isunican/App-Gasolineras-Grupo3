@@ -46,7 +46,7 @@ public class GasolinerasService {
                 Number number = null;
                 try {
                     number = format.parse(json.getAsString());
-                } catch (ParseException e) {}
+                } catch (ParseException e) { }
                 return number != null ? number.doubleValue() : null;
             }
         };

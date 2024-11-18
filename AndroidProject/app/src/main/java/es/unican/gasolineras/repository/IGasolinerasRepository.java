@@ -18,7 +18,7 @@ public interface IGasolinerasRepository {
          * Asynchronously requests a list of gas stations.
          * @param cb the callback that will asynchronously process the returned gas stations
          * @param ccaa id of the "comunidad autonoma", as defined in IDCCAAs
-         * @param fecha
+         * @param fecha fecha para la que se realiza la consulta
          */
         public void requestGasolinerasHistoricoFechas(ICallBack cb, String ccaa,LocalDate fecha);
 

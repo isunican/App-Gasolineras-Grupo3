@@ -16,7 +16,7 @@ import es.unican.gasolineras.repository.IGasolinerasRepository;
 
 public class DetailsPresenter implements  IDetails.Presenter {
 
-
+    /** The view that is controlled by this presenter */
     private IDetails.View view;
     private DescuentoDAO descuentoDAO;
     IGasolinerasRepository repository;
@@ -36,7 +36,6 @@ public class DetailsPresenter implements  IDetails.Presenter {
     public void init(IDetails.View view) {
         this.view = view;
         this.repository = view.getGasolinerasRepository();
-        this.view.init();
         load();
     }
 
@@ -45,9 +44,9 @@ public class DetailsPresenter implements  IDetails.Presenter {
      */
     private void load() {
 
+        // Recoger la fecha actual y la fecha de la semana pasada
         LocalDate fechaActual = LocalDate.now();
         LocalDate fechaSemanaPasada = fechaActual.minusWeeks(1);
-
 
         // Obtener precios de la semana pasada
         requestGasolineras(fechaSemanaPasada, new ICallBack() {
@@ -58,21 +57,23 @@ public class DetailsPresenter implements  IDetails.Presenter {
                         .filter(g -> g.getId().equals(gasolinera.getId()))
                         .findFirst()
                         .orElse(null);
-
+                // Comprobar si la gasolinera tiene un descueto registrado
+                Descuento d = descuentoDAO.descuentoPorMarca(gasolinera.getRotulo());
                 if (gasolineraSemanaPasada != null) {
                     double precioSemanaAnteriorGasoleoA = gasolineraSemanaPasada.getGasoleoA();
                     double precioSemanaAnteriorGasolina95 = gasolineraSemanaPasada.getGasolina95E5();
-
-                    Descuento d = descuentoDAO.descuentoPorMarca(gasolinera.getRotulo());
+                    // Mostrar los precios actuales en la vista
                     view.mostrarPreciosActuales(d);
-
+                    String dia = obtenerNombreDelDia(fechaActual);
                     // Mostrar los precios de la semana pasada en la vista
-                    view.mostrarPrecioDieselSemanaPasada(precioSemanaAnteriorGasoleoA ,d);
-                    view.mostrarPrecioGasolina95SemanaPasada(precioSemanaAnteriorGasolina95 ,d);
-                    // Mostrar el día de la semana correspondiente a la semana pasada
-                    view.mostrarDiaDeLaSemana(obtenerNombreDelDia(fechaActual));
-                } else {
-                    view.mostrarError("No se encontraron datos para la semana pasada.");
+                    view.mostrarPrecioDieselSemanaPasada(precioSemanaAnteriorGasoleoA ,d,dia);
+                    view.mostrarPrecioGasolina95SemanaPasada(precioSemanaAnteriorGasolina95 ,d,dia);
+
+                }
+                else {
+                    // En el caso de que la gasolinera seleccionada no tenga datos para la semana pasada
+                    // unicamente se muestran los precios acuales.
+                    view.mostrarPreciosActuales(d);
                 }
             }
 
@@ -83,11 +84,22 @@ public class DetailsPresenter implements  IDetails.Presenter {
         });
     }
 
-    public String obtenerNombreDelDia(LocalDate fechaActual) {
+
+    /**
+     * Obtiene el nombre del dia de la semana desde el que se consulta el precio de la gasolinera.
+     * @param fechaActual fecha del dia en el que se consulta
+     */
+    private String obtenerNombreDelDia(LocalDate fechaActual) {
         String dia = fechaActual.getDayOfWeek().getDisplayName(TextStyle.FULL, new Locale("es", "ES"));
         return dia.substring(0, 1).toUpperCase() + dia.substring(1).toLowerCase();
     }
 
+
+    /**
+     * Realiza la llamada correspondiente al historico de gasolineras con la fecha determinada
+     * @param fecha fecha del dia en el que se consulta
+     * @param callBack llamada al callBack
+     */
     private void requestGasolineras(LocalDate fecha, ICallBack callBack) {
         repository.requestGasolinerasHistoricoFechas(callBack, IDCCAAs.CANTABRIA.id, fecha);
     }
