@@ -106,8 +106,8 @@ public class MainPresenterTest {
     }
 
     @Test
-    public void testFiltrarPorMunicipioExito() {
-
+    public void onBtnFiltrarClickedTest() {
+        //Caso exito
         sut.onBtnFiltrarClicked("Reinosa");
 
         List<Gasolinera> listaEsperada = List.of(
@@ -118,43 +118,28 @@ public class MainPresenterTest {
 
         verify(mockRepository).requestGasolineras(any(), any());
         verify(mockView).showStations(listaEsperada);
-        assertEquals(sut.activarFiltro("Reinosa"), "Reinosa");
+        assertEquals("Reinosa", sut.activarFiltro("Reinosa"));
         assertEquals("Reinosa", sut.hayFiltroActivado());
-    }
-    /*
-    @Test
-    public void testFiltrarPorMunicipioCancelacionFiltrado() {
 
-        List<Gasolinera> listaEsperada = List.of(
-                gasolinera1,
-                gasolinera2,
-                gasolinera3
-        );
+        //Cancelacion filtrado
 
         verify(mockRepository).requestGasolineras(any(), any());
         verify(mockView).showStations(listaEsperada);
-        assertEquals(sut.activarFiltro("Reinosa"), "Reinosa");
+        assertEquals("Reinosa",sut.activarFiltro("Reinosa"));
         assertEquals("Reinosa", sut.hayFiltroActivado());
 
-    }*/
-
-    /**@Test
-    public void testFiltrarPorMunicipioSinGasolineras() {
-
+        //Municipio sin gasolinera
         sut.onBtnFiltrarClicked("Bareyo");
 
         verify(mockRepository).requestGasolineras(any(), any());
         assertEquals("Bareyo",sut.hayFiltroActivado());
+        assertEquals("Bareyo",sut.activarFiltro("Bareyo"));
         verify(mockView).mostrarErrorNoGasolinerasEnMunicipio("Error: No existen gasolineras \n con el filtro aplicado");
 
-    }*/
-
-    @Test
-    public void testFiltrarPorMunicipioEliminacionFiltrado() {
-
+        //EliminacionFiltrado
         sut.onBtnFiltrarClicked("Mostrar todos");
 
-        List<Gasolinera> listaEsperada = List.of(
+        List<Gasolinera> listaEsperada1 = List.of(
                 gasolinera1,
                 gasolinera2,
                 gasolinera3,
@@ -166,14 +151,12 @@ public class MainPresenterTest {
 
         verify(mockRepository).requestGasolineras(any(), any());
         assertNull(sut.hayFiltroActivado());
-        verify(mockView, times(2)).showStations(listaEsperada);
+        verify(mockView, times(2)).showStations(listaEsperada1);
 
     }
 
-    //Los siguientes cuatro test comprueban el funcionameinto
-    // del metodo onBtnOrdenarClicked(tipoCombustible)
     @Test
-    public void testOrdenarPorPrecioSinFiltroSinDescuentos() {
+    public void onBtnOrdenarClickedSinFiltroSinDescuentoTest() {
 
         sut.onBtnOrdenarClicked("Gasolina");
 
@@ -191,7 +174,7 @@ public class MainPresenterTest {
     }
 
     @Test
-    public void testOrdenarPorPrecioConFiltroSinDescuentos() {
+    public void onBtnOrdenarClickedConFiltroSinDescuentosTest() {
         sut.onBtnFiltrarClicked("Ampuero");
         sut.onBtnOrdenarClicked("Diesel");
 
@@ -208,7 +191,7 @@ public class MainPresenterTest {
     }
 
     @Test
-    public void testOrdenarPorPrecioSinFiltroConDescuentos() {
+    public void onBtnOrdenarClickedSinFiltroConDescuentosTest() {
 
         Descuento descuento = new Descuento();
         descuento.setDescuento(100);
@@ -234,7 +217,7 @@ public class MainPresenterTest {
     }
 
     @Test
-    public void testOrdenarPorPrecioConFiltroSinGasolinerasSinDescuentos() {
+    public void onBtnOrdenarClickedConFiltroSinGasolinerasSinDescuentosTest() {
 
         sut.onBtnFiltrarClicked("Bareyo");
         sut.onBtnOrdenarClicked("Gasolina");
@@ -248,15 +231,10 @@ public class MainPresenterTest {
         assertNull(sut.hayOrdenamientoActivado());
     }
 
-    //A partir de aqui del metodo calcularPrecioConDescuento
+
 
     @Test
-    public void testOrdenarPorPrecioCalculoSinDescuentoGasolina() {
-        Descuento descuento = new Descuento();
-        descuento.setDescuento(10);
-
-        when(mockView.getDescuentoDatabase().descuentoPorMarca("Cepsa")).thenReturn(descuento);
-
+    public void calcularPrecioConDescuentoSinDescuentoGasolinaTest() {
         Gasolinera gasA = new Gasolinera();
         gasA.setRotulo("Repsol");
         gasA.setGasolina95E5(1.49);
@@ -267,7 +245,7 @@ public class MainPresenterTest {
     }
 
     @Test
-    public void testOrdenarPorPrecioCalculoConDescuentoDiesel() {
+    public void calcularPrecioConDescuentoConDescuentoDieselTest() {
         Descuento descuento = new Descuento();
         descuento.setDescuento(10);
 
@@ -283,7 +261,7 @@ public class MainPresenterTest {
     }
 
     @Test
-    public void testOrdenarPorPrecioCalculoConDescuentoGasolina() {
+    public void calcularPrecioConDescuentoConDescuentoGasolinaTest() {
         Descuento descuento = new Descuento();
         descuento.setDescuento(10);
 
@@ -299,11 +277,7 @@ public class MainPresenterTest {
     }
 
     @Test
-    public void testOrdenarPorPrecioCalculoSinDescuentoDiesel() {
-        Descuento descuento = new Descuento();
-        descuento.setDescuento(10);
-
-        when(mockView.getDescuentoDatabase().descuentoPorMarca("Cepsa")).thenReturn(descuento);
+    public void calcularPrecioConDescuentoSinDescuentoDieselTest() {
 
         Gasolinera gasA = new Gasolinera();
         gasA.setRotulo("Repsol");
