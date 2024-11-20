@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -54,6 +55,8 @@ public class MainView extends AppCompatActivity implements IMainContract.View {
     /** The presenter of this view */
     private MainPresenter presenter;
 
+    GasolinerasArrayAdapter adapter;
+
     /** The repository to access the data. This is automatically injected by Hilt in this class */
     @Inject
     IGasolinerasRepository repository;
@@ -86,6 +89,10 @@ public class MainView extends AppCompatActivity implements IMainContract.View {
         if (ordenamiento != null) {
             presenter.onBtnOrdenarClicked(ordenamiento);
         }
+        if (adapter != null) {
+            adapter.notifyDataSetChanged();
+        }
+
 
     }
 
@@ -250,7 +257,7 @@ public class MainView extends AppCompatActivity implements IMainContract.View {
     @Override
     public void showStations(List<Gasolinera> stations) {
         ListView list = findViewById(R.id.lvStations);
-        GasolinerasArrayAdapter adapter = new GasolinerasArrayAdapter(this, stations, db.descuentoDao());
+        adapter = new GasolinerasArrayAdapter(this, stations, db.descuentoDao());
         list.setAdapter(adapter);
     }
 
