@@ -1,6 +1,6 @@
 ## Dominio
                                                 
-![](https://www.plantuml.com/plantuml/png/RL6zRdCX3Drv2YjZf8mPlczAfLRTqxu00VV65TW8cw6g-kwbm-qDDDvy3kS7EAdvQYqdvwuK4J0N-u2C-O9LdGl9gyApLqd4M3ryEkXpW1Uhn0jG7FSgrfACM2ZZ7gbY22Gymhan1IgqggEqIq9OVh9H7kwWnFxVyUdellxsr3Dg4LQS2xzXkFeHOh492LtPaldD-On5rFpxwZSx_lAT7OgMYlsghpqYpLGYgw9RnYDgQCWcDnd41etYd9bz3NxsYwk-M_QvznZxmm5s-ztjX_w7PJlet0avjfo-0G00)
+![](https://www.plantuml.com/plantuml/png/RL6nJWCn3Dtp5LR7IXqxm5Ga47lX1tA9kHebSMGx0qByEq7Yk5weDx_dzvuJdzIyMCl9kGj51CpLFY1Zdb3KkP2yAZnxvKG5nSEdWru7U36XCWF5RIziBV4M2tNRHn8CWRXiuTmA1Qgqg2EtAI7CFzd83pTGAlxk-7JyPIRkSxu0Yh2uh_-xwncrSb4S7_66uUAtK64RaD2LBPbVdSzOMSs_BtwZun-_iCloLJ0Gl_Q8D5A9J5ZNZ4VKqB0ONsLGCMWKnypi9VZHBoxwRjdhrcVi3mVOxNVNHxw7UHrqxeGbjfo-0G00)
 
 ## Arquitectura
 

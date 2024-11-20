@@ -10,6 +10,7 @@ class Gasolinera {
     - String municipio
     - double gasoleoA
     - double gasolina95E5
+    - boolean error
 }
 
 class GasolinerasResponse {
