@@ -2,3 +2,5 @@ US506087-ConsultarRepostaje: https://youtube.com/shorts/gm77nCdB8VU
 US506089-FiltrarGasolinerasPorMunicipios: https://youtu.be/RIOAfk5DvLc
 US500328-RegistrarRepostaje: https://youtu.be/oDDEXSGb4bA
 US506090-RegistrarDescuentoEnMarca: https://youtu.be/EQoj4NDOVlM
+US500326-CompararPrecioActualRespectoAlMismoDiaDeLaSemanaAnterior: https://youtube.com/shorts/nhchIbCSzWw?feature=share
+US500268-ObtenerListaGasolinerasordenadasPorPrecio: https://youtube.com/shorts/VaSHZSifNT8
