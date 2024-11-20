@@ -57,19 +57,17 @@ class DetailsPresenter {
 
 
 interface IDetails#View {
-    + init()
     + onOptionsItemSelected(MenuItem item): boolean
     + getGasolinerasRepository():  IGasolinerasRepository
     + mostrarPreciosSemanaPasada(double precioSemanaPasadaDiesel, double precioSemanaPasadaGasolina95,String dia,double 
       diferenciaGasolina, double diferenciaDiesel);
-    + mostrarDiaDeLaSemana(String texto)
-    + mostrarError(String mensaje)
+    + mostrarError(String mensaje);
     + mostrarPreciosActuales(double precioGasolinaActual, double precioActualDiesel);
 }
 
 
 interface IDetails#Presenter {
-    + init()
+    + init();
 }
 
 
