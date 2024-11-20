@@ -2,6 +2,7 @@ package es.unican.gasolineras.activities.main;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
@@ -54,36 +55,50 @@ public class MainPresenterTest {
 
         gasolinera1 = new Gasolinera();
         gasolinera1.setMunicipio("Reinosa");
+        gasolinera1.setCp("39200");
+        gasolinera1.setDireccion("Calle 1");
         gasolinera1.setRotulo("Repsol");
 
         gasolinera2 = new Gasolinera();
         gasolinera2.setMunicipio("Reinosa");
+        gasolinera2.setCp("39200");
+        gasolinera2.setDireccion("Calle 2");
         gasolinera2.setRotulo("Cepsa");
 
         gasolinera3 = new Gasolinera();
         gasolinera3.setMunicipio("Reinosa");
+        gasolinera3.setCp("39200");
+        gasolinera3.setDireccion("Calle 3");
         gasolinera3.setRotulo("Cepsa");
 
         gasolinera4 = new Gasolinera();
         gasolinera4.setMunicipio("Alfoz de Lloredo");
+        gasolinera4.setCp("39100");
+        gasolinera4.setDireccion("Calle 1");
         gasolinera4.setRotulo("Repsol");
         gasolinera4.setGasoleoA(2);
         gasolinera4.setGasolina95E5(1.25);
 
         gasolinera5 = new Gasolinera();
         gasolinera5.setMunicipio("Ampuero");
+        gasolinera5.setCp("39300");
+        gasolinera5.setDireccion("Calle 1");
         gasolinera5.setRotulo("Repsol");
         gasolinera5.setGasoleoA(1.25);
         gasolinera5.setGasolina95E5(0.0);
 
         gasolinera6 = new Gasolinera();
         gasolinera6.setMunicipio("Ampuero");
+        gasolinera6.setCp("39300");
+        gasolinera6.setDireccion("Calle 2");
         gasolinera6.setRotulo("Cepsa");
         gasolinera6.setGasoleoA(1.12);
         gasolinera6.setGasolina95E5(1.1);
 
         gasolinera7 = new Gasolinera();
         gasolinera7.setMunicipio("Anievas");
+        gasolinera7.setCp("39400");
+        gasolinera7.setDireccion("Calle 1");
         gasolinera7.setRotulo("Avia");
         gasolinera7.setGasoleoA(1.36);
         gasolinera7.setGasolina95E5(1.74);
@@ -119,13 +134,6 @@ public class MainPresenterTest {
         verify(mockRepository).requestGasolineras(any(), any());
         verify(mockView).showStations(listaEsperada);
         assertEquals("Reinosa", sut.activarFiltro("Reinosa"));
-        assertEquals("Reinosa", sut.hayFiltroActivado());
-
-        //Cancelacion filtrado
-
-        verify(mockRepository).requestGasolineras(any(), any());
-        verify(mockView).showStations(listaEsperada);
-        assertEquals("Reinosa",sut.activarFiltro("Reinosa"));
         assertEquals("Reinosa", sut.hayFiltroActivado());
 
         //Municipio sin gasolinera
@@ -287,6 +295,23 @@ public class MainPresenterTest {
         double resultado = sut.calcularPrecioConDescuento(gasA, "Diesel");
         assertEquals(1.33, resultado, 0.01);
     }
+
+    @Test
+    public void calcularPrecioConDescuentoErrorBBDDTest() {
+
+        Gasolinera gasA = new Gasolinera();
+        gasA.setRotulo("Repsol");
+        gasA.setGasolina95E5(1.49);
+        gasA.setGasoleoA(1.33);
+
+        // Simular un error en el acceso a la base de datos
+        when(mockView.getDescuentoDatabase()).thenThrow(new RuntimeException("Error al acceder a la base de datos"));
+
+        assertThrows(RuntimeException.class, () -> sut.calcularPrecioConDescuento(gasA, "Gasolina"));
+
+    }
+
+
 
 
 }
