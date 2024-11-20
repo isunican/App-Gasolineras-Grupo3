@@ -19,7 +19,6 @@ import javax.inject.Inject;
 
 import dagger.hilt.android.AndroidEntryPoint;
 import es.unican.gasolineras.R;
-import es.unican.gasolineras.model.Descuento;
 import es.unican.gasolineras.model.Gasolinera;
 import es.unican.gasolineras.repository.AppDatabase;
 import es.unican.gasolineras.repository.DatabaseFunction;
@@ -52,6 +51,8 @@ public class DetailsView extends AppCompatActivity implements IDetails.View {
     private TextView tvDiferenciaDiesel;
     private TextView tvNoDisponibleGasolina95;
     private TextView tvNoDisponibleDiesel;
+    private TextView tvHoy;
+    private TextView tvHoy2;
     Gasolinera gasolinera;
 
 
@@ -100,6 +101,8 @@ public class DetailsView extends AppCompatActivity implements IDetails.View {
         tvDiferenciaDiesel = findViewById(R.id.tvDiferenciaDiesel);
         tvNoDisponibleGasolina95 = findViewById(R.id.tvNoDisponibleGasolina95);
         tvNoDisponibleDiesel = findViewById(R.id.tvNoDisponibleDiesel);
+        tvHoy = findViewById(R.id.tvHoy);
+        tvHoy2 = findViewById(R.id.tvHoy2);
 
 
         // Set logo
@@ -140,138 +143,113 @@ public class DetailsView extends AppCompatActivity implements IDetails.View {
         return repository;
     }
 
-
     /**
-     * @see IDetails.View#mostrarPreciosActuales(Descuento)
+     * @see IDetails.View#mostrarPreciosSemanaPasada(double, double, String, double, double)
      *
-     * @param descuento descuento de la gasolinera seleccionada
+     * @param precioSemanaPasadaGasolina95 precio de gasolina de la gasolinera seleccionada
+     * @param precioSemanaPasadaDiesel precio de disel de la gasolinera seleccionada
+     * @param diferenciaGasolina diferencia de gasolina actual y de la semana anterior
+     * @param diferenciaDiesel diferencia del precio disel actual y de la semana anterior
+     * @param dia dia de la semana en el que se consulta la gasolina
      */
     @Override
-    public void mostrarPreciosActuales(Descuento descuento) {
-        // Verificar si el precio de la gasolina 95 es 0.0
-        if (gasolinera.getGasolina95E5() != 0.0) {
-            // Si hay descuento, aplicar el descuento
-            if (descuento == null) {
-                tvPrecioGasolina95Hoy.setText(String.format("%.2f", gasolinera.getGasolina95E5()));
-            } else {
-                double precioGasolina = gasolinera.getGasolina95E5() * (1 - descuento.getDescuento() / 100);
-                tvPrecioGasolina95Hoy.setText(String.format("%.2f", precioGasolina));
-            }
-            tvPrecioGasolina95Hoy.setVisibility(View.VISIBLE);  // Mostrar el precio
-        } else {
-            // En el caso de que el precio de la gasolina sea 0.0 significa
-            // que no hay datos registrados y por tanto no esta disponible.
-            tvNoDisponibleGasolina95.setText("(No disponible)");
-            tvNoDisponibleGasolina95.setVisibility(View.VISIBLE);
-        }
+    public void mostrarPreciosSemanaPasada(double precioSemanaPasadaDiesel , double precioSemanaPasadaGasolina95, String dia,double diferenciaGasolina, double diferenciaDiesel) {
+        // Se comprueba si hay disponibilidad del precio de la gasolina
+        if (precioSemanaPasadaGasolina95 != 0.0) {
 
-        // Verificar si el precio de diésel es 0.0
-        if (gasolinera.getGasoleoA() != 0.0) {
-            // Si hay descuento, aplicar el descuento
-            if (descuento == null) {
-                tvPrecioDieselHoy.setText(String.format("%.2f", gasolinera.getGasoleoA()));
-            } else {
-                double precioDiesel = gasolinera.getGasoleoA() * (1 - descuento.getDescuento() / 100);
-                tvPrecioDieselHoy.setText(String.format("%.2f", precioDiesel));
-            }
-            tvPrecioDieselHoy.setVisibility(View.VISIBLE);  // Mostrar el precio
-        } else {
-            // En el caso de que el precio del diesel sea 0.0 significa
-            // que no hay datos registrados y por tanto no esta disponible.
-            tvNoDisponibleDiesel.setText("(No disponible)");
-            tvNoDisponibleDiesel.setVisibility(View.VISIBLE);
-
-        }
-  
-    }
-
-    /**
-     * @see IDetails.View#mostrarPrecioGasolina95SemanaPasada
-     *
-     * @param precioSemanaPasada precio de gasolina de la semana pasada
-     * @param descuento  descuento registrado de la gasolinera seleccionada
-     * @param dia  dia concreto de la semana en el que se realiza la consulta a la gasolinera
-     */
-    @Override
-    public void mostrarPrecioGasolina95SemanaPasada(double precioSemanaPasada,Descuento descuento, String dia) {
-        if (precioSemanaPasada != 0.0) {
-            double precioConDescuento = gasolinera.getGasolina95E5();
-            if (descuento != null) {
-                precioConDescuento = precioConDescuento * (1 - descuento.getDescuento() / 100); // Precio con descuento
-            }
-
-            tvPrecioGasolina95SemanaPasada.setText(String.format("%.2f", precioSemanaPasada));
+            tvPrecioGasolina95SemanaPasada.setText(String.format("%.2f", precioSemanaPasadaGasolina95));
             tvPrecioGasolina95SemanaPasada.setVisibility(View.VISIBLE);
 
-            // Si hay descuento, calculamos la diferencia con el precio con descuento
-            double diferenciaGasolina = precioSemanaPasada - precioConDescuento;
-
-            // Formateamos la diferencia con el signo adecuado y entre paréntesis
-            String diferenciaTexto = String.format("%.2f", diferenciaGasolina);
+            // Mostrar la diferencia de la gasolina
+            String diferenciaTextoGasolina = String.format("%.2f", diferenciaGasolina);
             if (diferenciaGasolina > 0) {
                 // Si la diferencia es positiva, agregar el signo '+' y los paréntesis
-                tvDiferenciaGasolina95.setText("(+ " + diferenciaTexto + ")");
+                tvDiferenciaGasolina95.setText("(+ " + diferenciaTextoGasolina + ")");
             } else if (diferenciaGasolina < 0) {
                 // Si la diferencia es negativa, solo mostrar el valor con el signo negativo
-                tvDiferenciaGasolina95.setText("(- " + diferenciaTexto.substring(1) + ")");
+                tvDiferenciaGasolina95.setText("(- " + diferenciaTextoGasolina.substring(1) + ")");
             } else {
                 // Si la diferencia es cero, no se muestra nada
                 tvDiferenciaGasolina95.setText("");
             }
-            // Se muestra el dia de la semana
+
             tvDiferenciaGasolina95.setVisibility(View.VISIBLE);
+            // Se muestra el dia de la semana
             tvDiaSemanaPasada.setText(dia + " pasado:") ;
             tvDiaSemanaPasada.setVisibility(View.VISIBLE);
-        } else {
+        }
+        else {
             tvPrecioGasolina95SemanaPasada.setVisibility(View.GONE);
         }
 
-    }
+        // Se comprueba si hay disponibilidad del precio del diesel
+        if (precioSemanaPasadaDiesel != 0.0) {
 
-
-    /**
-     * @see IDetails.View#mostrarPrecioDieselSemanaPasada(double, Descuento, String)
-     *
-     * @param precioSemanaPasada precio de gasolina de la semana pasada
-     * @param descuento  descuento registrado de la gasolinera seleccionada
-     * @param dia  dia concreto de la semana en el que se realiza la consulta a la gasolinera
-     */
-    @Override
-    public void mostrarPrecioDieselSemanaPasada(double precioSemanaPasada,Descuento descuento,String dia) {
-        if (precioSemanaPasada != 0.0) {
-            double precioConDescuento = gasolinera.getGasoleoA();
-            if (descuento != null) {
-                precioConDescuento = precioConDescuento * (1 - descuento.getDescuento() / 100); // Precio con descuento
-            }
-
-            tvPrecioDieselSemanaPasada.setText(String.format("%.2f", precioSemanaPasada));
+            tvPrecioDieselSemanaPasada.setText(String.format("%.2f", precioSemanaPasadaDiesel));
             tvPrecioDieselSemanaPasada.setVisibility(View.VISIBLE);
 
-            // Si hay descuento, calculamos la diferencia con el precio con descuento
-            double diferenciaDiesel = precioSemanaPasada - precioConDescuento;
-
-
-            // Si la diferencia es mayor a 0, mostramos la diferencia con "+" y entre paréntesis
-            String diferenciaTexto = String.format("%.2f", diferenciaDiesel);
+            // Mostrar la diferencia de disel
+            String diferenciaTextoDiesel = String.format("%.2f", diferenciaDiesel);
             if (diferenciaDiesel > 0) {
-                tvDiferenciaDiesel.setText("(+ " + diferenciaTexto + ")");
+                tvDiferenciaDiesel.setText("(+ " + diferenciaTextoDiesel + ")");
             } else if (diferenciaDiesel < 0) {
                 // Si la diferencia es negativa, mostramos el valor con el signo negativo
-                tvDiferenciaDiesel.setText("(- " + diferenciaTexto.substring(1) + ")");
+                tvDiferenciaDiesel.setText("(- " + diferenciaTextoDiesel.substring(1) + ")");
             } else {
                 // Si la diferencia es cero, mostramos ""
                 tvDiferenciaDiesel.setText("");
             }
-            // Se muestra el dia de la semana
+
             tvDiferenciaDiesel.setVisibility(View.VISIBLE);
+            // Se muestra el dia de la semana
             tvDiaSemanaPasada2.setText(dia + " pasado:") ;
             tvDiaSemanaPasada2.setVisibility(View.VISIBLE);
         }
+
         else {
             tvPrecioDieselSemanaPasada.setVisibility(View.GONE);
         }
 
     }
+
+
+    /**
+     * @see IDetails.View#mostrarPreciosActuales(double, double)
+     *
+     * @param precioGasolina precio de gasolina de la gasolinera seleccionada
+     * @param precioDiesel precio de disel de la gasolinera seleccionada
+     *
+
+     */
+    @Override
+    public void mostrarPreciosActuales(double precioGasolina, double precioDiesel) {
+        // Verificar si el precio de la gasolina 95 es 0.0
+        if (gasolinera.getGasolina95E5() != 0.0) {
+            tvPrecioGasolina95Hoy.setText(String.format("%.2f", precioGasolina));
+            tvPrecioGasolina95Hoy.setVisibility(View.VISIBLE);
+        } else {
+            // En el caso de que el precio de la gasolina sea 0.0 significa
+            // que no hay datos registrados y por tanto no esta disponible.
+            tvNoDisponibleGasolina95.setText("(No disponible)");
+            tvNoDisponibleGasolina95.setVisibility(View.VISIBLE);
+            tvHoy.setVisibility(View.GONE);
+        }
+
+        // Verificar si el precio de diésel es 0.0
+        if (gasolinera.getGasoleoA() != 0.0) {
+            tvPrecioDieselHoy.setText(String.format("%.2f", precioDiesel));
+            tvPrecioDieselHoy.setVisibility(View.VISIBLE);
+
+        } else {
+            // En el caso de que el precio del diesel sea 0.0 significa
+            // que no hay datos registrados y por tanto no esta disponible.
+            tvNoDisponibleDiesel.setText("(No disponible)");
+            tvNoDisponibleDiesel.setVisibility(View.VISIBLE);
+            tvHoy2.setVisibility(View.GONE);
+
+        }
+    }
+
 
     /**
      * @see IDetails.View#mostrarError
