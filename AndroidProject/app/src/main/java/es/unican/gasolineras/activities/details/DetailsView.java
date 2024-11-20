@@ -19,7 +19,6 @@ import javax.inject.Inject;
 
 import dagger.hilt.android.AndroidEntryPoint;
 import es.unican.gasolineras.R;
-import es.unican.gasolineras.model.Descuento;
 import es.unican.gasolineras.model.Gasolinera;
 import es.unican.gasolineras.repository.AppDatabase;
 import es.unican.gasolineras.repository.DatabaseFunction;
@@ -52,6 +51,8 @@ public class DetailsView extends AppCompatActivity implements IDetails.View {
     private TextView tvDiferenciaDiesel;
     private TextView tvNoDisponibleGasolina95;
     private TextView tvNoDisponibleDiesel;
+    private TextView tvHoy;
+    private TextView tvHoy2;
     Gasolinera gasolinera;
 
 
@@ -100,6 +101,8 @@ public class DetailsView extends AppCompatActivity implements IDetails.View {
         tvDiferenciaDiesel = findViewById(R.id.tvDiferenciaDiesel);
         tvNoDisponibleGasolina95 = findViewById(R.id.tvNoDisponibleGasolina95);
         tvNoDisponibleDiesel = findViewById(R.id.tvNoDisponibleDiesel);
+        tvHoy = findViewById(R.id.tvHoy);
+        tvHoy2 = findViewById(R.id.tvHoy2);
 
 
         // Set logo
@@ -229,6 +232,7 @@ public class DetailsView extends AppCompatActivity implements IDetails.View {
             // que no hay datos registrados y por tanto no esta disponible.
             tvNoDisponibleGasolina95.setText("(No disponible)");
             tvNoDisponibleGasolina95.setVisibility(View.VISIBLE);
+            tvHoy.setVisibility(View.GONE);
         }
 
         // Verificar si el precio de diésel es 0.0
@@ -241,6 +245,7 @@ public class DetailsView extends AppCompatActivity implements IDetails.View {
             // que no hay datos registrados y por tanto no esta disponible.
             tvNoDisponibleDiesel.setText("(No disponible)");
             tvNoDisponibleDiesel.setVisibility(View.VISIBLE);
+            tvHoy2.setVisibility(View.GONE);
 
         }
     }
