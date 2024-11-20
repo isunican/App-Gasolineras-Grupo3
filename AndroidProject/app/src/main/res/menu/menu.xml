@@ -8,6 +8,7 @@
         android:layout_height="wrap_content"
         android:title="Ordenar item"
         android:icon="@drawable/ordenar"
+        app:iconTint="@color/white"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/menuItemInfo"
@@ -36,6 +37,7 @@
         android:layout_height="wrap_content"
         android:title="Filtrar Municipio"
         android:icon="@drawable/filtro"
+        app:iconTint="@color/white"
         app:showAsAction="always" />
 
     <item
