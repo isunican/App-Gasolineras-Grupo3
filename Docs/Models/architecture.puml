@@ -5,7 +5,7 @@ skinparam arrowLollipopColor #ADD1B2
 
 MainView -left(0- MainPresenter : IMainContract.Presenter
 MainView -left0)- MainPresenter : IMainContract.View
-MainView -up..-> InfoView : <<use>>
+MainView -right..-> InfoView : <<use>>
 MainView -down..-> ConsultarView : <<use>>
 MainView -down..->RegistrarView : <<use>>
 MainView -left..->RegistrarDescuentoView : <<use>>
@@ -31,6 +31,7 @@ class MainPresenter {
     + hayFiltroActivado() : String 
     + hayOrdenamientoPrivado(): String
     + activarOrdenamiento(): boolean
+    + calcularPrecioConDescuento(Gasolinera g1, String tipoCombustible) : double
 }
 
 class RegistrarPresenter {
@@ -59,11 +60,11 @@ interface IDetails#View {
     + init()
     + onOptionsItemSelected(MenuItem item): boolean
     + getGasolinerasRepository():  IGasolinerasRepository
-    + mostrarPrecioGasolina95SemanaPasada(double precioSemanaPasada, Descuento descuento)
-    + mostrarPrecioDieselSemanaPasada(double precioSemanaPasada, Descuento descuento)
+    + mostrarPreciosSemanaPasada(double precioSemanaPasadaDiesel, double precioSemanaPasadaGasolina95,String dia,double 
+      diferenciaGasolina, double diferenciaDiesel);
     + mostrarDiaDeLaSemana(String texto)
     + mostrarError(String mensaje)
-    + mostrarPreciosActuales(Descuento descuento)
+    + mostrarPreciosActuales(double precioGasolinaActual, double precioActualDiesel);
 }
 
 
