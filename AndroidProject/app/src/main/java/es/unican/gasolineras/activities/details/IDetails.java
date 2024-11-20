@@ -38,6 +38,8 @@ public interface IDetails {
          * Muestra los precios de gasolina de la semana pasada de la gasolinera seleccionada.
          * @param precioSemanaPasadaGasolina95 precio de la semana pasada para la gasolinera
          * @param precioSemanaPasadaDiesel precio de la semana pasada para la gasolinera
+         * @param diferenciaGasolina diferencia de la gasolina entre el precio actual y el del precio de la semana pasada
+         * @param diferenciaDiesel diferencia del diesel entre el precio actual y el del precio de la semana pasada
          * @param dia dia de la semana en el que se muestra el precio.
          */
         void mostrarPreciosSemanaPasada(double precioSemanaPasadaDiesel, double precioSemanaPasadaGasolina95,String dia,double diferenciaGasolina, double diferenciaDiesel);

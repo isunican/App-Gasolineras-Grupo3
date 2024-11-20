@@ -145,10 +145,13 @@ public class DetailsView extends AppCompatActivity implements IDetails.View {
      *
      * @param precioSemanaPasadaGasolina95 precio de gasolina de la gasolinera seleccionada
      * @param precioSemanaPasadaDiesel precio de disel de la gasolinera seleccionada
+     * @param diferenciaGasolina diferencia de gasolina actual y de la semana anterior
+     * @param diferenciaDiesel diferencia del precio disel actual y de la semana anterior
      * @param dia dia de la semana en el que se consulta la gasolina
      */
     @Override
     public void mostrarPreciosSemanaPasada(double precioSemanaPasadaDiesel , double precioSemanaPasadaGasolina95, String dia,double diferenciaGasolina, double diferenciaDiesel) {
+        // Se comprueba si hay disponibilidad del precio de la gasolina
         if (precioSemanaPasadaGasolina95 != 0.0) {
 
             tvPrecioGasolina95SemanaPasada.setText(String.format("%.2f", precioSemanaPasadaGasolina95));
@@ -167,7 +170,6 @@ public class DetailsView extends AppCompatActivity implements IDetails.View {
                 tvDiferenciaGasolina95.setText("");
             }
 
-
             tvDiferenciaGasolina95.setVisibility(View.VISIBLE);
             // Se muestra el dia de la semana
             tvDiaSemanaPasada.setText(dia + " pasado:") ;
@@ -177,6 +179,7 @@ public class DetailsView extends AppCompatActivity implements IDetails.View {
             tvPrecioGasolina95SemanaPasada.setVisibility(View.GONE);
         }
 
+        // Se comprueba si hay disponibilidad del precio del diesel
         if (precioSemanaPasadaDiesel != 0.0) {
 
             tvPrecioDieselSemanaPasada.setText(String.format("%.2f", precioSemanaPasadaDiesel));
@@ -209,6 +212,9 @@ public class DetailsView extends AppCompatActivity implements IDetails.View {
 
     /**
      * @see IDetails.View#mostrarPreciosActuales(double, double)
+     *
+     * @param precioGasolina precio de gasolina de la gasolinera seleccionada
+     * @param precioDiesel precio de disel de la gasolinera seleccionada
      *
 
      */

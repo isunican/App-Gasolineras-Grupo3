@@ -60,6 +60,7 @@ public class DetailsPresenter implements  IDetails.Presenter {
 
                 // Comprobar si la gasolinera tiene un descueto registrado
                 Descuento d = descuentoDAO.descuentoPorMarca(gasolinera.getRotulo());
+                // Se recogen los precios actuales de la gasolinera
                 double precioGasolina = gasolinera.getGasolina95E5();
                 double precioDiesel = gasolinera.getGasoleoA();
 
