@@ -57,23 +57,34 @@ public class DetailsPresenter implements  IDetails.Presenter {
                         .filter(g -> g.getId().equals(gasolinera.getId()))
                         .findFirst()
                         .orElse(null);
+
                 // Comprobar si la gasolinera tiene un descueto registrado
                 Descuento d = descuentoDAO.descuentoPorMarca(gasolinera.getRotulo());
+                double precioGasolina = gasolinera.getGasolina95E5();
+                double precioDiesel = gasolinera.getGasoleoA();
+
                 if (gasolineraSemanaPasada != null) {
                     double precioSemanaAnteriorGasoleoA = gasolineraSemanaPasada.getGasoleoA();
                     double precioSemanaAnteriorGasolina95 = gasolineraSemanaPasada.getGasolina95E5();
                     // Mostrar los precios actuales en la vista
-                    view.mostrarPreciosActuales(d);
+                    if (d != null) {
+                         precioGasolina = gasolinera.getGasolina95E5() * (1 - d.getDescuento() / 100);
+                         precioDiesel = gasolinera.getGasoleoA() * (1 - d.getDescuento() / 100);
+                    }
+                    view.mostrarPreciosActuales(precioGasolina, precioDiesel);
                     String dia = obtenerNombreDelDia(fechaActual);
-                    // Mostrar los precios de la semana pasada en la vista
-                    view.mostrarPrecioDieselSemanaPasada(precioSemanaAnteriorGasoleoA ,d,dia);
-                    view.mostrarPrecioGasolina95SemanaPasada(precioSemanaAnteriorGasolina95 ,d,dia);
+                    // Calculo de la diferencia
+                    // Si hay descuento, calculamos la diferencia con el precio con descuento
+                    double diferenciaGasolina = precioSemanaAnteriorGasolina95 - precioGasolina;
+                    double diferenciaDiesel = precioSemanaAnteriorGasoleoA - precioDiesel;
 
+                    // Mostrar los precios de la semana pasada en la vista
+                    view.mostrarPreciosSemanaPasada(precioSemanaAnteriorGasoleoA,precioSemanaAnteriorGasolina95,dia,diferenciaGasolina,diferenciaDiesel);
                 }
                 else {
                     // En el caso de que la gasolinera seleccionada no tenga datos para la semana pasada
                     // unicamente se muestran los precios acuales.
-                    view.mostrarPreciosActuales(d);
+                    view.mostrarPreciosActuales(precioGasolina, precioDiesel);
                 }
             }
 

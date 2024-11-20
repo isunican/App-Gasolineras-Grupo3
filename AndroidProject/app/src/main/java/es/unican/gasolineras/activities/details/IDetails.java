@@ -36,19 +36,11 @@ public interface IDetails {
 
         /**
          * Muestra los precios de gasolina de la semana pasada de la gasolinera seleccionada.
-         * @param precioSemanaPasada precio de la semana pasada para la gasolinera
-         * @param descuento registrado de la gasolinera.
+         * @param precioSemanaPasadaGasolina95 precio de la semana pasada para la gasolinera
+         * @param precioSemanaPasadaDiesel precio de la semana pasada para la gasolinera
          * @param dia dia de la semana en el que se muestra el precio.
          */
-        void mostrarPrecioGasolina95SemanaPasada(double precioSemanaPasada, Descuento descuento,String dia);
-
-        /**
-         * Muestra los precios de diesel de la semana pasada de la gasolinera seleccionada.
-         * @param precioSemanaPasada precio de la semana pasada para la gasolinera
-         * @param descuento registrado de la gasolinera.
-         * @param dia dia de la semana en el que se muestra el precio.
-         */
-        void mostrarPrecioDieselSemanaPasada(double precioSemanaPasada, Descuento descuento,String dia);
+        void mostrarPreciosSemanaPasada(double precioSemanaPasadaDiesel, double precioSemanaPasadaGasolina95,String dia,double diferenciaGasolina, double diferenciaDiesel);
 
         /**
          * Shows an error message on the screen.
@@ -58,9 +50,10 @@ public interface IDetails {
 
         /**
          * Muestra los precios actuales de la gasolinera seleccionada.
-         * @param descuento registrado de la gasolinera.
+         * @param precioGasolinaActual
+         * @param precioActualDiesel
          */
-        void mostrarPreciosActuales(Descuento descuento);
+        void mostrarPreciosActuales(double precioGasolinaActual, double precioActualDiesel);
 
     }
 }
