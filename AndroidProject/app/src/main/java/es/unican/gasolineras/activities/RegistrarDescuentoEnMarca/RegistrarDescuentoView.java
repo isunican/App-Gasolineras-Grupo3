@@ -1,7 +1,6 @@
 package es.unican.gasolineras.activities.RegistrarDescuentoEnMarca;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;

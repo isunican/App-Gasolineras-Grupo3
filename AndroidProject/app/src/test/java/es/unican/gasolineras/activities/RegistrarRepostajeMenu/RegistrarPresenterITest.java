@@ -20,10 +20,9 @@ import es.unican.gasolineras.repository.DatabaseFunction;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(sdk = {Build.VERSION_CODES.P}) // P corresponds to API level 28
-public class RegistrarRepostajeITest {
+public class RegistrarPresenterITest {
 
     private static RegistrarPresenter sut;
-    //private static RepostajeDAO respostajeDAO;
 
     private String litros;
     private String precioTotal;

@@ -11,7 +11,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -143,9 +142,9 @@ public class MainView extends AppCompatActivity implements IMainContract.View {
             Button btnCancelar = dialogView.findViewById(R.id.btnCancelar);
 
             String[] municipios = getResources().getStringArray(R.array.municipiosArray);
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, municipios);
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            spinner.setAdapter(adapter);
+            ArrayAdapter<String> adapterFiltrar = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, municipios);
+            adapterFiltrar.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinner.setAdapter(adapterFiltrar);
 
             String filtro = presenter.hayFiltroActivado();
             if (filtro != null) {
@@ -341,8 +340,8 @@ public class MainView extends AppCompatActivity implements IMainContract.View {
         emptyMessage.add(gasolinera);  // Usa el mensaje que se pasa como argumento
 
         ListView list = findViewById(R.id.lvStations);
-        GasolinerasArrayAdapter adapter = new GasolinerasArrayAdapter(this, emptyMessage, descuentoDAO);
-        list.setAdapter(adapter);
+        GasolinerasArrayAdapter adapterError = new GasolinerasArrayAdapter(this, emptyMessage, descuentoDAO);
+        list.setAdapter(adapterError);
     }
 
     /**
