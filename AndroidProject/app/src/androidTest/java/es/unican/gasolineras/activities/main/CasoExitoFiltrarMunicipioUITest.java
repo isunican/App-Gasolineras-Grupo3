@@ -36,7 +36,7 @@ import es.unican.gasolineras.repository.IGasolinerasRepository;
 @UninstallModules(RepositoriesModule.class)
 @HiltAndroidTest
 @RunWith(AndroidJUnit4.class)
-public class CasoExitoUITest {
+public class CasoExitoFiltrarMunicipioUITest {
 
     @Rule(order = 0)  // the Hilt rule must execute first
     public HiltAndroidRule hiltRule = new HiltAndroidRule(this);
