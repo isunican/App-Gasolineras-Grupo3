@@ -50,9 +50,9 @@ class RegistrarDescuentoPresenter {
 }
 
 class DetailsPresenter {
-   - load()
+   + load()
    - obtenerNombreDelDia(LocalDate fechaActual): String
-   - requestGasolineras(LocalDate fecha, ICallBack callBack)
+   + requestGasolineras(LocalDate fecha, ICallBack callBack)
 }
 
 
