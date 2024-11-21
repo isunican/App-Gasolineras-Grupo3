@@ -28,6 +28,7 @@ public class DetailsPresenter implements  IDetails.Presenter {
         this.descuentoDAO = descuentoDAO;
     }
 
+
     /**
      * @see IDetails.Presenter#init(IDetails.View)
      * @param view the view to control
@@ -42,7 +43,7 @@ public class DetailsPresenter implements  IDetails.Presenter {
     /**
      * Carga los datos a mostrar desde la vista
      */
-    private void load() {
+    public void load() {
 
         // Recoger la fecha actual y la fecha de la semana pasada
         LocalDate fechaActual = LocalDate.now();
@@ -112,7 +113,7 @@ public class DetailsPresenter implements  IDetails.Presenter {
      * @param fecha fecha del dia en el que se consulta
      * @param callBack llamada al callBack
      */
-    private void requestGasolineras(LocalDate fecha, ICallBack callBack) {
+    public void requestGasolineras(LocalDate fecha, ICallBack callBack) {
         repository.requestGasolinerasHistoricoFechas(callBack, IDCCAAs.CANTABRIA.id, fecha);
     }
 
