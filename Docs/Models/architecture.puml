@@ -3,14 +3,14 @@ hide empty members
 skinparam linetype polyline
 skinparam arrowLollipopColor #ADD1B2
 
-MainView -right(0- MainPresenter : IMainContract.Presenter
-MainView -right0)- MainPresenter : IMainContract.View
-MainView -up..-> InfoView : <<use>>
+MainView -left(0- MainPresenter : IMainContract.Presenter
+MainView -left0)- MainPresenter : IMainContract.View
+MainView -right..-> InfoView : <<use>>
 MainView -down..-> ConsultarView : <<use>>
 MainView -down..->RegistrarView : <<use>>
 MainView -left..->RegistrarDescuentoView : <<use>>
-MainView -up..> DetailsView : <<use>>
-MainPresenter -right(0- GasolinerasRepository : IGasolinerasRepository
+MainView -left..> DetailsView : <<use>>
+MainPresenter -left(0- GasolinerasRepository : IGasolinerasRepository
 RegistrarPresenter -down(0- RepostajeDAO : IRepostajeDAO
 ConsultarPresenter -down(0- RepostajeDAO : IRepostajeDAO
 RegistrarDescuentoPresenter -down(0- DescuentoDAO : IDescuentoDAO
@@ -19,13 +19,19 @@ RegistrarView -right(0- RegistrarPresenter : IRegistrarContract.View
 ConsultarView -right(0- ConsultarPresenter : IConsultarContract.Presenter
 ConsultarView -right(0- ConsultarPresenter : IConsultarContract.View
 RegistrarDescuentoView -left(0- RegistrarDescuentoPresenter : IRegistrarDescuentoContract.View
-RegistrarDescuentoView -left(0- RegistrarDescuentoPresenter : IRegistrarDescuentoContract.Pressenter
-
+RegistrarDescuentoView -left(0- RegistrarDescuentoPresenter : IRegistrarDescuentoContract.Presenter
+DetailsView -down(0- DetailsPresenter : IDetailsContract.Presenter
+DetailsView -down(0- DetailsPresenter : IDetailsContract.View
+DetailsPresenter -up(0- DescuentoDAO : IDescuentoDAO
+DetailsPresenter -right(0- GasolinerasRepository : IGasolinerasRepository
 
 class MainPresenter {
     - load()
     + activarFiltro(String municipio) : String
     + hayFiltroActivado() : String 
+    + hayOrdenamientoPrivado(): String
+    + activarOrdenamiento(): boolean
+    + calcularPrecioConDescuento(Gasolinera g1, String tipoCombustible) : double
 }
 
 class RegistrarPresenter {
@@ -43,6 +49,27 @@ class RegistrarDescuentoPresenter {
     
 }
 
+class DetailsPresenter {
+   + load()
+   - obtenerNombreDelDia(LocalDate fechaActual): String
+   + requestGasolineras(LocalDate fecha, ICallBack callBack)
+}
+
+
+interface IDetails#View {
+    + onOptionsItemSelected(MenuItem item): boolean
+    + getGasolinerasRepository():  IGasolinerasRepository
+    + mostrarPreciosSemanaPasada(double precioSemanaPasadaDiesel, double precioSemanaPasadaGasolina95,String dia,double 
+      diferenciaGasolina, double diferenciaDiesel);
+    + mostrarError(String mensaje);
+    + mostrarPreciosActuales(double precioGasolinaActual, double precioActualDiesel);
+}
+
+
+interface IDetails#Presenter {
+    + init();
+}
+
 
 interface IMainContract#View {
     + init()
@@ -57,6 +84,7 @@ interface IMainContract#View {
     + showDescuentoActivity()
     + mostrarErrorNoGasolinerasEnMunicipio(String s)
     + showBtnCancelarFiltro()
+    + getDescuentoDatabase() : DescuentoDAO
 
 }
 
@@ -69,6 +97,7 @@ interface IMainContract#Presenter {
     + onMenuDescuentoClicked()
     + onBtnFiltrarClicked()
     + onBtnCancelarFiltroClicked()
+    + onBtnOrdenarClicked()
 }
 
 interface IGasolinerasRepository {
