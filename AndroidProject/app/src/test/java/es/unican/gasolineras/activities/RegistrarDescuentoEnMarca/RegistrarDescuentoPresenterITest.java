@@ -10,7 +10,6 @@ import android.content.Context;
 import androidx.room.Room;
 import androidx.test.core.app.ApplicationProvider;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -23,7 +22,6 @@ import org.robolectric.RobolectricTestRunner;
 
 import es.unican.gasolineras.model.Descuento;
 import es.unican.gasolineras.repository.AppDatabase;
-import es.unican.gasolineras.repository.DatabaseFunction;
 import es.unican.gasolineras.repository.DescuentoDAO;
 
 

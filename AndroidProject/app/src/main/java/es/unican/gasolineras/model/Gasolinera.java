@@ -88,4 +88,9 @@ public class Gasolinera {
                 Objects.equals(cp, other.cp);
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(municipio, direccion, cp);
+    }
+
 }

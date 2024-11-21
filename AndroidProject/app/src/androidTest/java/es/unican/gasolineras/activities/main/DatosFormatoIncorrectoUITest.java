@@ -1,16 +1,21 @@
-package es.unican.gasolineras.activities.RegistrarRepostajeMenu;
+package es.unican.gasolineras.activities.main;
 
+import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.hasToString;
 import static es.unican.gasolineras.utils.Matchers.DrawableMatcher;
 import static es.unican.gasolineras.utils.MockRepositories.getTestRepository;
 
 import android.content.Context;
 
+import androidx.test.core.app.ApplicationProvider;
 import androidx.test.espresso.Espresso;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -37,7 +42,7 @@ public class DatosFormatoIncorrectoUITest {
     public HiltAndroidRule hiltRule = new HiltAndroidRule(this);
 
     @Rule(order = 1)
-    public ActivityScenarioRule<RegistrarView> activityRule = new ActivityScenarioRule<>(RegistrarView.class);
+    public ActivityScenarioRule<MainView> activityRule = new ActivityScenarioRule<>(MainView.class);
 
     // I need the context to access resources, such as the json with test gas stations
     final Context context = InstrumentationRegistry.getInstrumentation().getTargetContext();
@@ -48,6 +53,10 @@ public class DatosFormatoIncorrectoUITest {
 
     @Test
     public void datosFormatoIncorrectoContext() {
+
+        openActionBarOverflowOrOptionsMenu(ApplicationProvider.getApplicationContext());
+        onData(hasToString(containsString("Registrar repostaje"))).perform(click());
+
         onView(withId(R.id.textLitros)).perform(click());
         onView(withId(R.id.textLitros)).perform(typeText("Veinte"));
         Espresso.pressBackUnconditionally();

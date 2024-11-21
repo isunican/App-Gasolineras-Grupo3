@@ -104,7 +104,7 @@ public class MainPresenterITest {
 
         verify(mockMainView).getGasolinerasRepository();
         verify(mockMainView).showStations(listaGasolineras);
-        assertEquals("Reinosa", sut.activarFiltro("Reinosa"), "Reinosa");
+        assertEquals("Reinosa", sut.activarFiltro("Reinosa"));
         assertTrue(sut.filtroActivado);
     }
 
@@ -119,7 +119,7 @@ public class MainPresenterITest {
 
         verify(mockMainView).getGasolinerasRepository();
         verify(mockMainView).showStations(listaGasolineras);
-        assertEquals(sut.activarFiltro("Reinosa"), "Reinosa");
+        assertEquals("Reinosa", sut.activarFiltro("Reinosa"));
         assertTrue(sut.filtroActivado);
 
 

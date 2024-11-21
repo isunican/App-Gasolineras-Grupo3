@@ -23,7 +23,7 @@ import es.unican.gasolineras.model.Repostaje;
 import es.unican.gasolineras.repository.RepostajeDAO;
 
 @RunWith(RobolectricTestRunner.class)
-public class ConsultarRepostajeTest {
+public class ConsultarPresenterTest {
 
     Repostaje repostaje1, repostaje2, repostaje3;
     double res0, res1, res2, res3;

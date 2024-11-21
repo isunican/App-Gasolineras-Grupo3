@@ -38,6 +38,8 @@ public class MainPresenterTest {
     private Gasolinera gasolinera5;
     private Gasolinera gasolinera6;
     private Gasolinera gasolinera7;
+    private Gasolinera gasA;
+    private Gasolinera gasB;
 
     @Mock
     private static IMainContract.View mockView;
@@ -102,6 +104,16 @@ public class MainPresenterTest {
         gasolinera7.setRotulo("Avia");
         gasolinera7.setGasoleoA(1.36);
         gasolinera7.setGasolina95E5(1.74);
+
+        gasA = new Gasolinera();
+        gasA.setRotulo("Repsol");
+        gasA.setGasolina95E5(1.49);
+        gasA.setGasoleoA(1.33);
+
+        gasB = new Gasolinera();
+        gasB.setRotulo("Cepsa");
+        gasB.setGasolina95E5(1.33);
+        gasB.setGasoleoA(1.25);
 
         listaGasolineras.add(gasolinera1);
         listaGasolineras.add(gasolinera2);
@@ -239,14 +251,8 @@ public class MainPresenterTest {
         assertNull(sut.hayOrdenamientoActivado());
     }
 
-
-
     @Test
     public void calcularPrecioConDescuentoSinDescuentoGasolinaTest() {
-        Gasolinera gasA = new Gasolinera();
-        gasA.setRotulo("Repsol");
-        gasA.setGasolina95E5(1.49);
-        gasA.setGasoleoA(1.33);
 
         double resultado = sut.calcularPrecioConDescuento(gasA, "Gasolina");
         assertEquals(1.49, resultado, 0.01);
@@ -259,11 +265,6 @@ public class MainPresenterTest {
 
         when(mockView.getDescuentoDatabase().descuentoPorMarca("Cepsa")).thenReturn(descuento);
 
-        Gasolinera gasB = new Gasolinera();
-        gasB.setRotulo("Cepsa");
-        gasB.setGasolina95E5(1.33);
-        gasB.setGasoleoA(1.25);
-
         double resultado = sut.calcularPrecioConDescuento(gasB, "Diesel");
         assertEquals(1.12, resultado, 0.01);
     }
@@ -275,11 +276,6 @@ public class MainPresenterTest {
 
         when(mockView.getDescuentoDatabase().descuentoPorMarca("Cepsa")).thenReturn(descuento);
 
-        Gasolinera gasB = new Gasolinera();
-        gasB.setRotulo("Cepsa");
-        gasB.setGasolina95E5(1.33);
-        gasB.setGasoleoA(1.25);
-
         double resultado = sut.calcularPrecioConDescuento(gasB, "Gasolina");
         assertEquals(1.19, resultado, 0.01);
     }
@@ -287,22 +283,12 @@ public class MainPresenterTest {
     @Test
     public void calcularPrecioConDescuentoSinDescuentoDieselTest() {
 
-        Gasolinera gasA = new Gasolinera();
-        gasA.setRotulo("Repsol");
-        gasA.setGasolina95E5(1.49);
-        gasA.setGasoleoA(1.33);
-
         double resultado = sut.calcularPrecioConDescuento(gasA, "Diesel");
         assertEquals(1.33, resultado, 0.01);
     }
 
     @Test
     public void calcularPrecioConDescuentoErrorBBDDTest() {
-
-        Gasolinera gasA = new Gasolinera();
-        gasA.setRotulo("Repsol");
-        gasA.setGasolina95E5(1.49);
-        gasA.setGasoleoA(1.33);
 
         // Simular un error en el acceso a la base de datos
         when(mockView.getDescuentoDatabase()).thenThrow(new RuntimeException("Error al acceder a la base de datos"));

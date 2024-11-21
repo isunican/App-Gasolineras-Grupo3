@@ -12,7 +12,7 @@ import org.mockito.MockitoAnnotations;
 import es.unican.gasolineras.model.Repostaje;
 import es.unican.gasolineras.repository.RepostajeDAO;
 
-public class RegistrarRepostajeTest {
+public class RegistrarPresenterTest {
 
     private static RegistrarPresenter sut;
     private String litros;
