@@ -1,6 +1,5 @@
 package es.unican.gasolineras.activities.RegistrarDescuentoEnMarca;
 
-import android.database.sqlite.SQLiteDatabaseLockedException;
 import android.database.sqlite.SQLiteException;
 
 import es.unican.gasolineras.model.Descuento;

@@ -1,8 +1,6 @@
 package es.unican.gasolineras.activities.RegistrarDescuentoEnMarca;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -15,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import es.unican.gasolineras.R;
-import es.unican.gasolineras.activities.main.MainView;
 import es.unican.gasolineras.repository.AppDatabase;
 import es.unican.gasolineras.repository.DatabaseFunction;
 
@@ -79,12 +76,7 @@ public class RegistrarDescuentoView extends AppCompatActivity implements IRegist
         });
 
         Button btnCancelar = findViewById(R.id.btnCancelar);
-        btnCancelar.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                presenter.onBtnCancelarClicked();
-            }
-        });
+        btnCancelar.setOnClickListener(v -> presenter.onBtnCancelarClicked());
     }
 
 
@@ -96,26 +88,14 @@ public class RegistrarDescuentoView extends AppCompatActivity implements IRegist
         try {
             new AlertDialog.Builder(RegistrarDescuentoView.this)
                     .setMessage(getString(R.string.registro_descuento_exito))
-                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            Intent intent = new Intent(RegistrarDescuentoView.this, MainView.class);
-                            startActivity(intent);
-                        }
-                    })
+                    .setPositiveButton("OK", (dialog, which) -> finish())
                     .show();
 
         } catch (Exception e) {
             new AlertDialog.Builder(RegistrarDescuentoView.this)
                     .setTitle("Error")
                     .setMessage(getString(R.string.error_acceso_bbdd))
-                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            Intent intent = new Intent(RegistrarDescuentoView.this, MainView.class);
-                            startActivity(intent);
-                        }
-                    })
+                    .setPositiveButton("OK", (dialog, which) -> finish())
                     .show();
         }
     }
@@ -125,8 +105,7 @@ public class RegistrarDescuentoView extends AppCompatActivity implements IRegist
      */
     @Override
     public void showBtnCancelar(){
-        Intent intent = new Intent(RegistrarDescuentoView.this, MainView.class);
-        startActivity(intent);
+        finish();
     }
 
     /**

@@ -4,6 +4,8 @@ import com.google.gson.annotations.SerializedName;
 
 import org.parceler.Parcel;
 
+import java.util.Objects;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -71,4 +73,24 @@ public class Gasolinera {
     public double getGasolina95E5() {
         return Double.parseDouble(String.format("%.2f",gasolina95E5).replace(",","."));
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Gasolinera other = (Gasolinera) o;
+        return Objects.equals(municipio, other.municipio) &&
+                Objects.equals(direccion, other.direccion) &&
+                Objects.equals(cp, other.cp);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(municipio, direccion, cp);
+    }
+
 }

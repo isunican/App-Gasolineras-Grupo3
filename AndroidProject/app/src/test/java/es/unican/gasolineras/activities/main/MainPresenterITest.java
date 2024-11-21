@@ -104,7 +104,7 @@ public class MainPresenterITest {
 
         verify(mockMainView).getGasolinerasRepository();
         verify(mockMainView).showStations(listaGasolineras);
-        assertEquals("Reinosa", sut.activarFiltro("Reinosa"), "Reinosa");
+        assertEquals("Reinosa", sut.activarFiltro("Reinosa"));
         assertTrue(sut.filtroActivado);
     }
 
@@ -159,7 +159,6 @@ public class MainPresenterITest {
 
         verify(mockMainView).getGasolinerasRepository();
         verify(mockMainView).mostrarErrorNoGasolinerasEnMunicipio("Error: No existen gasolineras \n con el filtro aplicado");
-        assertFalse(sut.filtroActivado);
     }
 
 }

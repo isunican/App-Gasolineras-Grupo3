@@ -10,9 +10,10 @@ import android.content.Context;
 import androidx.room.Room;
 import androidx.test.core.app.ApplicationProvider;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -21,7 +22,6 @@ import org.robolectric.RobolectricTestRunner;
 
 import es.unican.gasolineras.model.Descuento;
 import es.unican.gasolineras.repository.AppDatabase;
-import es.unican.gasolineras.repository.DatabaseFunction;
 import es.unican.gasolineras.repository.DescuentoDAO;
 
 
@@ -54,55 +54,23 @@ public class RegistrarDescuentoPresenterITest {
     }
 
 
-    @Test
-    public void itestRegistrarDescuentoExito() {
+    @ParameterizedTest
+    @CsvSource({
+            "Repsol, 20, 20", // Test case 1: Successful registration with a valid discount
+            "Repsol, 0, 0",   // Test case 2: Registration with a 0% discount
+            "Repsol, 15, 15"  // Test case 3: Update discount for an already registered brand
+    })
+    public void itestRegistrarDescuento(String marca, double descuentoInput, double descuentoExpected) {
+        // Act: Attempt to save the discount
+        sut.onBtnGuardarClicked(marca, descuentoInput);
 
-        marca = "Repsol";
-        descuento = 20;
-
-        sut.onBtnGuardarClicked(marca, descuento);
-
-        //Se comprueba en la base de datos que el descuento se ha añadido
+        // Assert: Verify the saved discount in the database
         Descuento descuentoGuardado = db.descuentoDao().descuentoPorMarca(marca);
+        assertEquals(descuentoExpected, descuentoGuardado.getDescuento(),
+                "El descuento guardado no coincide con el esperado.");
 
-        assertEquals(descuento, descuentoGuardado.getDescuento(), "El descuento guardado no coincide con el esperado.");
-
-        verify(mockRegistrarDescuentoView).showBtnGuardar(marca, descuento);
-    }
-
-
-    @Test
-    public void itestRegistrarDescuentoCero() {
-
-        marca = "Repsol";
-        descuento = 0;
-
-        sut.onBtnGuardarClicked(marca, descuento);
-
-        //Se comprueba en la base de datos que el descuento se ha añadido
-        Descuento descuentoGuardado = db.descuentoDao().descuentoPorMarca(marca);
-
-        assertEquals(descuento, descuentoGuardado.getDescuento(), "El descuento guardado no coincide con el esperado.");
-
-        verify(mockRegistrarDescuentoView).showBtnGuardar(marca, descuento);
-
-    }
-
-    @Test
-    public void itestRegistrarDescuentoEnMarcaYaRegistrada() {
-
-        marca = "Repsol";
-        descuento = 15;
-
-        sut.onBtnGuardarClicked(marca, descuento);
-
-        //Se comprueba en la base de datos que el descuento se ha añadido
-        Descuento descuentoGuardado = db.descuentoDao().descuentoPorMarca(marca);
-
-        assertEquals(descuento, descuentoGuardado.getDescuento(), "El descuento guardado no coincide con el esperado.");
-
-        verify(mockRegistrarDescuentoView).showBtnGuardar(marca, descuento);
-
+        // Verify that the view was notified of success
+        verify(mockRegistrarDescuentoView).showBtnGuardar(marca, descuentoExpected);
     }
 
 

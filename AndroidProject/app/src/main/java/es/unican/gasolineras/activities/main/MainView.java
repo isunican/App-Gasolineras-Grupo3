@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -34,7 +36,6 @@ import es.unican.gasolineras.activities.RegistrarDescuentoEnMarca.RegistrarDescu
 import es.unican.gasolineras.activities.RegistrarRepostajeMenu.RegistrarView;
 import es.unican.gasolineras.activities.info.InfoView;
 import es.unican.gasolineras.activities.details.DetailsView;
-import es.unican.gasolineras.model.Descuento;
 import es.unican.gasolineras.model.Gasolinera;
 import es.unican.gasolineras.repository.AppDatabase;
 import es.unican.gasolineras.repository.DatabaseFunction;
@@ -48,8 +49,12 @@ import es.unican.gasolineras.repository.IGasolinerasRepository;
 @AndroidEntryPoint
 public class MainView extends AppCompatActivity implements IMainContract.View {
 
+    public static final String GASOLINA = "Gasolina";
+
     /** The presenter of this view */
     private MainPresenter presenter;
+
+    GasolinerasArrayAdapter adapter;
 
     /** The repository to access the data. This is automatically injected by Hilt in this class */
     @Inject
@@ -76,7 +81,19 @@ public class MainView extends AppCompatActivity implements IMainContract.View {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        String ordenamiento = presenter.hayOrdenamientoActivado();
+        if (ordenamiento != null) {
+            presenter.onBtnOrdenarClicked(ordenamiento);
+        }
+        if (adapter != null) {
+            adapter.notifyDataSetChanged();
+        }
 
+
+    }
 
     /**
      * This creates the menu that is shown in the action bar (the upper toolbar)
@@ -125,9 +142,9 @@ public class MainView extends AppCompatActivity implements IMainContract.View {
             Button btnCancelar = dialogView.findViewById(R.id.btnCancelar);
 
             String[] municipios = getResources().getStringArray(R.array.municipiosArray);
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, municipios);
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            spinner.setAdapter(adapter);
+            ArrayAdapter<String> adapterFiltrar = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, municipios);
+            adapterFiltrar.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinner.setAdapter(adapterFiltrar);
 
             String filtro = presenter.hayFiltroActivado();
             if (filtro != null) {
@@ -152,6 +169,55 @@ public class MainView extends AppCompatActivity implements IMainContract.View {
 
             dialog.show();
             return true;
+
+        }
+
+        if (itemId == R.id.OrdenarItem) {
+
+            View dialogView = getLayoutInflater().inflate(R.layout.activity_ordenar, null);
+
+            AlertDialog dialog = new AlertDialog.Builder(this)
+                    .setTitle("Ordenar")
+                    .setView(dialogView)
+                    .create();
+
+            dialog.show();
+
+            Button btnOrdenar = dialogView.findViewById(R.id.btnOrdenar);
+            Button btnCancelar = dialogView.findViewById(R.id.btnCancelar);
+            RadioGroup radioCombustible = dialogView.findViewById(R.id.btnRadioGroup);
+            RadioButton gasolina = dialogView.findViewById(R.id.btnGasolina);
+            RadioButton diesel = dialogView.findViewById(R.id.btnDiesel);
+
+            String ordenamiento = presenter.hayOrdenamientoActivado();
+            if (ordenamiento == null) {
+                gasolina.setChecked(true);
+            } else if (ordenamiento.equals(GASOLINA)) {
+                gasolina.setChecked(true);
+            } else {
+                diesel.setChecked(true);
+            }
+
+
+            btnOrdenar.setOnClickListener(v -> {
+                int selectedId = radioCombustible.getCheckedRadioButtonId();
+                String combustibleSeleccionado;
+
+                if (selectedId == R.id.btnGasolina) {
+                    combustibleSeleccionado = GASOLINA;
+                } else if (selectedId == R.id.btnDiesel) {
+                    combustibleSeleccionado = "Diesel";
+                } else {
+                    combustibleSeleccionado = GASOLINA;
+                }
+                presenter.onBtnOrdenarClicked(combustibleSeleccionado);
+                dialog.dismiss();
+            });
+
+            btnCancelar.setOnClickListener(v -> dialog.dismiss());
+
+            return true;
+
         }
 
 
@@ -180,6 +246,9 @@ public class MainView extends AppCompatActivity implements IMainContract.View {
         return repository;
     }
 
+    @Override
+    public DescuentoDAO getDescuentoDatabase() { return db.descuentoDao(); }
+
     /**
      * @see IMainContract.View#showStations(List) 
      * @param stations the list of charging stations
@@ -187,7 +256,7 @@ public class MainView extends AppCompatActivity implements IMainContract.View {
     @Override
     public void showStations(List<Gasolinera> stations) {
         ListView list = findViewById(R.id.lvStations);
-        GasolinerasArrayAdapter adapter = new GasolinerasArrayAdapter(this, stations, db.descuentoDao());
+        adapter = new GasolinerasArrayAdapter(this, stations, db.descuentoDao());
         list.setAdapter(adapter);
     }
 
@@ -271,8 +340,8 @@ public class MainView extends AppCompatActivity implements IMainContract.View {
         emptyMessage.add(gasolinera);  // Usa el mensaje que se pasa como argumento
 
         ListView list = findViewById(R.id.lvStations);
-        GasolinerasArrayAdapter adapter = new GasolinerasArrayAdapter(this, emptyMessage, descuentoDAO);
-        list.setAdapter(adapter);
+        GasolinerasArrayAdapter adapterError = new GasolinerasArrayAdapter(this, emptyMessage, descuentoDAO);
+        list.setAdapter(adapterError);
     }
 
     /**
